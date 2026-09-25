@@ -1,0 +1,85 @@
+---
+import { Icon } from 'astro-icon/components';
+import { contact } from '../data/site';
+---
+
+<section id="casos" class="relative overflow-hidden py-28 md:py-40">
+	<div class="orb bg-brand/50 top-1/3 left-1/2 h-[30rem] w-[30rem] -translate-x-1/2" aria-hidden="true"></div>
+
+	<div class="relative mx-auto max-w-7xl px-4 md:px-6">
+		<div class="mb-14 max-w-2xl">
+			<p data-reveal class="text-brand mb-5 flex items-center gap-3 text-sm font-medium tracking-[0.2em] uppercase">
+				<span class="bg-brand h-px w-10"></span> Explore outras áreas
+			</p>
+			<h2 class="text-[clamp(2.4rem,5.5vw,4.8rem)] leading-[0.95] font-semibold tracking-[-0.04em]">
+				<span class="line"><span data-split-line>Problemas reais,</span></span>
+				<span class="line"><span data-split-line>soluções <span class="font-serif font-normal italic text-brand">rápidas</span>.</span></span>
+			</h2>
+		</div>
+
+		<div class="grid gap-5 lg:grid-cols-3 lg:grid-rows-2">
+			<!-- PIX -->
+			<a
+				href={contact.whatsapp}
+				target="_blank"
+				rel="noopener"
+				data-reveal
+				class="spotlight group relative min-h-[520px] overflow-hidden rounded-[2rem] border border-white/8 lg:col-span-2 lg:row-span-2"
+			>
+				<img src="/images/pix.webp" alt="" loading="lazy" class="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.4s] group-hover:scale-105" />
+				<div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
+
+				<!-- Fake transaction UI -->
+				<div class="glass absolute top-6 right-6 w-72 !bg-black/60 rounded-2xl p-4 transition-transform duration-700 group-hover:-translate-y-2" data-parallax="8">
+					<div class="flex items-center justify-between text-xs">
+						<span class="text-mist">Pix enviado · agora</span>
+						<span class="rounded-full bg-red-500/20 px-2 py-0.5 text-red-300">Suspeito</span>
+					</div>
+					<p class="mt-2 text-3xl font-semibold tracking-tight">R$ 2.350,00</p>
+					<p class="text-mist mt-1 text-xs">Para: conta não verificada</p>
+					<div class="mt-4 flex items-center gap-2 rounded-xl bg-emerald-500/15 p-2.5 text-xs text-emerald-300">
+						<Icon name="lucide:shield-check" class="h-4 w-4" /> Pedido de devolução iniciado
+					</div>
+				</div>
+
+				<div class="absolute right-0 bottom-0 left-0 p-8 md:p-10">
+					<span class="bg-brand rounded-full px-3 py-1 text-xs font-semibold text-black">Mais procurado</span>
+					<h3 class="mt-5 text-4xl font-semibold tracking-tight md:text-6xl">Golpe do PIX</h3>
+					<p class="mt-4 max-w-lg text-white/75">
+						Você transferiu e o dinheiro sumiu. A conta era falsa, o vendedor não existia, ou alguém clonou
+						seu WhatsApp e pediu em seu nome. A gente te ajuda a recuperar.
+					</p>
+					<span class="mt-6 inline-flex items-center gap-2 font-semibold">
+						Saiba mais
+						<Icon name="lucide:arrow-right" class="h-4 w-4 transition-transform group-hover:translate-x-1.5" />
+					</span>
+				</div>
+			</a>
+
+			{
+				[
+					{ title: 'Voo Cancelado', img: '/images/voo.webp', text: 'Atraso, cancelamento ou overbooking? Você pode ter direito a indenização.' },
+					{ title: 'Acidente de Trabalho', img: '/images/acidente.webp', text: 'Assessoria especializada para garantir seus direitos e a segurança da sua empresa.' },
+				].map((c) => (
+					<a
+						href={contact.whatsapp}
+						target="_blank"
+						rel="noopener"
+						data-reveal
+						class="spotlight group relative min-h-[300px] overflow-hidden rounded-[2rem] border border-white/8"
+					>
+						<img src={c.img} alt="" loading="lazy" class="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.4s] group-hover:scale-110" />
+						<div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/10" />
+						<div class="absolute right-0 bottom-0 left-0 p-7">
+							<h3 class="text-3xl font-semibold tracking-tight">{c.title}</h3>
+							<p class="mt-2 text-sm text-white/70">{c.text}</p>
+						</div>
+						<span class="absolute top-6 right-6 grid h-11 w-11 place-items-center rounded-full bg-white text-black transition-all duration-500 group-hover:rotate-45 group-hover:bg-brand">
+							<Icon name="lucide:arrow-up-right" class="h-5 w-5" />
+						</span>
+					</a>
+				))
+			}
+		</div>
+	</div>
+</section>

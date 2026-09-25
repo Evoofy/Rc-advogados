@@ -1,0 +1,50 @@
+---
+import { Icon } from 'astro-icon/components';
+import { team } from '../data/site';
+---
+
+<section id="equipe" class="relative border-t border-white/8 bg-ink-2 py-28 md:py-40">
+	<div class="mx-auto max-w-7xl px-4 md:px-6">
+		<div class="mb-14 flex flex-wrap items-end justify-between gap-6">
+			<div>
+				<p data-reveal class="text-brand mb-5 flex items-center gap-3 text-sm font-medium tracking-[0.2em] uppercase">
+					<span class="bg-brand h-px w-10"></span> Advogados
+				</p>
+				<h2 class="text-[clamp(2.4rem,5.5vw,4.8rem)] leading-[0.95] font-semibold tracking-[-0.04em]">
+					<span class="line"><span data-split-line>Conheça quem</span></span>
+					<span class="line"><span data-split-line>cuida do <span class="font-serif font-normal italic text-brand">seu caso</span></span></span>
+				</h2>
+			</div>
+			<p data-reveal class="text-mist max-w-sm">
+				Uma equipe multidisciplinar que une experiência de tribunal com a agilidade que o seu caso precisa.
+			</p>
+		</div>
+
+		<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+			{
+				team.map((p, i) => (
+					<article data-reveal class="group" style={`--i:${i}`}>
+						<div class="relative aspect-[3/4] overflow-hidden rounded-[1.75rem] bg-ink-3">
+							<img
+								src={p.img}
+								alt={p.name}
+								loading="lazy"
+								class="h-full w-full object-cover object-top grayscale-[70%] transition-all duration-[1.2s] ease-[cubic-bezier(.2,.8,.2,1)] group-hover:scale-105 group-hover:grayscale-0"
+							/>
+							<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
+							<span class="glass absolute top-4 left-4 rounded-full px-3 py-1 text-xs">{p.role}</span>
+							<span class="absolute right-4 bottom-4 left-4 flex translate-y-4 items-center justify-between rounded-full bg-white py-2 pr-2 pl-5 text-sm font-semibold text-black opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+								Ver história
+								<span class="bg-brand grid h-8 w-8 place-items-center rounded-full">
+									<Icon name="lucide:arrow-up-right" class="h-4 w-4" />
+								</span>
+							</span>
+						</div>
+						<h3 class="mt-5 text-lg font-semibold tracking-tight">{p.name}</h3>
+						<p class="text-mist font-mono text-xs">{p.oab}</p>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>

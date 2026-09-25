@@ -1,0 +1,47 @@
+---
+import { Icon } from 'astro-icon/components';
+import { testimonials } from '../data/site';
+
+const rows = [testimonials, [...testimonials].reverse()];
+---
+
+<section class="relative overflow-hidden py-28 md:py-40">
+	<div class="mx-auto mb-16 max-w-7xl px-4 text-center md:px-6">
+		<p data-reveal class="text-brand mb-5 text-sm font-medium tracking-[0.2em] uppercase">Clientes</p>
+		<h2 class="text-[clamp(2.4rem,5.5vw,4.8rem)] leading-[0.95] font-semibold tracking-[-0.04em]">
+			<span class="line"><span data-split-line>O que estão</span></span>
+			<span class="line"><span data-split-line>falando de <span class="font-serif font-normal italic text-brand">nós</span></span></span>
+		</h2>
+		<p data-reveal class="text-mist mx-auto mt-6 max-w-xl">
+			Saber que conseguimos ajudar quando mais precisavam nos motiva a sempre melhorar.
+		</p>
+	</div>
+
+	<div class="flex flex-col gap-5 [mask-image:linear-gradient(to_right,transparent,#000_12%,#000_88%,transparent)]">
+		{
+			rows.map((row, r) => (
+				<div class="marquee-wrap">
+					<div class:list={['marquee', r === 1 && 'reverse']} style={`--dur:${r ? 50 : 40}s`}>
+						{[...row, ...row, ...row, ...row].map((t) => (
+							<figure class="glass mx-2.5 w-[340px] shrink-0 rounded-3xl p-7">
+								<div class="text-brand flex gap-0.5">
+									<span class="text-sm tracking-[0.15em]">★★★★★</span>
+								</div>
+								<blockquote class="mt-5 text-lg leading-snug">“{t.text}”</blockquote>
+								<figcaption class="mt-6 flex items-center gap-3">
+									<span class="bg-brand/15 text-brand grid h-10 w-10 place-items-center rounded-full font-semibold">
+										{t.name.charAt(0)}
+									</span>
+									<span>
+										<span class="block text-sm font-semibold">{t.name}</span>
+										<span class="text-mist block text-xs">Avaliação Google</span>
+									</span>
+								</figcaption>
+							</figure>
+						))}
+					</div>
+				</div>
+			))
+		}
+	</div>
+</section>

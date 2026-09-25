@@ -1,0 +1,61 @@
+---
+import { Icon } from 'astro-icon/components';
+import { nav, contact } from '../data/site';
+---
+
+<header id="nav" class="fixed inset-x-0 top-0 z-50 px-4 pt-4 transition-transform duration-500">
+	<div
+		class="nav-inner mx-auto flex max-w-7xl items-center justify-between rounded-full border border-transparent px-4 py-2.5 transition-all duration-500 md:px-6"
+	>
+		<a href="#top" class="flex items-center gap-3" aria-label="RC Advogados — início">
+			<img src="/images/logo.png" alt="" class="h-9 w-9" width="36" height="36" />
+			<span class="hidden text-sm leading-tight font-semibold tracking-tight sm:block">
+				Reginaldo Costa<br /><span class="text-mist font-normal">Advogados Associados</span>
+			</span>
+		</a>
+
+		<nav class="hidden items-center gap-1 lg:flex" aria-label="Principal">
+			{
+				nav.map((item) => (
+					<a
+						href={item.href}
+						class="group relative overflow-hidden rounded-full px-4 py-2 text-sm text-white/70 transition-colors hover:text-white"
+					>
+						<span class="relative z-10">{item.label}</span>
+						<span class="absolute inset-0 scale-50 rounded-full bg-white/8 opacity-0 transition-all duration-300 group-hover:scale-100 group-hover:opacity-100" />
+					</a>
+				))
+			}
+		</nav>
+
+		<div class="flex items-center gap-2">
+			<a
+				href="#"
+				class="hidden items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm text-white/80 transition hover:border-white/40 hover:text-white md:flex"
+			>
+				<Icon name="lucide:search" class="h-4 w-4" /> Consultar processos
+			</a>
+			<a
+				href={contact.whatsapp}
+				target="_blank"
+				rel="noopener"
+				data-magnetic
+				class="bg-brand flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-black transition hover:bg-white"
+			>
+				Falar agora <Icon name="lucide:arrow-up-right" class="h-4 w-4" />
+			</a>
+		</div>
+	</div>
+</header>
+
+<style>
+	:global(#nav.is-scrolled) .nav-inner {
+		background: rgb(10 10 14 / 0.65);
+		border-color: rgb(255 255 255 / 0.08);
+		backdrop-filter: blur(16px);
+		-webkit-backdrop-filter: blur(16px);
+	}
+	:global(#nav.is-hidden) {
+		transform: translateY(-120%);
+	}
+</style>

@@ -1,0 +1,100 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const stats = [
+	{ value: 20, suffix: '+', label: 'anos de expertise jurídica' },
+	{ value: 10, suffix: '+', label: 'anos atendendo em Limeira' },
+	{ value: 6, suffix: '', label: 'áreas do Direito integradas' },
+	{ value: 100, suffix: '%', label: 'atendimento customizado' },
+];
+
+const values = [
+	{ icon: 'lucide:scale', title: 'Ética', text: 'Cada decisão pautada pela integridade e pelo respeito à lei e ao cliente.' },
+	{ icon: 'lucide:eye', title: 'Transparência', text: 'Você acompanha cada etapa do seu caso, sem juridiquês e sem surpresas.' },
+	{ icon: 'lucide:handshake', title: 'Compromisso', text: 'Nosso trabalho só termina com a sua satisfação e o seu direito garantido.' },
+];
+---
+
+<section id="sobre" class="relative py-28 md:py-40">
+	<div class="mx-auto max-w-7xl px-4 md:px-6">
+		<p data-reveal class="text-brand mb-8 flex items-center gap-3 text-sm font-medium tracking-[0.2em] uppercase">
+			<span class="bg-brand h-px w-10"></span> Quem somos
+		</p>
+
+		<p
+			data-scrub-words
+			class="max-w-5xl text-[clamp(1.8rem,4.2vw,3.8rem)] leading-[1.08] font-medium tracking-[-0.03em]"
+		>
+			A RC Advogados é uma Hub de Soluções Jurídicas. Reunimos diferentes áreas do Direito e conectamos
+			especialistas para oferecer suporte completo a pessoas e empresas — com soluções seguras, estratégicas e
+			personalizadas.
+		</p>
+
+		<div class="mt-24 grid gap-6 lg:grid-cols-12">
+			<!-- Image -->
+			<div class="relative overflow-hidden rounded-[2rem] lg:col-span-7 lg:row-span-2" data-clip>
+				<img
+					src="/images/escritorio.webp"
+					alt="Advogados da RC no escritório"
+					class="h-full min-h-[420px] w-full scale-125 object-cover"
+					data-parallax="-12"
+					loading="lazy"
+				/>
+				<div class="absolute inset-0 bg-gradient-to-tr from-black/70 via-transparent to-transparent"></div>
+				<div class="glass absolute bottom-6 left-6 max-w-xs rounded-2xl p-5">
+					<p class="text-sm leading-relaxed text-white/85">
+						Profissionais altamente capacitados, pautados na ética, transparência e no compromisso com a
+						satisfação de cada cliente.
+					</p>
+				</div>
+			</div>
+
+			<!-- Stats -->
+			<div class="grid grid-cols-2 gap-4 lg:col-span-5">
+				{
+					stats.map((s) => (
+						<div data-reveal class="spotlight rounded-3xl border border-white/8 bg-ink-2 p-6">
+							<p class="text-5xl font-semibold tracking-tight md:text-6xl">
+								<span data-counter={s.value}>0</span>
+								<span class="text-brand">{s.suffix}</span>
+							</p>
+							<p class="text-mist mt-3 text-sm">{s.label}</p>
+						</div>
+					))
+				}
+			</div>
+
+			<!-- Features -->
+			<div class="grid gap-4 sm:grid-cols-2 lg:col-span-5">
+				<div data-reveal class="rounded-3xl bg-brand p-6 text-black">
+					<Icon name="lucide:clock-9" class="h-7 w-7" />
+					<p class="mt-6 text-xl font-semibold">Suporte 24 horas</p>
+					<p class="mt-1 text-sm text-black/70">Seu caso não para quando o expediente acaba.</p>
+				</div>
+				<div data-reveal class="rounded-3xl border border-white/8 bg-ink-2 p-6">
+					<Icon name="lucide:monitor-smartphone" class="text-brand h-7 w-7" />
+					<p class="mt-6 text-xl font-semibold">Presencial e digital</p>
+					<p class="text-mist mt-1 text-sm">Atendimento no escritório ou de onde você estiver.</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- Values -->
+		<div class="mt-6 grid gap-4 md:grid-cols-3">
+			{
+				values.map((v, i) => (
+					<div data-reveal class="spotlight group rounded-3xl border border-white/8 bg-ink-2 p-8">
+						<div class="flex items-center justify-between">
+							<span class="grid h-12 w-12 place-items-center rounded-2xl bg-white/5 transition-colors duration-500 group-hover:bg-brand group-hover:text-black">
+								<Icon name={v.icon} class="h-6 w-6" />
+							</span>
+							<span class="text-mist font-mono text-xs">0{i + 1}</span>
+						</div>
+						<p class="mt-10 text-2xl font-semibold tracking-tight">{v.title}</p>
+						<p class="text-mist mt-2 leading-relaxed">{v.text}</p>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>

@@ -1,0 +1,32 @@
+---
+import { Icon } from 'astro-icon/components';
+import { getPosts } from '../lib/blog';
+import Eyebrow from './Eyebrow.astro';
+import PostCard from './PostCard.astro';
+
+const posts = (await getPosts()).slice(0, 3);
+---
+
+<section class="relative border-t border-white/8 py-28 md:py-36">
+	<div class="mx-auto max-w-7xl px-4 md:px-6">
+		<div class="mb-14 flex flex-wrap items-end justify-between gap-6">
+			<div>
+				<Eyebrow>Blog e recursos</Eyebrow>
+				<h2 class="text-[clamp(2.4rem,5.5vw,4.8rem)] leading-[0.95] font-semibold tracking-[-0.04em]">
+					<span class="line"><span data-split-line>Informação que</span></span>
+					<span class="line"><span data-split-line><span class="font-serif font-normal italic text-brand">protege</span> você</span></span>
+				</h2>
+			</div>
+			<a
+				data-reveal
+				href="/blog"
+				class="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-sm font-medium transition hover:border-white/40 hover:bg-white/5"
+			>
+				Acessar blog <Icon name="lucide:arrow-right" class="h-4 w-4" />
+			</a>
+		</div>
+		<div class="grid gap-8 md:grid-cols-3">
+			{posts.map((post) => <PostCard post={post} />)}
+		</div>
+	</div>
+</section>

@@ -1,13 +1,16 @@
 ---
 import { Icon } from 'astro-icon/components';
 import { nav, contact } from '../data/site';
+
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
 ---
 
 <header id="nav" class="fixed inset-x-0 top-0 z-50 px-4 pt-4 transition-transform duration-500">
 	<div
 		class="nav-inner mx-auto flex max-w-7xl items-center justify-between rounded-full border border-transparent px-4 py-2.5 transition-all duration-500 md:px-6"
 	>
-		<a href="#top" class="flex items-center gap-3" aria-label="RC Advogados — início">
+		<a href="/" class="relative z-10 flex items-center gap-3" aria-label="RC Advogados — início">
 			<img src="/images/logo.png" alt="" class="h-9 w-9" width="36" height="36" />
 			<span class="hidden text-sm leading-tight font-semibold tracking-tight sm:block">
 				Reginaldo Costa<br /><span class="text-mist font-normal">Advogados Associados</span>
@@ -19,19 +22,28 @@ import { nav, contact } from '../data/site';
 				nav.map((item) => (
 					<a
 						href={item.href}
-						class="group relative overflow-hidden rounded-full px-4 py-2 text-sm text-white/70 transition-colors hover:text-white"
+						aria-current={isActive(item.href) ? 'page' : undefined}
+						class:list={[
+							'group relative overflow-hidden rounded-full px-4 py-2 text-sm transition-colors hover:text-white',
+							isActive(item.href) ? 'text-white' : 'text-white/65',
+						]}
 					>
 						<span class="relative z-10">{item.label}</span>
-						<span class="absolute inset-0 scale-50 rounded-full bg-white/8 opacity-0 transition-all duration-300 group-hover:scale-100 group-hover:opacity-100" />
+						<span
+							class:list={[
+								'absolute inset-0 rounded-full bg-white/8 transition-all duration-300 group-hover:scale-100 group-hover:opacity-100',
+								isActive(item.href) ? 'scale-100 opacity-100' : 'scale-50 opacity-0',
+							]}
+						/>
 					</a>
 				))
 			}
 		</nav>
 
-		<div class="flex items-center gap-2">
+		<div class="relative z-10 flex items-center gap-2">
 			<a
-				href="#"
-				class="hidden items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm text-white/80 transition hover:border-white/40 hover:text-white md:flex"
+				href="/consultar-processos"
+				class="hidden items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm text-white/80 transition hover:border-white/40 hover:text-white xl:flex"
 			>
 				<Icon name="lucide:search" class="h-4 w-4" /> Consultar processos
 			</a>
@@ -40,13 +52,61 @@ import { nav, contact } from '../data/site';
 				target="_blank"
 				rel="noopener"
 				data-magnetic
-				class="bg-brand flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-black transition hover:bg-white"
+				class="bg-brand hidden items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-black transition hover:bg-white sm:flex"
 			>
 				Falar agora <Icon name="lucide:arrow-up-right" class="h-4 w-4" />
 			</a>
+			<button
+				type="button"
+				data-menu-toggle
+				aria-expanded="false"
+				aria-controls="mobile-menu"
+				aria-label="Abrir menu"
+				class="grid h-10 w-10 place-items-center rounded-full border border-white/15 lg:hidden"
+			>
+				<span class="menu-bars relative block h-3 w-4">
+					<span class="absolute top-0 left-0 h-px w-full bg-white transition-all duration-500"></span>
+					<span class="absolute bottom-0 left-0 h-px w-full bg-white transition-all duration-500"></span>
+				</span>
+			</button>
 		</div>
 	</div>
 </header>
+
+<!-- Mobile menu -->
+<div
+	id="mobile-menu"
+	class="menu-panel bg-ink fixed inset-0 z-40 flex overflow-hidden flex-col justify-between px-6 pt-28 pb-10 lg:hidden"
+	aria-hidden="true"
+>
+	<div class="orb bg-brand/60 -right-20 -bottom-20 h-80 w-80" aria-hidden="true"></div>
+	<nav class="relative flex flex-col" aria-label="Menu móvel">
+		{
+			nav.map((item, i) => (
+				<a
+					href={item.href}
+					class="menu-link flex items-baseline gap-4 border-b border-white/8 py-3 text-4xl font-semibold tracking-tight"
+					style={`--d:${i * 50 + 150}ms`}
+				>
+					<span class="text-brand font-mono text-xs">0{i + 1}</span>
+					{item.label}
+				</a>
+			))
+		}
+		<a
+			href="/consultar-processos"
+			class="menu-link text-mist mt-6 flex items-center gap-2 text-base"
+			style="--d:500ms"
+		>
+			<Icon name="lucide:search" class="h-4 w-4" /> Consultar processos
+		</a>
+	</nav>
+	<div class="menu-link relative space-y-1 text-sm" style="--d:550ms">
+		<a href={contact.whatsapp} class="block text-2xl font-semibold">{contact.phone}</a>
+		<p class="text-mist">{contact.email}</p>
+		<p class="text-mist">{contact.address}</p>
+	</div>
+</div>
 
 <style>
 	:global(#nav.is-scrolled) .nav-inner {
@@ -57,5 +117,44 @@ import { nav, contact } from '../data/site';
 	}
 	:global(#nav.is-hidden) {
 		transform: translateY(-120%);
+	}
+
+	.menu-panel {
+		clip-path: circle(0% at calc(100% - 3rem) 2.5rem);
+		visibility: hidden;
+		transition:
+			clip-path 0.8s cubic-bezier(0.7, 0, 0.2, 1),
+			visibility 0s 0.8s;
+	}
+	:global(html.menu-open) .menu-panel {
+		clip-path: circle(150% at calc(100% - 3rem) 2.5rem);
+		visibility: visible;
+		transition: clip-path 0.8s cubic-bezier(0.7, 0, 0.2, 1);
+	}
+	.menu-link {
+		opacity: 0;
+		transform: translateY(24px);
+		transition:
+			opacity 0.3s,
+			transform 0.3s;
+	}
+	:global(html.menu-open) .menu-link {
+		opacity: 1;
+		transform: none;
+		transition:
+			opacity 0.6s var(--d),
+			transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) var(--d);
+	}
+	:global(html.menu-open) .menu-bars span:first-child {
+		top: 50%;
+		transform: rotate(45deg);
+	}
+	:global(html.menu-open) .menu-bars span:last-child {
+		bottom: auto;
+		top: 50%;
+		transform: rotate(-45deg);
+	}
+	:global(html.menu-open) #nav {
+		transform: none !important;
 	}
 </style>

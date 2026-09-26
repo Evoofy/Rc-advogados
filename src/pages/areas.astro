@@ -1,0 +1,92 @@
+---
+import { Icon } from 'astro-icon/components';
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Cases from '../components/Cases.astro';
+import Faq from '../components/Faq.astro';
+import { areas, whatsappMsg } from '../data/site';
+
+const label = (title: string) => (title.startsWith("Defesa") ? title : `Direito ${title}`);
+---
+
+<Layout
+	title="Áreas de atuação"
+	description="Direito Civil, Criminal, Trabalhista e Previdenciário, Tributário, Eleitoral, Administrativo e Regulatório, Penal Empresarial e mais."
+>
+	<PageHero
+		eyebrow="Especialidades"
+		lines={['Áreas de', '*atuação*']}
+		lead="Atuação consultiva e contenciosa, nas esferas administrativa e judicial. Uma equipe integrada para cada tipo de demanda."
+		crumbs={[{ label: 'Áreas' }]}
+	>
+		<div data-hero-fade class="mt-10 flex flex-wrap gap-2">
+			{
+				areas.map((a) => (
+					<a
+						href={`#${a.slug}`}
+						class="hover:border-brand hover:text-brand rounded-full border border-white/12 px-4 py-2 text-sm text-white/75 transition"
+					>
+						{a.title}
+					</a>
+				))
+			}
+		</div>
+	</PageHero>
+
+	<section class="relative pb-24">
+		<div class="hover-preview" aria-hidden="true">
+			{areas.map((a) => <img src={a.img} alt="" loading="lazy" data-preview={a.slug} />)}
+		</div>
+
+		<div class="mx-auto max-w-7xl px-4 md:px-6">
+			<div class="border-t border-white/10" data-accordion data-hover-list>
+				{
+					areas.map((a, i) => (
+						<article id={a.slug} data-reveal data-preview-key={a.slug} class="acc-item group scroll-mt-28 border-b border-white/10">
+							<button
+								type="button"
+								aria-expanded="false"
+								class="grid w-full grid-cols-[auto_1fr_auto] items-center gap-5 py-8 text-left md:gap-10 md:py-10"
+							>
+								<span class="text-mist group-hover:text-brand w-8 font-mono text-sm transition-colors">
+									{String(i + 1).padStart(2, '0')}
+								</span>
+								<span>
+									<span class="block text-[clamp(1.6rem,3.6vw,3.2rem)] leading-tight font-semibold tracking-[-0.03em] transition-transform duration-500 group-hover:translate-x-3">
+										{label(a.title)}
+									</span>
+									<span class="text-mist mt-2 block max-w-2xl text-sm md:text-base">{a.short}</span>
+								</span>
+								<span class="acc-icon group-hover:border-brand group-hover:bg-brand grid h-12 w-12 place-items-center rounded-full border border-white/15 transition-colors group-hover:text-black md:h-14 md:w-14">
+									<Icon name="lucide:plus" class="h-5 w-5" />
+								</span>
+							</button>
+							<div class="acc-panel">
+								<div>
+									<div class="grid gap-8 pb-10 md:grid-cols-[2rem_1fr_auto] md:gap-10 md:pl-0">
+										<span class="hidden md:block" />
+										<div class="space-y-8">
+											<p class="max-w-2xl text-lg leading-relaxed text-white/80">{a.long}</p>
+											<img src={a.img} alt="" loading="lazy" class="aspect-[4/3] w-full rounded-2xl object-cover object-top md:hidden" />
+										</div>
+										<a
+											href={whatsappMsg(`Olá! Gostaria de falar sobre um caso de ${label(a.title)}.`)}
+											target="_blank"
+											rel="noopener"
+											class="bg-brand inline-flex items-center gap-2 self-start rounded-full px-5 py-3 text-sm font-semibold whitespace-nowrap text-black transition hover:bg-white"
+										>
+											Falar com especialista <Icon name="lucide:arrow-up-right" class="h-4 w-4" />
+										</a>
+									</div>
+								</div>
+							</div>
+						</article>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<Cases />
+	<Faq />
+</Layout>

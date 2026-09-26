@@ -1,0 +1,122 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { render } from 'astro:content';
+import { Icon } from 'astro-icon/components';
+import Layout from '../../layouts/Layout.astro';
+import PostCard from '../../components/PostCard.astro';
+import Eyebrow from '../../components/Eyebrow.astro';
+import { getPosts, authorOf, formatDate, readingTime, type Post } from '../../lib/blog';
+import { whatsappMsg } from '../../data/site';
+
+export const getStaticPaths = (async () => {
+	const posts = await getPosts();
+	return posts.map((post) => ({ params: { id: post.id }, props: { post, all: posts } }));
+}) satisfies GetStaticPaths;
+
+const { post, all } = Astro.props as { post: Post; all: Post[] };
+const { Content } = await render(post);
+const author = authorOf(post);
+const related = all.filter((p) => p.id !== post.id).slice(0, 3);
+const url = new URL(Astro.url.pathname, Astro.site ?? 'https://rcadvogados.com.br').href;
+const share = [
+	{ icon: 'lucide:message-circle', label: 'WhatsApp', href: `https://wa.me/?text=${encodeURIComponent(`${post.data.title} ${url}`)}` },
+	{ icon: 'lucide:linkedin', label: 'LinkedIn', href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}` },
+	{ icon: 'lucide:facebook', label: 'Facebook', href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}` },
+];
+---
+
+<Layout title={post.data.title} description={post.data.description}>
+	<div class="bg-brand fixed top-0 left-0 z-[55] h-0.5 w-full origin-left scale-x-0" data-read-progress aria-hidden="true"></div>
+
+	<article>
+		<header class="relative overflow-hidden pt-36 pb-14 md:pt-44">
+			<div class="bg-grid absolute inset-0" aria-hidden="true"></div>
+			<div class="orb bg-brand/60 -top-48 left-1/3 h-[28rem] w-[28rem]" data-orb aria-hidden="true"></div>
+			<div class="relative mx-auto max-w-4xl px-4 md:px-6">
+				<nav data-hero-fade aria-label="Breadcrumb" class="text-mist mb-8 flex flex-wrap items-center gap-2 text-xs">
+					<a href="/" class="hover:text-white">Início</a>
+					<span class="text-white/25">/</span>
+					<a href="/blog" class="hover:text-white">Blog</a>
+					<span class="text-white/25">/</span>
+					<span class="text-white/80">{post.data.category}</span>
+				</nav>
+				<div data-hero-fade class="text-mist flex flex-wrap items-center gap-3 text-sm">
+					<span class="bg-brand rounded-full px-3 py-1 text-xs font-semibold text-black">{post.data.category}</span>
+					<time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+					<span>· {readingTime(post)} min de leitura</span>
+				</div>
+				<h1 class="mt-6 text-[clamp(2.2rem,5vw,4.2rem)] leading-[1.02] font-semibold tracking-[-0.04em]">
+					<span class="line"><span data-hero-line>{post.data.title}</span></span>
+				</h1>
+				<p data-hero-fade class="text-mist mt-6 max-w-2xl text-xl leading-relaxed">{post.data.description}</p>
+			</div>
+		</header>
+
+		<div class="mx-auto max-w-6xl px-4 md:px-6">
+			<div data-hero-visual class="relative aspect-[16/8] overflow-hidden rounded-[2rem]">
+				<img src={post.data.cover} alt="" class="h-full w-full scale-110 object-cover" data-hero-img />
+			</div>
+		</div>
+
+		<div class="mx-auto grid max-w-6xl gap-14 px-4 py-20 md:px-6 lg:grid-cols-[1fr_17rem]">
+			<div class="prose-rc max-w-2xl">
+				<Content />
+			</div>
+
+			<aside class="space-y-5 lg:sticky lg:top-28 lg:self-start">
+				{
+					author && (
+						<a href={`/equipe/${author.slug}`} class="group border-line bg-ink-2 block rounded-[1.5rem] border p-5">
+							<p class="text-mist text-xs tracking-widest uppercase">Escrito por</p>
+							<div class="mt-4 flex items-center gap-3">
+								<img src={author.img} alt="" class="h-12 w-12 rounded-full object-cover object-top" />
+								<div class="text-sm">
+									<p class="group-hover:text-brand font-semibold transition-colors">{author.name}</p>
+									<p class="text-mist font-mono text-xs">{author.oab}</p>
+								</div>
+							</div>
+						</a>
+					)
+				}
+				<div class="border-line bg-ink-2 rounded-[1.5rem] border p-5">
+					<p class="text-mist text-xs tracking-widest uppercase">Compartilhar</p>
+					<div class="mt-4 flex gap-2">
+						{
+							share.map((s) => (
+								<a href={s.href} target="_blank" rel="noopener" aria-label={`Compartilhar no ${s.label}`} class="hover:border-brand hover:bg-brand grid h-10 w-10 place-items-center rounded-full border border-white/15 transition hover:text-black">
+									<Icon name={s.icon} class="h-4 w-4" />
+								</a>
+							))
+						}
+					</div>
+				</div>
+				<div class="bg-brand rounded-[1.5rem] p-6 text-black">
+					<p class="text-xl leading-tight font-semibold">Passou por uma situação parecida?</p>
+					<p class="mt-2 text-sm text-black/70">A análise inicial é gratuita.</p>
+					<a
+						href={whatsappMsg(`Olá! Li o artigo "${post.data.title}" e gostaria de uma análise do meu caso.`)}
+						target="_blank"
+						rel="noopener"
+						class="mt-5 inline-flex items-center gap-2 rounded-full bg-black px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-white hover:text-black"
+					>
+						Falar com advogado <Icon name="lucide:arrow-up-right" class="h-4 w-4" />
+					</a>
+				</div>
+			</aside>
+		</div>
+	</article>
+
+	<section class="border-t border-white/8 py-24">
+		<div class="mx-auto max-w-7xl px-4 md:px-6">
+			<div class="mb-10 flex items-end justify-between gap-6">
+				<Eyebrow>Continue lendo</Eyebrow>
+				<a href="/blog" class="text-mist mb-5 inline-flex items-center gap-2 text-sm hover:text-white">
+					Todos os artigos <Icon name="lucide:arrow-right" class="h-4 w-4" />
+				</a>
+			</div>
+			<div class="grid gap-8 md:grid-cols-3">
+				{related.map((p) => <PostCard post={p} />)}
+			</div>
+		</div>
+	</section>
+</Layout>

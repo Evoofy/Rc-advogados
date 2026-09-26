@@ -1,0 +1,43 @@
+---
+import { Icon } from 'astro-icon/components';
+import { contact } from '../data/site';
+---
+
+<section class="relative overflow-hidden px-4 pt-10 pb-4 md:px-6">
+	<div class="bg-brand relative mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] text-black">
+		<img
+			src="/images/gavel.jpg"
+			alt=""
+			loading="lazy"
+			class="absolute -top-[15%] left-0 h-[130%] w-full object-cover opacity-20 mix-blend-multiply grayscale"
+			data-parallax="-10"
+		/>
+		<div class="relative grid items-center gap-12 p-8 py-20 md:p-16 lg:grid-cols-[1.4fr_1fr]">
+			<h2 class="text-[clamp(2.6rem,6.5vw,6rem)] leading-[0.92] font-semibold tracking-[-0.05em]">
+				<span class="line"><span data-split-line>Vamos falar</span></span>
+				<span class="line"><span data-split-line>sobre o seu</span></span>
+				<span class="line"><span data-split-line class="font-serif font-normal italic">caso?</span></span>
+			</h2>
+			<div class="flex flex-col items-start gap-8 lg:items-center">
+				<a
+					href={contact.whatsapp}
+					target="_blank"
+					rel="noopener"
+					data-magnetic
+					class="group relative grid h-48 w-48 place-items-center rounded-full bg-black text-center text-white md:h-56 md:w-56"
+				>
+					<span
+						class="absolute inset-0 scale-0 rounded-full bg-white transition-transform duration-500 ease-[cubic-bezier(.7,0,.2,1)] group-hover:scale-100"
+					></span>
+					<span class="relative z-10 flex flex-col items-center gap-2 font-semibold transition-colors group-hover:text-black">
+						<Icon name="lucide:message-circle" class="h-8 w-8" />
+						Fale conosco
+					</span>
+				</a>
+				<p class="max-w-xs text-sm text-black/70 lg:text-center">
+					Primeira conversa sem compromisso. Respondemos pelo WhatsApp em horário comercial.
+				</p>
+			</div>
+		</div>
+	</div>
+</section>

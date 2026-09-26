@@ -1,0 +1,98 @@
+---
+import { Icon } from 'astro-icon/components';
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getPosts, authorOf, formatDate, readingTime } from '../../lib/blog';
+
+const posts = await getPosts();
+const [featured, ...rest] = posts;
+const featuredAuthor = authorOf(featured);
+const categories = [...new Set(rest.map((p) => p.data.category))];
+---
+
+<Layout title="Blog" description="Artigos sobre golpes bancários, direitos do consumidor, trabalhista e aposentadoria, escritos pela equipe da RC Advogados.">
+	<PageHero
+		eyebrow="Blog e recursos"
+		lines={['Leia nosso', '*blog*']}
+		lead="Conteúdo claro e sem juridiquês para você entender seus direitos e saber o que fazer em cada situação."
+		crumbs={[{ label: 'Blog' }]}
+	/>
+
+	<section class="pb-28">
+		<div class="mx-auto max-w-7xl px-4 md:px-6">
+			<!-- Featured -->
+			<a href={`/blog/${featured.id}`} data-reveal class="group border-line bg-ink-2 grid overflow-hidden rounded-[2rem] border lg:grid-cols-2">
+				<div class="relative aspect-[16/10] overflow-hidden lg:aspect-auto">
+					<img
+						src={featured.data.cover}
+						alt=""
+						class="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.4s] group-hover:scale-105"
+					/>
+					<span class="bg-brand absolute top-5 left-5 rounded-full px-3 py-1 text-xs font-semibold text-black">Em destaque</span>
+				</div>
+				<div class="flex flex-col justify-between gap-10 p-8 md:p-12">
+					<div>
+						<div class="text-mist flex items-center gap-3 text-xs">
+							<span class="text-brand rounded-full border border-current/30 px-2.5 py-0.5">{featured.data.category}</span>
+							<span>{formatDate(featured.data.date)}</span>
+							<span>· {readingTime(featured)} min</span>
+						</div>
+						<h2 class="group-hover:text-brand mt-5 text-3xl leading-tight font-semibold tracking-tight transition-colors md:text-4xl">
+							{featured.data.title}
+						</h2>
+						<p class="text-mist mt-4 text-lg leading-relaxed">{featured.data.description}</p>
+					</div>
+					<div class="flex items-center justify-between">
+						{
+							featuredAuthor && (
+								<span class="flex items-center gap-3">
+									<img src={featuredAuthor.img} alt="" class="h-11 w-11 rounded-full object-cover object-top" />
+									<span class="text-sm">
+										<span class="block font-semibold">{featuredAuthor.name}</span>
+										<span class="text-mist">{featuredAuthor.oab}</span>
+									</span>
+								</span>
+							)
+						}
+						<span class="group-hover:bg-brand grid h-12 w-12 place-items-center rounded-full bg-white text-black transition-all duration-500 group-hover:rotate-45">
+							<Icon name="lucide:arrow-up-right" class="h-5 w-5" />
+						</span>
+					</div>
+				</div>
+			</a>
+
+			<!-- Filters -->
+			<div data-reveal class="mt-20 mb-10 flex flex-wrap items-center gap-2" role="toolbar" aria-label="Filtrar por categoria">
+				<button type="button" data-filter="all" aria-pressed="true" class="filter-chip">Todos</button>
+				{categories.map((c) => <button type="button" data-filter={c} aria-pressed="false" class="filter-chip">{c}</button>)}
+			</div>
+
+			<div class="grid gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3" data-filter-grid>
+				{rest.map((post) => <PostCard post={post} />)}
+			</div>
+			<p data-filter-empty hidden class="text-mist py-16 text-center">Nenhum artigo nesta categoria ainda.</p>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.filter-chip {
+		border-radius: 999px;
+		border: 1px solid rgb(255 255 255 / 0.12);
+		padding: 0.55rem 1.1rem;
+		font-size: 0.875rem;
+		color: rgb(255 255 255 / 0.75);
+		transition: all 0.3s;
+	}
+	.filter-chip:hover {
+		border-color: rgb(255 255 255 / 0.35);
+		color: #fff;
+	}
+	.filter-chip[aria-pressed='true'] {
+		background: var(--color-brand);
+		border-color: var(--color-brand);
+		color: #000;
+		font-weight: 600;
+	}
+</style>

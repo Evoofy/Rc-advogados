@@ -1,0 +1,35 @@
+---
+import { Icon } from 'astro-icon/components';
+import Layout from '../layouts/Layout.astro';
+import { nav } from '../data/site';
+---
+
+<Layout title="Página não encontrada" cta={false}>
+	<section class="relative flex min-h-svh items-center overflow-hidden pt-28 pb-16">
+		<div class="bg-grid absolute inset-0" aria-hidden="true"></div>
+		<div class="orb bg-brand top-1/4 left-1/2 h-[30rem] w-[30rem] -translate-x-1/2" data-orb aria-hidden="true"></div>
+		<div class="relative mx-auto max-w-4xl px-4 text-center md:px-6">
+			<p class="text-[clamp(7rem,26vw,18rem)] leading-none font-semibold tracking-[-0.08em] text-transparent [-webkit-text-stroke:1.5px_rgb(255_255_255/0.4)]">
+				<span class="line"><span data-hero-line>404</span></span>
+			</p>
+			<h1 data-hero-fade class="mt-4 text-3xl font-semibold tracking-tight md:text-5xl">
+				Esta página <span class="font-serif font-normal italic text-brand">não existe</span>
+			</h1>
+			<p data-hero-fade class="text-mist mx-auto mt-4 max-w-md">
+				O endereço pode ter mudado ou sido digitado incorretamente. Que tal começar por aqui?
+			</p>
+			<div data-hero-fade class="mt-10 flex flex-wrap justify-center gap-2">
+				{
+					nav.map((n) => (
+						<a href={n.href} class="hover:border-brand hover:text-brand rounded-full border border-white/15 px-5 py-2.5 text-sm transition">
+							{n.label}
+						</a>
+					))
+				}
+			</div>
+			<a href="/" data-hero-fade class="bg-brand mt-8 inline-flex items-center gap-2 rounded-full px-6 py-3.5 font-semibold text-black transition hover:bg-white">
+				<Icon name="lucide:arrow-left" class="h-4 w-4" /> Voltar ao início
+			</a>
+		</div>
+	</section>
+</Layout>

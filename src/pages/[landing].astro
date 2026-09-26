@@ -1,0 +1,237 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { Icon } from 'astro-icon/components';
+import Layout from '../layouts/Layout.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import Testimonials from '../components/Testimonials.astro';
+import { landings, landingStats, type Landing } from '../data/landings';
+import { team, whatsappMsg } from '../data/site';
+
+export const getStaticPaths = (() => landings.map((l) => ({ params: { landing: l.slug }, props: { l } }))) satisfies GetStaticPaths;
+
+const { l } = Astro.props as { l: Landing };
+const cta = whatsappMsg(`Olá! Gostaria de solicitar uma análise gratuita sobre: ${l.name}.`);
+const founder = team[0];
+const badges = [
+	{ icon: 'lucide:monitor-smartphone', label: 'Atendimento 100% digital' },
+	{ icon: 'lucide:badge-check', label: 'Avaliação gratuita' },
+	{ icon: 'lucide:globe', label: 'Atuação nacional' },
+];
+---
+
+<Layout title={l.name} description={l.lead}>
+	<!-- Hero -->
+	<section class="relative overflow-hidden pt-32 pb-20 md:pt-40">
+		<div class="bg-grid absolute inset-0" aria-hidden="true"></div>
+		<div class="orb bg-brand -top-40 -left-40 h-[34rem] w-[34rem]" data-orb aria-hidden="true"></div>
+		<div class="orb right-0 bottom-0 h-[26rem] w-[26rem] bg-[#7a2cff]/50" data-orb aria-hidden="true"></div>
+
+		<div class="relative mx-auto grid max-w-7xl items-center gap-14 px-4 md:px-6 lg:grid-cols-[1.15fr_1fr]">
+			<div>
+				<div data-hero-fade class="glass mb-8 inline-flex items-center gap-2 rounded-full py-1.5 pr-4 pl-1.5 text-xs text-white/80">
+					<span class="bg-brand rounded-full px-2 py-0.5 font-semibold text-black">{l.tag}</span>
+					Mais de 20.000 clientes atendidos
+				</div>
+				<h1 class="text-[clamp(2.3rem,5.4vw,4.8rem)] leading-[1] font-semibold tracking-[-0.045em]">
+					<span class="line"><span data-hero-line>{l.title}</span></span>
+					<span class="line"><span data-hero-line class="font-serif font-normal italic text-gradient pr-2">{l.accent}</span></span>
+				</h1>
+				<p data-hero-fade class="text-mist mt-8 max-w-xl text-lg leading-relaxed">{l.lead}</p>
+				<div data-hero-fade class="mt-10 flex flex-wrap items-center gap-4">
+					<a
+						href={cta}
+						target="_blank"
+						rel="noopener"
+						data-magnetic
+						class="group bg-brand relative inline-flex items-center gap-3 overflow-hidden rounded-full py-2 pr-2 pl-6 font-semibold text-black"
+					>
+						<span class="relative z-10">Solicite uma análise</span>
+						<span class="relative z-10 grid h-10 w-10 place-items-center rounded-full bg-black text-white transition-transform duration-500 group-hover:rotate-45">
+							<Icon name="lucide:arrow-up-right" class="h-5 w-5" />
+						</span>
+						<span class="absolute inset-0 translate-y-full rounded-full bg-white transition-transform duration-500 ease-[cubic-bezier(.7,0,.2,1)] group-hover:translate-y-0"></span>
+					</a>
+				</div>
+				<ul data-hero-fade class="mt-10 flex flex-wrap gap-x-6 gap-y-3 text-sm">
+					{
+						badges.map((b) => (
+							<li class="flex items-center gap-2 text-white/80">
+								<Icon name={b.icon} class="text-brand h-4 w-4" />
+								{b.label}
+							</li>
+						))
+					}
+				</ul>
+			</div>
+
+			<div data-hero-visual class="relative mx-auto aspect-[4/5] w-full max-w-md lg:max-w-none">
+				<div data-depth="0.3" class="ring-glow absolute inset-0 rounded-[2rem] p-2">
+					<div class="relative h-full w-full overflow-hidden rounded-[1.6rem]">
+						<img src={l.img} alt="" class="h-full w-full scale-110 object-cover" data-hero-img />
+						<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+					</div>
+				</div>
+				<div data-depth="1" data-float class="glass absolute top-10 -left-4 w-72 rounded-2xl !bg-black/60 p-4 shadow-2xl shadow-black/50 sm:-left-12">
+					<div class="flex items-center justify-between text-xs">
+						<span class="text-mist">{l.widget.label}</span>
+						<span class="rounded-full bg-red-500/20 px-2 py-0.5 text-red-300">{l.widget.status}</span>
+					</div>
+					<p class="mt-2 text-3xl font-semibold tracking-tight">{l.widget.value}</p>
+					<div class="mt-4 flex items-center gap-2 rounded-xl bg-emerald-500/15 p-2.5 text-xs text-emerald-300">
+						<Icon name="lucide:shield-check" class="h-4 w-4" />
+						{l.widget.ok}
+					</div>
+				</div>
+				<div data-depth="1.4" data-float class="glass absolute -right-4 bottom-10 flex items-center gap-3 rounded-2xl p-3 pr-5 shadow-2xl shadow-black/50 sm:-right-8">
+					<img src={founder.img} alt="" class="h-12 w-12 rounded-xl object-cover object-top" />
+					<div class="text-sm">
+						<p class="font-semibold">Análise gratuita</p>
+						<p class="text-mist text-xs">por especialistas</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Types -->
+	<section class="bg-ink-2 border-y border-white/8 py-24 md:py-32">
+		<div class="mx-auto max-w-7xl px-4 md:px-6">
+			<div class="mb-14 max-w-2xl">
+				<Eyebrow>{l.typesEyebrow}</Eyebrow>
+				<h2 class="text-[clamp(2.2rem,4.8vw,4.2rem)] leading-[0.95] font-semibold tracking-[-0.04em]">
+					<span class="line"><span data-split-line>{l.typesTitle}</span></span>
+				</h2>
+				<p data-reveal class="text-mist mt-5">Situações como as seguintes têm sido recorrentes no território nacional:</p>
+			</div>
+			<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+				{
+					l.types.map((t, i) => (
+						<div data-reveal class="spotlight group border-line bg-ink flex flex-col rounded-[1.75rem] border p-7">
+							<div class="flex items-center justify-between">
+								<span class="group-hover:bg-brand grid h-12 w-12 place-items-center rounded-2xl bg-white/5 transition-colors duration-500 group-hover:text-black">
+									<Icon name={t.icon} class="h-6 w-6" />
+								</span>
+								<span class="text-mist font-mono text-xs">0{i + 1}</span>
+							</div>
+							<h3 class="mt-12 text-xl leading-snug font-semibold tracking-tight">{t.title}</h3>
+							<p class="text-mist mt-3 text-sm leading-relaxed">{t.text}</p>
+						</div>
+					))
+				}
+			</div>
+			<div data-reveal class="border-line mt-5 flex flex-wrap items-center justify-between gap-6 rounded-[1.75rem] border border-dashed p-7">
+				<div>
+					<p class="text-xl font-semibold">E mais outras dezenas de situações</p>
+					<p class="text-mist mt-1 text-sm">Fale com a gente e veja se o seu caso é atendido.</p>
+				</div>
+				<a href={cta} target="_blank" rel="noopener" class="bg-brand inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-black transition hover:bg-white">
+					Solicite uma análise <Icon name="lucide:arrow-up-right" class="h-4 w-4" />
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Eligibility -->
+	<section class="py-24 md:py-32">
+		<div class="mx-auto grid max-w-7xl items-center gap-14 px-4 md:px-6 lg:grid-cols-2 lg:gap-20">
+			<div class="relative overflow-hidden rounded-[2rem]" data-clip>
+				<img src={founder.img} alt={founder.name} loading="lazy" class="aspect-[4/5] w-full scale-110 object-cover object-top" data-parallax="-8" />
+				<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+				<div class="absolute right-6 bottom-6 left-6">
+					<p class="text-2xl font-semibold">Reginaldo Costa</p>
+					<p class="text-mist text-sm">{founder.oab} · Atuação em todo o Brasil – 100% online</p>
+				</div>
+			</div>
+			<div>
+				<Eyebrow>Seus direitos</Eyebrow>
+				<h2 class="text-[clamp(2.2rem,4.5vw,3.8rem)] leading-[0.98] font-semibold tracking-[-0.04em]">
+					<span class="line"><span data-split-line>{l.eligibilityTitle}</span></span>
+				</h2>
+				<p data-reveal class="text-mist mt-6 text-lg">{l.eligibilityLead}</p>
+				<ul class="mt-8 space-y-3">
+					{
+						l.eligibility.map((e) => (
+							<li data-reveal class="border-line bg-ink-2 flex items-center gap-4 rounded-2xl border p-4">
+								<span class="bg-brand/15 text-brand grid h-9 w-9 shrink-0 place-items-center rounded-full">
+									<Icon name="lucide:check" class="h-4 w-4" />
+								</span>
+								<span class="text-white/85">{e}</span>
+							</li>
+						))
+					}
+				</ul>
+				<p data-reveal class="text-mist mt-6 text-sm">Por isso, a análise técnica do caso concreto é indispensável.</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- Trust -->
+	<section class="relative overflow-hidden border-y border-white/8">
+		<div class="orb bg-brand/40 top-0 left-1/2 h-80 w-80 -translate-x-1/2" aria-hidden="true"></div>
+		<div class="relative mx-auto max-w-7xl px-4 py-20 md:px-6">
+			<p data-reveal class="mx-auto max-w-2xl text-center text-[clamp(1.8rem,3.5vw,2.8rem)] leading-tight font-semibold tracking-tight">
+				Confiança comprovada por quem <span class="font-serif font-normal italic text-brand">já foi atendido</span>
+			</p>
+			<div class="mt-14 grid gap-5 md:grid-cols-3">
+				{
+					landingStats.map((s) => (
+						<div data-reveal class="glass rounded-[1.75rem] p-8 text-center">
+							<p class="text-5xl font-semibold tracking-tight md:text-6xl">{s.value}</p>
+							<p class="text-mist mt-3 text-sm">{s.label}</p>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<!-- Steps -->
+	<section class="py-24 md:py-32">
+		<div class="mx-auto grid max-w-7xl gap-14 px-4 md:px-6 lg:grid-cols-[1fr_1.3fr]">
+			<div class="lg:sticky lg:top-32 lg:self-start">
+				<Eyebrow>Etapas do atendimento</Eyebrow>
+				<h2 class="text-[clamp(2.2rem,4.5vw,3.8rem)] leading-[0.98] font-semibold tracking-[-0.04em]">
+					<span class="line"><span data-split-line>Como funciona</span></span>
+					<span class="line"><span data-split-line>a <span class="font-serif font-normal italic text-brand">análise</span> do caso</span></span>
+				</h2>
+				{l.threshold && <p data-reveal class="border-brand/40 bg-brand/5 mt-8 max-w-sm rounded-2xl border p-5 text-sm text-white/80">{l.threshold}</p>}
+			</div>
+			<ol class="relative" data-steps>
+				<span class="absolute top-2 bottom-2 left-[1.4rem] w-px bg-white/10" aria-hidden="true"></span>
+				<span class="bg-brand absolute top-2 bottom-2 left-[1.4rem] w-px origin-top scale-y-0" data-steps-line aria-hidden="true"></span>
+				{
+					l.steps.map((s, i) => (
+						<li data-reveal class="relative flex gap-7 pb-12 last:pb-0">
+							<span class="bg-ink border-brand text-brand relative z-10 grid h-11 w-11 shrink-0 place-items-center rounded-full border font-mono text-sm">
+								{i + 1}
+							</span>
+							<div class="pt-1.5">
+								<h3 class="text-2xl font-semibold tracking-tight">{s.title}</h3>
+								<p class="text-mist mt-2 max-w-lg leading-relaxed">{s.text}</p>
+							</div>
+						</li>
+					))
+				}
+			</ol>
+		</div>
+	</section>
+
+	<Testimonials />
+
+	<!-- Closing -->
+	<section class="px-4 md:px-6">
+		<div data-reveal class="ring-glow bg-ink-2 mx-auto max-w-5xl rounded-[2rem] p-10 text-center md:p-16">
+			<Icon name="lucide:hourglass" class="text-brand mx-auto h-10 w-10" />
+			<p class="mx-auto mt-6 max-w-3xl text-xl leading-relaxed text-white/85 md:text-2xl">{l.closing}</p>
+			<a
+				href={cta}
+				target="_blank"
+				rel="noopener"
+				data-magnetic
+				class="bg-brand mt-10 inline-flex items-center gap-2 rounded-full px-7 py-4 font-semibold text-black transition hover:bg-white"
+			>
+				Solicite uma análise gratuita <Icon name="lucide:arrow-up-right" class="h-5 w-5" />
+			</a>
+		</div>
+	</section>
+</Layout>

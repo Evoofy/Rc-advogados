@@ -1,0 +1,49 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { contact } from '../data/site';
+---
+
+<LegalLayout title="Termos de Uso" lines={['Termos de', '*uso*']} updated="25 de setembro de 2026">
+	<p>
+		Ao acessar este site, você concorda com os termos abaixo. Caso não concorde, recomendamos não utilizar o site.
+	</p>
+
+	<h2>1. Finalidade do site</h2>
+	<p>
+		Este site tem caráter exclusivamente informativo e institucional, em conformidade com o Código de Ética e Disciplina da
+		OAB e com o Provimento nº 205/2021 do Conselho Federal da OAB, que regula a publicidade na advocacia.
+	</p>
+
+	<h2>2. Conteúdo informativo</h2>
+	<p>
+		Os artigos e textos publicados não constituem consulta ou parecer jurídico. Cada situação exige análise individual por
+		um advogado. O envio de mensagens pelo site ou pelo WhatsApp não estabelece, por si só, relação cliente–advogado.
+	</p>
+
+	<h2>3. Propriedade intelectual</h2>
+	<p>
+		Textos, marcas, logotipos, fotografias e demais elementos deste site pertencem à Reginaldo Costa Advogados Associados ou
+		são utilizados com autorização, sendo vedada a reprodução sem consentimento prévio.
+	</p>
+
+	<h2>4. Links externos</h2>
+	<p>
+		O site pode conter links para portais de tribunais e outros sites de terceiros. Não nos responsabilizamos pelo conteúdo
+		ou pela disponibilidade dessas páginas.
+	</p>
+
+	<h2>5. Responsabilidades</h2>
+	<p>
+		Empregamos esforços para manter as informações atualizadas e corretas, mas não garantimos que o conteúdo esteja livre de
+		erros ou que reflita alterações legislativas ou jurisprudenciais recentes.
+	</p>
+
+	<h2>6. Alterações</h2>
+	<p>Estes termos podem ser atualizados a qualquer momento. A versão vigente estará sempre disponível nesta página.</p>
+
+	<h2>7. Foro</h2>
+	<p>
+		Fica eleito o foro da Comarca de Limeira – SP para dirimir quaisquer questões relacionadas a estes termos. Dúvidas:
+		<a href={`mailto:${contact.email}`}>{contact.email}</a>.
+	</p>
+</LegalLayout>

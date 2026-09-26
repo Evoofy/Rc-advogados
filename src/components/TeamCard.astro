@@ -1,0 +1,35 @@
+---
+import { Icon } from 'astro-icon/components';
+import type { Lawyer } from '../data/site';
+
+interface Props {
+	lawyer: Lawyer;
+}
+const { lawyer: p } = Astro.props;
+---
+
+<a href={`/equipe/${p.slug}`} data-reveal class="group block">
+	<div class="bg-ink-3 relative aspect-[3/4] overflow-hidden rounded-[1.75rem]">
+		<img
+			src={p.img}
+			alt={p.name}
+			loading="lazy"
+			class="h-full w-full object-cover object-top grayscale-[70%] transition-all duration-[1.2s] ease-[cubic-bezier(.2,.8,.2,1)] group-hover:scale-105 group-hover:grayscale-0"
+		/>
+		<div
+			class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100"
+		>
+		</div>
+		<span class="glass absolute top-4 left-4 rounded-full px-3 py-1 text-xs">{p.role}</span>
+		<span
+			class="absolute right-4 bottom-4 left-4 flex translate-y-4 items-center justify-between rounded-full bg-white py-2 pr-2 pl-5 text-sm font-semibold text-black opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100"
+		>
+			Ver história
+			<span class="bg-brand grid h-8 w-8 place-items-center rounded-full">
+				<Icon name="lucide:arrow-up-right" class="h-4 w-4" />
+			</span>
+		</span>
+	</div>
+	<h3 class="mt-5 text-lg font-semibold tracking-tight">{p.name}</h3>
+	<p class="text-mist font-mono text-xs">{p.oab}</p>
+</a>

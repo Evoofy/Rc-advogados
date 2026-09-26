@@ -1,0 +1,20 @@
+---
+import Layout from './Layout.astro';
+import PageHero from '../components/PageHero.astro';
+
+interface Props {
+	title: string;
+	lines: string[];
+	updated: string;
+}
+const { title, lines, updated } = Astro.props;
+---
+
+<Layout title={title} cta={false}>
+	<PageHero eyebrow="Institucional" lines={lines} lead={`Última atualização: ${updated}`} crumbs={[{ label: title }]} />
+	<section class="pb-28">
+		<div class="prose-rc mx-auto max-w-3xl px-4 md:px-6">
+			<slot />
+		</div>
+	</section>
+</Layout>

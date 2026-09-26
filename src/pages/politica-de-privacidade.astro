@@ -1,0 +1,58 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { contact } from '../data/site';
+---
+
+<LegalLayout title="Política de Privacidade" lines={['Política de', '*privacidade*']} updated="25 de setembro de 2026">
+	<p>
+		A <strong>Reginaldo Costa Advogados Associados</strong> ({contact.oab}), com sede na {contact.address}, respeita a sua
+		privacidade e trata os dados pessoais de acordo com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018 — LGPD) e com o
+		sigilo profissional previsto no Estatuto da Advocacia.
+	</p>
+
+	<h2>1. Quais dados coletamos</h2>
+	<ul>
+		<li><strong>Dados fornecidos por você:</strong> nome, telefone, e-mail e as informações do seu caso enviadas por formulário, WhatsApp ou e-mail.</li>
+		<li><strong>Dados de navegação:</strong> endereço IP, tipo de navegador, páginas acessadas e cookies, conforme as suas preferências de consentimento.</li>
+	</ul>
+
+	<h2>2. Para que usamos</h2>
+	<ul>
+		<li>Responder ao seu contato e realizar a análise inicial do caso;</li>
+		<li>Prestar os serviços jurídicos contratados;</li>
+		<li>Cumprir obrigações legais e regulatórias;</li>
+		<li>Melhorar a experiência de navegação no site.</li>
+	</ul>
+
+	<h2>3. Compartilhamento</h2>
+	<p>
+		Não vendemos dados pessoais. O compartilhamento ocorre apenas quando necessário para a prestação do serviço (por exemplo,
+		com órgãos do Poder Judiciário), por obrigação legal ou com fornecedores que nos auxiliam na operação, sempre sob dever
+		de confidencialidade.
+	</p>
+
+	<h2>4. Sigilo profissional</h2>
+	<p>
+		Todas as informações relacionadas ao seu caso são protegidas pelo sigilo profissional do advogado, além das garantias
+		da LGPD.
+	</p>
+
+	<h2>5. Seus direitos</h2>
+	<p>
+		Você pode, a qualquer momento, solicitar a confirmação da existência de tratamento, o acesso, a correção, a
+		anonimização, a portabilidade ou a eliminação dos seus dados, bem como revogar o consentimento, nos termos do art. 18 da
+		LGPD.
+	</p>
+
+	<h2>6. Cookies</h2>
+	<p>
+		Utilizamos cookies necessários ao funcionamento do site e, mediante consentimento, cookies funcionais, analíticos e de
+		publicidade. Você pode gerenciar suas preferências no seu navegador.
+	</p>
+
+	<h2>7. Contato</h2>
+	<p>
+		Para exercer seus direitos ou tirar dúvidas sobre esta política, fale conosco pelo e-mail
+		<a href={`mailto:${contact.email}`}>{contact.email}</a> ou pelo telefone {contact.phone}.
+	</p>
+</LegalLayout>

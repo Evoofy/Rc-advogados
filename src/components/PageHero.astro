@@ -1,0 +1,74 @@
+---
+/**
+ * Hero for inner pages. `lines` are rendered one per masked line;
+ * wrap a word in *asterisks* to render it in the orange serif accent.
+ */
+interface Props {
+	eyebrow: string;
+	lines: string[];
+	lead?: string;
+	img?: string;
+	crumbs?: { label: string; href?: string }[];
+}
+
+const { eyebrow, lines, lead, img, crumbs = [] } = Astro.props;
+const parts = (line: string) =>
+	line.split(/(\*[^*]+\*)/).filter(Boolean).map((p) => ({ accent: p.startsWith('*'), text: p.replace(/\*/g, '') }));
+---
+
+<section class="relative overflow-hidden pt-36 pb-16 md:pt-44 md:pb-24">
+	<div class="bg-grid absolute inset-0" aria-hidden="true"></div>
+	<div class="orb bg-brand/70 -top-48 -left-40 h-[32rem] w-[32rem]" data-orb aria-hidden="true"></div>
+	<div class="orb -top-20 right-0 h-[24rem] w-[24rem] bg-[#7a2cff]/40" data-orb aria-hidden="true"></div>
+
+	<div class="relative mx-auto max-w-7xl px-4 md:px-6">
+		<nav data-hero-fade aria-label="Breadcrumb" class="text-mist mb-8 flex flex-wrap items-center gap-2 text-xs">
+			<a href="/" class="transition hover:text-white">Início</a>
+			{
+				crumbs.map((c) => (
+					<>
+						<span class="text-white/25">/</span>
+						{c.href ? (
+							<a href={c.href} class="transition hover:text-white">{c.label}</a>
+						) : (
+							<span class="text-white/80">{c.label}</span>
+						)}
+					</>
+				))
+			}
+		</nav>
+
+		<p data-hero-fade class="text-brand mb-6 flex items-center gap-3 text-sm font-medium tracking-[0.2em] uppercase">
+			<span class="bg-brand h-px w-10"></span>
+			{eyebrow}
+		</p>
+
+		<div class:list={['grid items-end gap-10', img && 'lg:grid-cols-[1.4fr_1fr]']}>
+			<div>
+				<h1 class="text-[clamp(2.7rem,7vw,6.2rem)] leading-[0.95] font-semibold tracking-[-0.045em]">
+					{
+						lines.map((line) => (
+							<span class="line">
+								<span data-hero-line>
+									{parts(line).map((p) =>
+										p.accent ? <span class="font-serif font-normal italic text-gradient pr-2">{p.text}</span> : p.text,
+									)}
+								</span>
+							</span>
+						))
+					}
+				</h1>
+				{lead && <p data-hero-fade class="text-mist mt-8 max-w-xl text-lg leading-relaxed">{lead}</p>}
+				<slot />
+			</div>
+			{
+				img && (
+					<div data-hero-visual class="relative aspect-[4/3] overflow-hidden rounded-[2rem] border border-white/10">
+						<img src={img} alt="" class="h-full w-full scale-110 object-cover" data-hero-img />
+						<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+					</div>
+				)
+			}
+		</div>
+	</div>
+</section>

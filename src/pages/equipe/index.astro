@@ -1,0 +1,67 @@
+---
+import { Icon } from 'astro-icon/components';
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import TeamCard from '../../components/TeamCard.astro';
+import Eyebrow from '../../components/Eyebrow.astro';
+import { team } from '../../data/site';
+
+const expertise = [...new Set(team.flatMap((t) => t.tags))];
+---
+
+<Layout title="Equipe" description="Conheça os advogados da RC Advogados: especialistas em Direito Civil, Trabalhista, Família, Administrativo e mais.">
+	<PageHero
+		eyebrow="Nosso time"
+		lines={['Conheça nossa', '*equipe*']}
+		lead="Profissionais altamente capacitados e experientes, pautados na ética, na transparência e no compromisso com a satisfação de cada cliente."
+		img="/images/area-trabalhista.webp"
+		crumbs={[{ label: 'Equipe' }]}
+	/>
+
+	<section class="pb-28 md:pb-36">
+		<div class="mx-auto max-w-7xl px-4 md:px-6">
+			<div class="grid gap-x-5 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+				{team.map((p) => <TeamCard lawyer={p} />)}
+				<a
+					href="/contato"
+					data-reveal
+					class="group hover:border-brand flex aspect-[3/4] flex-col justify-between rounded-[1.75rem] border border-dashed border-white/15 p-7 transition-colors"
+				>
+					<Icon name="lucide:message-circle-question" class="text-brand h-9 w-9" />
+					<div>
+						<p class="text-2xl font-semibold tracking-tight">Não sabe com quem falar?</p>
+						<p class="text-mist mt-2 text-sm">Conte seu caso e direcionamos para o especialista certo.</p>
+						<span class="text-brand mt-6 inline-flex items-center gap-2 text-sm font-semibold">
+							Fale com a gente
+							<Icon name="lucide:arrow-right" class="h-4 w-4 transition-transform group-hover:translate-x-1.5" />
+						</span>
+					</div>
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Expertise marquee -->
+	<section class="bg-ink-2 overflow-hidden border-y border-white/8 py-24">
+		<div class="mx-auto mb-12 max-w-7xl px-4 md:px-6">
+			<Eyebrow>Especialidades da equipe</Eyebrow>
+			<h2 class="text-[clamp(2.2rem,4.5vw,3.8rem)] leading-[0.95] font-semibold tracking-[-0.04em]">
+				<span class="line"><span data-split-line>Experiência que se</span></span>
+				<span class="line"><span data-split-line class="font-serif font-normal italic text-brand">complementa</span></span>
+			</h2>
+		</div>
+		<div class="marquee-wrap [mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)]">
+			<div class="marquee" style="--dur: 35s">
+				{
+					[0, 1].map(() => (
+						<div class="flex shrink-0 gap-3 pr-3">
+							{expertise.map((e) => (
+								<span class="glass rounded-full px-6 py-3 text-lg whitespace-nowrap">{e}</span>
+							))}
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</section>
+</Layout>

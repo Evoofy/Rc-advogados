@@ -1,0 +1,17 @@
+---
+interface Props {
+	center?: boolean;
+}
+const { center = false } = Astro.props;
+---
+
+<p
+	data-reveal
+	class:list={[
+		'text-brand mb-5 flex items-center gap-3 text-sm font-medium tracking-[0.2em] uppercase',
+		center && 'justify-center',
+	]}
+>
+	{!center && <span class="bg-brand h-px w-10" />}
+	<slot />
+</p>

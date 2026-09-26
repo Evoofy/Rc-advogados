@@ -1,15 +1,23 @@
 ---
 import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CtaBanner from '../components/CtaBanner.astro';
 
 interface Props {
 	title?: string;
 	description?: string;
+	/** Show the orange "Vamos falar sobre o seu caso?" banner above the footer */
+	cta?: boolean;
 }
 
+const siteName = 'RC Advogados';
 const {
-	title = 'RC Advogados — Hub de Soluções Jurídicas',
-	description = 'Reginaldo Costa Advogados Associados. Consultoria e assessoria jurídica em Limeira – SP, presencial e digital.',
+	title,
+	description = 'Reginaldo Costa Advogados Associados. Hub de Soluções Jurídicas em Limeira – SP, com atendimento presencial e 100% digital.',
+	cta = true,
 } = Astro.props;
+const fullTitle = title ? `${title} — ${siteName}` : `${siteName} — Hub de Soluções Jurídicas`;
 ---
 
 <!doctype html>
@@ -19,6 +27,10 @@ const {
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="description" content={description} />
 		<meta name="theme-color" content="#07070a" />
+		<meta property="og:title" content={fullTitle} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content="/images/fachada.webp" />
+		<meta property="og:locale" content="pt_BR" />
 		<link rel="icon" type="image/png" href="/favicon.png" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -27,13 +39,18 @@ const {
 			rel="stylesheet"
 		/>
 		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
+		<title>{fullTitle}</title>
 		<script is:inline>document.documentElement.classList.add('js');</script>
 	</head>
 	<body class="bg-ink text-white overflow-x-hidden">
 		<div class="grain" aria-hidden="true"></div>
 		<div class="cursor" aria-hidden="true"></div>
-		<slot />
+		<Nav />
+		<main>
+			<slot />
+		</main>
+		{cta && <CtaBanner />}
+		<Footer />
 		<script>
 			import '../scripts/motion';
 		</script>

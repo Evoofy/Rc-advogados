@@ -1,4 +1,5 @@
 ---
+import Img from './Img.astro';
 import { Icon } from 'astro-icon/components';
 import { areas, contact } from '../data/site';
 
@@ -65,13 +66,12 @@ const ticker = [...areas.map((a) => a.title), 'Golpe do PIX', 'Voo Cancelado', '
 				<div class="flex -space-x-3">
 					{
 						['adv-reginaldo', 'adv-eliezer', 'adv-mariane', 'adv-ricardo'].map((n) => (
-							<img
+							<Img
 								src={`/images/${n}.webp`}
 								alt=""
 								width="44"
 								height="44"
-								class="ring-ink h-11 w-11 rounded-full object-cover object-top ring-2"
-							/>
+								class="ring-ink h-11 w-11 rounded-full object-cover object-top ring-2" widths={[48, 96]} sizes="48px" />
 						))
 					}
 				</div>
@@ -88,12 +88,11 @@ const ticker = [...areas.map((a) => a.title), 'Golpe do PIX', 'Voo Cancelado', '
 		<div class="relative mx-auto aspect-[4/5] w-full max-w-md lg:max-w-none" data-hero-visual>
 			<div data-depth="0.3" class="ring-glow absolute inset-0 rounded-[2rem] p-2">
 				<div class="relative h-full w-full overflow-hidden rounded-[1.6rem]">
-					<img
+					<Img
 						src="/images/fachada.webp"
 						alt="Fachada do escritório Reginaldo Costa Advogados Associados"
 						class="h-full w-full scale-110 object-cover"
-						data-hero-img
-					/>
+						data-hero-img sizes="(min-width: 1024px) 40vw, 100vw" priority />
 					<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
 					<div class="absolute right-6 bottom-16 left-6">
 						<p class="text-xs tracking-[0.2em] text-white/60 uppercase">Sede · Limeira</p>
@@ -112,7 +111,7 @@ const ticker = [...areas.map((a) => a.title), 'Golpe do PIX', 'Voo Cancelado', '
 					<span class="text-mist">Seu processo</span>
 					<span class="flex items-center gap-1.5 text-emerald-400">
 						<span class="relative flex h-2 w-2">
-							<span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+							<span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-80"></span>
 							<span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-400"></span>
 						</span>
 						Em andamento

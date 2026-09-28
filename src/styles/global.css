@@ -10,8 +10,8 @@
   --color-brand-2: #ff8a3d;
   --color-gold: #c9a86a;
 
-  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument), ui-serif, Georgia, serif;
 }
 
 html {
@@ -200,3 +200,9 @@ html.lenis, html.lenis body { height: auto; }
   }
   .light .orb { opacity: 0.18; }
 }
+
+/* Orange text on white fails contrast (2.9:1); use a deeper orange in light sections (5.2:1).
+   Unlayered on purpose so it wins over the `text-brand` utility. */
+.light .text-brand { color: #c2410c; }
+.light .dark-scope .text-brand,
+.light .bg-brand .text-brand { color: var(--color-brand); }

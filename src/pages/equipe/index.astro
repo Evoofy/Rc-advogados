@@ -9,12 +9,13 @@ import { team } from '../../data/site';
 const expertise = [...new Set(team.flatMap((t) => t.tags))];
 ---
 
-<Layout title="Equipe" description="Conheça os advogados da RC Advogados: especialistas em Direito Civil, Trabalhista, Família, Administrativo e mais.">
+<Layout title="Equipe" image="/images/area-trabalhista.webp" description="Conheça os advogados da RC Advogados: especialistas em Direito Civil, Trabalhista, Família, Administrativo e mais.">
 	<PageHero
 		eyebrow="Nosso time"
 		lines={['Conheça nossa', '*equipe*']}
 		lead="Profissionais altamente capacitados e experientes, pautados na ética, na transparência e no compromisso com a satisfação de cada cliente."
 		img="/images/area-trabalhista.webp"
+		imgAlt="Equipe de advogados da RC Advogados"
 		crumbs={[{ label: 'Equipe' }]}
 	/>
 

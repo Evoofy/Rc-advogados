@@ -1,6 +1,8 @@
 export type Landing = {
 	slug: string;
 	name: string;
+	/** Meta description (≤ 155 chars) */
+	seoDescription: string;
 	tag: string;
 	title: string;
 	accent: string;
@@ -23,6 +25,7 @@ export const landings: Landing[] = [
 	{
 		slug: 'golpe-do-pix',
 		name: 'Golpe do PIX',
+		seoDescription: 'Sofreu golpe do Pix, boleto falso ou fraude bancária acima de R$ 5.000? Entenda quando é possível buscar a restituição. Atendimento 100% online.',
 		tag: 'Golpes bancários',
 		title: 'Sofreu um golpe bancário e teve um prejuízo superior a',
 		accent: 'R$ 5.000?',
@@ -57,6 +60,7 @@ export const landings: Landing[] = [
 	{
 		slug: 'voo-cancelado',
 		name: 'Voo Cancelado',
+		seoDescription: 'Voo cancelado, atraso de mais de 4 horas, overbooking ou bagagem extraviada? Conheça seus direitos a reembolso e indenização. Atendimento online.',
 		tag: 'Direito do passageiro',
 		title: 'Seu voo foi cancelado, atrasou ou sua bagagem',
 		accent: 'sumiu?',
@@ -90,6 +94,7 @@ export const landings: Landing[] = [
 	{
 		slug: 'acidente-de-trabalho',
 		name: 'Acidente de Trabalho',
+		seoDescription: 'Acidente de trabalho ou doença ocupacional? Estabilidade, benefícios do INSS e indenização. Assessoria jurídica em Limeira – SP e em todo o Brasil.',
 		tag: 'Trabalhista e previdenciário',
 		title: 'Sofreu um acidente de trabalho ou desenvolveu uma',
 		accent: 'doença ocupacional?',

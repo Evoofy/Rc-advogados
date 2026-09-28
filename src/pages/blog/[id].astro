@@ -1,4 +1,5 @@
 ---
+import Img from '../../components/Img.astro';
 import type { GetStaticPaths } from 'astro';
 import { render } from 'astro:content';
 import { Icon } from 'astro-icon/components';
@@ -7,6 +8,9 @@ import PostCard from '../../components/PostCard.astro';
 import Eyebrow from '../../components/Eyebrow.astro';
 import { getPosts, authorOf, formatDate, readingTime, type Post } from '../../lib/blog';
 import { whatsappMsg } from '../../data/site';
+import { article, breadcrumbs } from '../../lib/seo';
+import { asset } from '../../lib/images';
+import { getImage } from 'astro:assets';
 
 export const getStaticPaths = (async () => {
 	const posts = await getPosts();
@@ -17,7 +21,12 @@ const { post, all } = Astro.props as { post: Post; all: Post[] };
 const { Content } = await render(post);
 const author = authorOf(post);
 const related = all.filter((p) => p.id !== post.id).slice(0, 3);
-const url = new URL(Astro.url.pathname, Astro.site ?? 'https://rcadvogados.com.br').href;
+const url = new URL(Astro.url.pathname, Astro.site).href;
+const cover = await getImage({ src: asset(post.data.cover), width: 1200, height: 630, fit: 'cover', format: 'jpg', quality: 80 });
+const jsonLd = [
+	article(Astro.site!, { title: post.data.title, description: post.data.description, date: post.data.date, url: new URL(url), image: new URL(cover.src, Astro.site).href }, author),
+	breadcrumbs(Astro.site!, [{ label: 'Blog', href: '/blog' }, { label: post.data.title }], Astro.url),
+];
 const share = [
 	{ icon: 'lucide:message-circle', label: 'WhatsApp', href: `https://wa.me/?text=${encodeURIComponent(`${post.data.title} ${url}`)}` },
 	{ icon: 'lucide:linkedin', label: 'LinkedIn', href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}` },
@@ -25,7 +34,7 @@ const share = [
 ];
 ---
 
-<Layout title={post.data.title} description={post.data.description}>
+<Layout title={post.data.title} description={post.data.description} image={post.data.cover} type="article" publishedTime={post.data.date} jsonLd={jsonLd}>
 	<div class="bg-brand fixed top-0 left-0 z-[55] h-0.5 w-full origin-left scale-x-0" data-read-progress aria-hidden="true"></div>
 
 	<article>
@@ -54,7 +63,7 @@ const share = [
 
 		<div class="mx-auto max-w-6xl px-4 md:px-6">
 			<div data-hero-visual class="relative aspect-[16/8] overflow-hidden rounded-[2rem]">
-				<img src={post.data.cover} alt="" class="h-full w-full scale-110 object-cover" data-hero-img />
+				<Img src={post.data.cover} alt="" class="h-full w-full scale-110 object-cover" data-hero-img sizes="(min-width: 1152px) 1100px, 100vw" priority />
 			</div>
 		</div>
 
@@ -69,7 +78,7 @@ const share = [
 						<a href={`/equipe/${author.slug}`} class="group border-line bg-ink-2 block rounded-[1.5rem] border p-5">
 							<p class="text-mist text-xs tracking-widest uppercase">Escrito por</p>
 							<div class="mt-4 flex items-center gap-3">
-								<img src={author.img} alt="" class="h-12 w-12 rounded-full object-cover object-top" />
+								<Img src={author.img} alt="" class="h-12 w-12 rounded-full object-cover object-top" widths={[48, 96]} sizes="48px" />
 								<div class="text-sm">
 									<p class="group-hover:text-brand font-semibold transition-colors">{author.name}</p>
 									<p class="text-mist font-mono text-xs">{author.oab}</p>

@@ -1,4 +1,6 @@
 ---
+import Img from './Img.astro';
+import { breadcrumbs } from '../lib/seo';
 /**
  * Hero for inner pages. `lines` are rendered one per masked line;
  * wrap a word in *asterisks* to render it in the orange serif accent.
@@ -9,12 +11,16 @@ interface Props {
 	lead?: string;
 	img?: string;
 	crumbs?: { label: string; href?: string }[];
+	imgAlt?: string;
 }
 
-const { eyebrow, lines, lead, img, crumbs = [] } = Astro.props;
+const { eyebrow, lines, lead, img, imgAlt = '', crumbs = [] } = Astro.props;
+const crumbLd = breadcrumbs(Astro.site!, crumbs, Astro.url);
 const parts = (line: string) =>
 	line.split(/(\*[^*]+\*)/).filter(Boolean).map((p) => ({ accent: p.startsWith('*'), text: p.replace(/\*/g, '') }));
 ---
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(crumbLd)} />
 
 <section class="relative overflow-hidden pt-36 pb-16 md:pt-44 md:pb-24">
 	<div class="bg-grid absolute inset-0" aria-hidden="true"></div>
@@ -64,7 +70,7 @@ const parts = (line: string) =>
 			{
 				img && (
 					<div data-hero-visual class="relative aspect-[4/3] overflow-hidden rounded-[2rem] border border-white/10">
-						<img src={img} alt="" class="h-full w-full scale-110 object-cover" data-hero-img />
+						<Img src={img} alt={imgAlt} class="h-full w-full scale-110 object-cover" data-hero-img sizes="(min-width: 1024px) 40vw, 100vw" priority />
 						<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
 					</div>
 				)

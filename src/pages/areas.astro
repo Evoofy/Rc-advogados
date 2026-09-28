@@ -1,4 +1,5 @@
 ---
+import Img from '../components/Img.astro';
 import { Icon } from 'astro-icon/components';
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
@@ -35,7 +36,7 @@ const label = (title: string) => (title.startsWith("Defesa") ? title : `Direito 
 
 	<section class="relative pb-24">
 		<div class="hover-preview" aria-hidden="true">
-			{areas.map((a) => <img src={a.img} alt="" loading="lazy" data-preview={a.slug} />)}
+			{areas.map((a) => <Img src={a.img} alt="" data-preview={a.slug} sizes="280px" />)}
 		</div>
 
 		<div class="mx-auto max-w-7xl px-4 md:px-6">
@@ -67,7 +68,7 @@ const label = (title: string) => (title.startsWith("Defesa") ? title : `Direito 
 										<span class="hidden md:block" />
 										<div class="space-y-8">
 											<p class="max-w-2xl text-lg leading-relaxed text-white/80">{a.long}</p>
-											<img src={a.img} alt="" loading="lazy" class="aspect-[4/3] w-full rounded-2xl object-cover object-top md:hidden" />
+											<Img src={a.img} alt="" class="aspect-[4/3] w-full rounded-2xl object-cover object-top md:hidden" sizes="100vw" />
 										</div>
 										<a
 											href={whatsappMsg(`Olá! Gostaria de falar sobre um caso de ${label(a.title)}.`)}

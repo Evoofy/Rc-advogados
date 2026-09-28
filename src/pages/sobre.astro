@@ -1,4 +1,5 @@
 ---
+import Img from '../components/Img.astro';
 import { Icon } from 'astro-icon/components';
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
@@ -56,12 +57,17 @@ const pillars = [
 ];
 ---
 
-<Layout title="Sobre nós" description="Conheça a RC Advogados: uma Hub de Soluções Jurídicas em Limeira – SP, com mais de duas décadas de expertise.">
+<Layout
+	title="Sobre nós"
+	description="Conheça a RC Advogados: hub de soluções jurídicas em Limeira – SP, com mais de duas décadas de experiência e atendimento presencial e digital."
+	image="/images/fachada.webp"
+>
 	<PageHero
 		eyebrow="Quem somos"
 		lines={['Uma *hub* de', 'soluções jurídicas']}
 		lead="Reunimos diferentes áreas do Direito e conectamos especialistas para oferecer suporte completo a pessoas e empresas, com soluções seguras, estratégicas e personalizadas."
 		img="/images/fachada.webp"
+		imgAlt="Fachada do escritório Reginaldo Costa Advogados Associados em Limeira"
 		crumbs={[{ label: 'Sobre' }]}
 	/>
 
@@ -69,13 +75,11 @@ const pillars = [
 	<section class="light relative py-24 md:py-32">
 		<div class="mx-auto grid max-w-7xl gap-14 px-4 md:px-6 lg:grid-cols-2 lg:gap-20">
 			<div class="dark-scope relative overflow-hidden rounded-[2rem]" data-clip>
-				<img
+				<Img
 					src="/images/escritorio.webp"
 					alt="Advogados da RC no escritório de Limeira"
-					loading="lazy"
 					class="h-full min-h-[460px] w-full scale-125 object-cover"
-					data-parallax="-10"
-				/>
+					data-parallax="-10" sizes="(min-width: 1024px) 64vw, 100vw" />
 				<div class="glass absolute right-6 bottom-6 left-6 flex items-center gap-4 rounded-2xl p-4">
 					<span class="bg-brand grid h-12 w-12 shrink-0 place-items-center rounded-xl text-black">
 						<Icon name="lucide:map-pin" class="h-6 w-6" />

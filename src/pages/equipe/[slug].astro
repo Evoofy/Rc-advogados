@@ -1,4 +1,5 @@
 ---
+import Img from '../../components/Img.astro';
 import type { GetStaticPaths } from 'astro';
 import { Icon } from 'astro-icon/components';
 import Layout from '../../layouts/Layout.astro';
@@ -7,19 +8,34 @@ import Eyebrow from '../../components/Eyebrow.astro';
 import PostCard from '../../components/PostCard.astro';
 import { team, contact, whatsappMsg, type Lawyer } from '../../data/site';
 import { getPosts } from '../../lib/blog';
+import { person, breadcrumbs } from '../../lib/seo';
+import { asset } from '../../lib/images';
+import { getImage } from 'astro:assets';
 
 export const getStaticPaths = (() => team.map((lawyer) => ({ params: { slug: lawyer.slug }, props: { lawyer } }))) satisfies GetStaticPaths;
 
 const { lawyer } = Astro.props as { lawyer: Lawyer };
 const others = team.filter((t) => t.slug !== lawyer.slug).slice(0, 4);
 const posts = (await getPosts()).filter((p) => p.data.author === lawyer.slug);
+const photo = await getImage({ src: asset(lawyer.img), width: 800, format: 'jpg', quality: 80 });
+const jsonLd = [
+	person(Astro.site!, lawyer, new URL(photo.src, Astro.site).href),
+	breadcrumbs(Astro.site!, [{ label: 'Equipe', href: '/equipe' }, { label: lawyer.name }], Astro.url),
+];
 const firstName = lawyer.name.replace(/^Dra?\.\s*/, '').split(' ')[0];
 const words = lawyer.name.split(" ");
 const half = Math.ceil(words.length / 2);
 const nameLines = [words.slice(0, half).join(" "), words.slice(half).join(" ")];
 ---
 
-<Layout title={lawyer.name} description={`${lawyer.name} — ${lawyer.oab}. ${lawyer.bio.slice(0, 140)}…`}>
+<Layout
+	title={lawyer.name}
+	description={`${lawyer.name}, ${lawyer.oab}. ${lawyer.role} na RC Advogados, em Limeira – SP. Atuação: ${lawyer.tags.join(', ')}.`.slice(0, 158)}
+	image={lawyer.img}
+	imagePosition="top"
+	type="profile"
+	jsonLd={jsonLd}
+>
 	<section class="relative overflow-hidden pt-32 pb-24 md:pt-40">
 		<div class="bg-grid absolute inset-0" aria-hidden="true"></div>
 		<div class="orb bg-brand/60 -top-40 right-0 h-[30rem] w-[30rem]" data-orb aria-hidden="true"></div>
@@ -38,7 +54,7 @@ const nameLines = [words.slice(0, half).join(" "), words.slice(half).join(" ")];
 				<div class="lg:sticky lg:top-28 lg:self-start">
 					<div data-hero-visual class="ring-glow relative rounded-[2rem] p-2">
 						<div class="bg-ink-3 relative aspect-[4/5] overflow-hidden rounded-[1.6rem]">
-							<img src={lawyer.img} alt={lawyer.name} class="h-full w-full scale-110 object-cover object-top" data-hero-img />
+							<Img src={lawyer.img} alt={lawyer.name} class="h-full w-full scale-110 object-cover object-top" data-hero-img sizes="(min-width: 1024px) 40vw, 100vw" priority />
 							<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
 							<div class="glass absolute right-5 bottom-5 left-5 flex items-center justify-between rounded-2xl p-4">
 								<div>

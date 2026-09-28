@@ -6,8 +6,9 @@ interface Props {
 	title: string;
 	lines: string[];
 	updated: string;
+	description: string;
 }
-const { title, lines, updated } = Astro.props;
+const { title, lines, updated, description } = Astro.props;
 
 const docs = [
 	{ label: 'Política de Privacidade', href: '/politica-de-privacidade' },
@@ -17,7 +18,7 @@ const docs = [
 const path = Astro.url.pathname.replace(/\/$/, '');
 ---
 
-<Layout title={title} cta={false}>
+<Layout title={title} description={description} cta={false}>
 	<PageHero eyebrow="Institucional" lines={lines} lead={`Última atualização: ${updated}`} crumbs={[{ label: title }]}>
 		<nav data-hero-fade aria-label="Documentos legais" class="mt-10 flex flex-wrap gap-2">
 			{

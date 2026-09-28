@@ -1,0 +1,37 @@
+---
+/**
+ * Drop-in replacement for <img> for photos in src/assets/images.
+ * Generates a responsive WebP srcset; pass `sizes` so the browser picks the right file.
+ */
+import { Image } from 'astro:assets';
+import type { HTMLAttributes } from 'astro/types';
+import { asset } from '../lib/images';
+
+type Props = Omit<HTMLAttributes<'img'>, 'src' | 'width' | 'height'> & {
+	src: string;
+	alt: string;
+	/** CSS sizes hint, e.g. "(min-width: 1024px) 40vw, 100vw" */
+	sizes?: string;
+	/** Rendered widths to generate; defaults to a range capped at the source width */
+	widths?: number[];
+	/** Above-the-fold image: load eagerly with high priority */
+	priority?: boolean;
+};
+
+const { src, alt, sizes = '100vw', widths, priority = false, loading, ...rest } = Astro.props;
+const meta = asset(src);
+const candidates = widths ?? [320, 480, 640, 800, 1024, 1280, 1600, 1920];
+const list = [...new Set(candidates.map((w) => Math.min(w, meta.width)))];
+---
+
+<Image
+	src={meta}
+	alt={alt}
+	widths={list}
+	sizes={sizes}
+	quality={78}
+	loading={priority ? 'eager' : (loading ?? 'lazy')}
+	fetchpriority={priority ? 'high' : undefined}
+	decoding="async"
+	{...rest}
+/>

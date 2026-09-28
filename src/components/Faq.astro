@@ -2,7 +2,10 @@
 import { Icon } from 'astro-icon/components';
 import { faq, contact } from '../data/site';
 import Eyebrow from './Eyebrow.astro';
+import { faqPage } from '../lib/seo';
 ---
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(faqPage())} />
 
 <section class="relative py-28 md:py-36">
 	<div class="mx-auto grid max-w-7xl gap-14 px-4 md:px-6 lg:grid-cols-[1fr_1.4fr]">

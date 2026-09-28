@@ -3,7 +3,7 @@ import LegalLayout from '../layouts/LegalLayout.astro';
 import { contact } from '../data/site';
 ---
 
-<LegalLayout title="Política de Privacidade" lines={['Política de', '*privacidade*']} updated="25 de setembro de 2026">
+<LegalLayout title="Política de Privacidade" lines={['Política de', '*privacidade*']} updated="28 de setembro de 2026">
 	<p>
 		A <strong>Reginaldo Costa Advogados Associados</strong> ({contact.oab}), com sede na {contact.address}, respeita a sua
 		privacidade e trata os dados pessoais de acordo com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018 — LGPD) e com o
@@ -46,13 +46,14 @@ import { contact } from '../data/site';
 
 	<h2>6. Cookies</h2>
 	<p>
-		Utilizamos cookies necessários ao funcionamento do site e, mediante consentimento, cookies funcionais, analíticos e de
-		publicidade. Você pode gerenciar suas preferências no seu navegador.
+		Utilizamos cookies necessários ao funcionamento do site e, mediante consentimento, cookies opcionais (funcionais,
+		analíticos e de publicidade). Veja os detalhes e como gerenciar as suas escolhas na nossa{' '}
+		<a href="/politica-de-cookies">Política de Cookies</a>.
 	</p>
 
 	<h2>7. Contato</h2>
 	<p>
-		Para exercer seus direitos ou tirar dúvidas sobre esta política, fale conosco pelo e-mail
+		Para exercer seus direitos ou tirar dúvidas sobre esta política, fale conosco pelo e-mail{' '}
 		<a href={`mailto:${contact.email}`}>{contact.email}</a> ou pelo telefone {contact.phone}.
 	</p>
 </LegalLayout>

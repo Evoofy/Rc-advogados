@@ -119,11 +119,25 @@ const channels = [
 			<div data-clip class="border-line relative h-[420px] overflow-hidden rounded-[2rem] border">
 				<iframe
 					title="Mapa: RC Advogados, R. Treze de Maio, 151 - Centro, Limeira – SP"
-					src={contact.mapsEmbed}
+					data-map-src={contact.mapsEmbed}
 					loading="lazy"
 					referrerpolicy="no-referrer-when-downgrade"
 					class="h-full w-full [filter:invert(0.92)_hue-rotate(180deg)_saturate(0.6)_contrast(0.9)]"
 				></iframe>
+				<div data-map-gate class="bg-ink-2 absolute inset-0 flex flex-col items-center justify-center gap-4 p-6 text-center">
+					<p class="max-w-sm text-sm text-white/75">
+						O mapa é fornecido pelo Google, que pode gravar cookies no seu navegador. Veja a nossa{' '}
+						<a href="/politica-de-cookies" class="text-brand underline underline-offset-2">Política de Cookies</a>.
+					</p>
+					<div class="flex flex-wrap justify-center gap-2">
+						<button type="button" data-map-load class="bg-brand rounded-full px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-white">
+							Carregar mapa
+						</button>
+						<a href={contact.maps} target="_blank" rel="noopener" class="rounded-full border border-white/15 px-5 py-2.5 text-sm transition hover:border-white/40">
+							Abrir no Google Maps
+						</a>
+					</div>
+				</div>
 				<div class="glass pointer-events-none absolute top-5 left-5 flex items-center gap-3 rounded-2xl p-4">
 					<img src="/images/logo.png" alt="" class="h-10 w-10" />
 					<div class="text-sm">
@@ -200,6 +214,21 @@ const channels = [
 
 <script>
 	import { contact } from '../data/site';
+	import { whenAllowed, getConsent, saveConsent } from '../scripts/consent';
+
+	const map = document.querySelector<HTMLIFrameElement>('[data-map-src]');
+	const gate = document.querySelector<HTMLElement>('[data-map-gate]');
+	const loadMap = () => {
+		if (!map || map.src) return;
+		map.src = map.dataset.mapSrc!;
+		gate?.remove();
+	};
+	whenAllowed('funcionais', loadMap);
+	// Clicking "Carregar mapa" is an explicit opt-in to functional cookies
+	document.querySelector('[data-map-load]')?.addEventListener('click', () => {
+		const c = getConsent();
+		saveConsent({ funcionais: true, analiticos: c?.analiticos ?? false, publicidade: c?.publicidade ?? false });
+	});
 
 	const form = document.getElementById('contact-form') as HTMLFormElement | null;
 	const error = form?.querySelector<HTMLElement>('[data-form-error]');

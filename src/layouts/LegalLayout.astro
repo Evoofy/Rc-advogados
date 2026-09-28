@@ -8,10 +8,36 @@ interface Props {
 	updated: string;
 }
 const { title, lines, updated } = Astro.props;
+
+const docs = [
+	{ label: 'Política de Privacidade', href: '/politica-de-privacidade' },
+	{ label: 'Termos de Uso', href: '/termos-de-uso' },
+	{ label: 'Política de Cookies', href: '/politica-de-cookies' },
+];
+const path = Astro.url.pathname.replace(/\/$/, '');
 ---
 
 <Layout title={title} cta={false}>
-	<PageHero eyebrow="Institucional" lines={lines} lead={`Última atualização: ${updated}`} crumbs={[{ label: title }]} />
+	<PageHero eyebrow="Institucional" lines={lines} lead={`Última atualização: ${updated}`} crumbs={[{ label: title }]}>
+		<nav data-hero-fade aria-label="Documentos legais" class="mt-10 flex flex-wrap gap-2">
+			{
+				docs.map((d) => (
+					<a
+						href={d.href}
+						aria-current={path === d.href ? 'page' : undefined}
+						class:list={[
+							'rounded-full border px-4 py-2 text-sm transition',
+							path === d.href
+								? 'bg-brand border-brand font-semibold text-black'
+								: 'border-white/12 text-white/75 hover:border-white/35 hover:text-white',
+						]}
+					>
+						{d.label}
+					</a>
+				))
+			}
+		</nav>
+	</PageHero>
 	<section class="pb-28">
 		<div class="prose-rc mx-auto max-w-3xl px-4 md:px-6">
 			<slot />

@@ -1,0 +1,174 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const categories = [
+	{ id: 'necessarios', title: 'Cookies necessários', text: 'Essenciais para o site funcionar, como lembrar as suas preferências de consentimento. Não armazenam dados pessoais.', locked: true },
+	{ id: 'funcionais', title: 'Cookies funcionais', text: 'Permitem recursos de terceiros, como o mapa do Google na página de contato e o compartilhamento em redes sociais.' },
+	{ id: 'analiticos', title: 'Cookies analíticos', text: 'Nos ajudam a entender como o site é usado: número de visitantes, páginas acessadas e origem do tráfego.' },
+	{ id: 'publicidade', title: 'Cookies de publicidade', text: 'Usados para exibir anúncios relevantes e medir a eficácia das campanhas.' },
+];
+---
+
+<!-- Banner -->
+<div
+	id="cookie-banner"
+	hidden
+	role="region"
+	aria-label="Aviso de cookies"
+	class="fixed right-4 bottom-4 left-4 z-[65] rounded-3xl border border-white/10 bg-[#0e0e13] p-5 text-white shadow-2xl shadow-black/60 sm:right-auto sm:max-w-md md:p-6"
+>
+	<div class="flex items-start gap-4">
+		<span class="bg-brand/15 text-brand grid h-10 w-10 shrink-0 place-items-center rounded-xl">
+			<Icon name="lucide:cookie" class="h-5 w-5" />
+		</span>
+		<div>
+			<p class="font-semibold">Sua privacidade importa</p>
+			<p class="mt-1 text-sm leading-relaxed text-[#a1a1aa]">
+				Usamos cookies necessários para o site funcionar e, com a sua permissão, cookies opcionais para recursos como o mapa.
+				Saiba mais na <a href="/politica-de-cookies" class="text-brand underline underline-offset-2">Política de Cookies</a>.
+			</p>
+		</div>
+	</div>
+	<div class="mt-5 flex flex-wrap gap-2">
+		<button type="button" data-consent="all" class="bg-brand flex-1 rounded-full px-4 py-2.5 text-sm font-semibold text-black transition hover:bg-white">
+			Aceitar todos
+		</button>
+		<button type="button" data-consent="none" class="flex-1 rounded-full border border-white/15 px-4 py-2.5 text-sm font-medium transition hover:border-white/40">
+			Rejeitar
+		</button>
+		<button type="button" data-cookie-prefs class="w-full rounded-full px-4 py-2 text-sm text-[#a1a1aa] underline-offset-2 transition hover:text-white hover:underline">
+			Personalizar
+		</button>
+	</div>
+</div>
+
+<!-- Preferences dialog -->
+<dialog
+	id="cookie-dialog"
+	aria-labelledby="cookie-dialog-title"
+	class="m-auto w-[calc(100%-2rem)] max-w-lg rounded-3xl border border-white/10 bg-[#0e0e13] p-0 text-white shadow-2xl backdrop:bg-black/70"
+>
+	<form method="dialog" class="p-6 md:p-8">
+		<div class="flex items-start justify-between gap-4">
+			<div>
+				<h2 id="cookie-dialog-title" class="text-2xl font-semibold tracking-tight">Preferências de cookies</h2>
+				<p class="mt-1 text-sm text-[#a1a1aa]">Escolha quais categorias você permite. Você pode mudar isso quando quiser.</p>
+			</div>
+			<button type="submit" value="cancel" aria-label="Fechar" class="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-white/15 hover:border-white/40">
+				<Icon name="lucide:x" class="h-4 w-4" />
+			</button>
+		</div>
+
+		<ul class="mt-6 divide-y divide-white/8 rounded-2xl border border-white/8">
+			{
+				categories.map((c) => (
+					<li class="flex items-start justify-between gap-5 p-4">
+						<div>
+							<p class="text-sm font-semibold">{c.title}</p>
+							<p class="mt-1 text-xs leading-relaxed text-[#a1a1aa]">{c.text}</p>
+						</div>
+						{c.locked ? (
+							<span class="shrink-0 rounded-full bg-emerald-500/15 px-2.5 py-1 text-[11px] text-emerald-300">Sempre ativo</span>
+						) : (
+							<label class="switch shrink-0">
+								<input type="checkbox" name={c.id} class="sr-only" />
+								<span aria-hidden="true" />
+								<span class="sr-only">{c.title}</span>
+							</label>
+						)}
+					</li>
+				))
+			}
+		</ul>
+
+		<div class="mt-6 flex flex-wrap gap-2">
+			<button type="submit" value="save" class="bg-brand flex-1 rounded-full px-4 py-3 text-sm font-semibold text-black transition hover:bg-white">
+				Salvar preferências
+			</button>
+			<button type="submit" value="all" class="flex-1 rounded-full border border-white/15 px-4 py-3 text-sm font-medium transition hover:border-white/40">
+				Aceitar todos
+			</button>
+		</div>
+	</form>
+</dialog>
+
+<style>
+	.switch {
+		position: relative;
+		display: inline-block;
+		width: 2.75rem;
+		height: 1.5rem;
+		cursor: pointer;
+	}
+	.switch > span[aria-hidden] {
+		position: absolute;
+		inset: 0;
+		border-radius: 999px;
+		background: rgb(255 255 255 / 0.15);
+		transition: background 0.25s;
+	}
+	.switch > span[aria-hidden]::after {
+		content: '';
+		position: absolute;
+		top: 3px;
+		left: 3px;
+		width: 18px;
+		height: 18px;
+		border-radius: 999px;
+		background: #fff;
+		transition: transform 0.25s;
+	}
+	.switch input:checked + span {
+		background: var(--color-brand);
+	}
+	.switch input:checked + span::after {
+		transform: translateX(1.25rem);
+	}
+	.switch input:focus-visible + span {
+		outline: 2px solid var(--color-brand);
+		outline-offset: 2px;
+	}
+	dialog[open] {
+		animation: pop 0.25s ease-out;
+	}
+	@keyframes pop {
+		from {
+			opacity: 0;
+			transform: translateY(8px);
+		}
+	}
+</style>
+
+<script>
+	import { getConsent, saveConsent, type Category } from '../scripts/consent';
+
+	const banner = document.getElementById('cookie-banner')!;
+	const dialog = document.getElementById('cookie-dialog') as HTMLDialogElement;
+	const form = dialog.querySelector('form')!;
+	const cats: Category[] = ['funcionais', 'analiticos', 'publicidade'];
+	const box = (c: Category) => form.elements.namedItem(c) as HTMLInputElement;
+
+	const decide = (choice: Record<Category, boolean>) => {
+		saveConsent(choice);
+		banner.hidden = true;
+	};
+	const every = (v: boolean) => Object.fromEntries(cats.map((c) => [c, v])) as Record<Category, boolean>;
+
+	if (!getConsent()) banner.hidden = false;
+
+	banner.querySelector('[data-consent="all"]')!.addEventListener('click', () => decide(every(true)));
+	banner.querySelector('[data-consent="none"]')!.addEventListener('click', () => decide(every(false)));
+
+	// Any element with [data-cookie-prefs] (banner, footer, cookie policy page) opens the dialog
+	document.addEventListener('click', (e) => {
+		if (!(e.target as Element).closest('[data-cookie-prefs]')) return;
+		const current = getConsent();
+		cats.forEach((c) => (box(c).checked = current?.[c] ?? false));
+		dialog.showModal();
+	});
+
+	dialog.addEventListener('close', () => {
+		if (dialog.returnValue === 'all') decide(every(true));
+		else if (dialog.returnValue === 'save') decide(Object.fromEntries(cats.map((c) => [c, box(c).checked])) as Record<Category, boolean>);
+	});
+</script>

@@ -1,0 +1,140 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { contact } from '../data/site';
+
+const cookies = [
+	{
+		category: 'Necessários',
+		name: 'rc-consent',
+		provider: 'RC Advogados (este site)',
+		purpose: 'Guarda as suas escolhas de consentimento de cookies.',
+		duration: 'Até você limpar os dados do navegador',
+	},
+	{
+		category: 'Funcionais',
+		name: 'NID, AEC e similares',
+		provider: 'Google (mapa na página de contato)',
+		purpose: 'Exibir o mapa interativo com a localização do escritório.',
+		duration: 'Até 6 meses',
+	},
+];
+---
+
+<LegalLayout title="Política de Cookies" lines={['Política de', '*cookies*']} updated="28 de setembro de 2026">
+	<p>
+		Esta política explica o que são cookies, quais utilizamos no site da <strong>Reginaldo Costa Advogados Associados</strong>{' '}
+		e como você pode gerenciar as suas preferências, em conformidade com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018 — LGPD).
+		Ela complementa a nossa <a href="/politica-de-privacidade">Política de Privacidade</a>.
+	</p>
+
+	<h2>1. O que são cookies</h2>
+	<p>
+		Cookies são pequenos arquivos armazenados no seu navegador quando você visita um site. Tecnologias semelhantes, como o
+		armazenamento local (<em>localStorage</em>), cumprem funções parecidas e são tratadas da mesma forma nesta política.
+	</p>
+
+	<h2>2. Categorias que utilizamos</h2>
+	<ul>
+		<li>
+			<strong>Necessários (sempre ativos):</strong> essenciais para o funcionamento do site, como lembrar as suas preferências de
+			consentimento. Não armazenam dados pessoais e não podem ser desativados.
+		</li>
+		<li>
+			<strong>Funcionais:</strong> permitem recursos de terceiros, como o mapa do Google na página de contato. Só são carregados
+			com a sua permissão.
+		</li>
+		<li>
+			<strong>Analíticos:</strong> ajudam a entender como o site é usado (visitas, páginas acessadas, origem do tráfego).{' '}
+			<em>Atualmente não utilizamos ferramentas analíticas.</em>
+		</li>
+		<li>
+			<strong>Publicidade:</strong> usados para exibir anúncios relevantes e medir campanhas.{' '}
+			<em>Atualmente não utilizamos cookies de publicidade.</em>
+		</li>
+	</ul>
+
+	<h2>3. Cookies em uso</h2>
+	<div class="-mx-4 overflow-x-auto px-4 md:mx-0 md:px-0">
+		<table class="cookie-table">
+			<thead>
+				<tr>
+					<th>Categoria</th>
+					<th>Nome</th>
+					<th>Fornecedor</th>
+					<th>Finalidade</th>
+					<th>Duração</th>
+				</tr>
+			</thead>
+			<tbody>
+				{
+					cookies.map((c) => (
+						<tr>
+							<td>{c.category}</td>
+							<td><code>{c.name}</code></td>
+							<td>{c.provider}</td>
+							<td>{c.purpose}</td>
+							<td>{c.duration}</td>
+						</tr>
+					))
+				}
+			</tbody>
+		</table>
+	</div>
+	<p>
+		Os cookies do Google seguem a{' '}
+		<a href="https://policies.google.com/technologies/cookies?hl=pt-BR" target="_blank" rel="noopener">política de cookies do Google</a>.
+	</p>
+
+	<h2>4. Como gerenciar as suas preferências</h2>
+	<p>
+		No primeiro acesso, exibimos um aviso para você aceitar, rejeitar ou personalizar os cookies opcionais. Você pode mudar
+		a sua escolha a qualquer momento:
+	</p>
+	<p>
+		<button type="button" data-cookie-prefs class="bg-brand rounded-full px-5 py-3 text-sm font-semibold text-black no-underline transition hover:bg-white">
+			Abrir preferências de cookies
+		</button>
+	</p>
+	<p>
+		Também é possível bloquear ou apagar cookies nas configurações do seu navegador. Bloquear cookies necessários pode
+		afetar o funcionamento de algumas partes do site.
+	</p>
+
+	<h2>5. Alterações</h2>
+	<p>
+		Esta política pode ser atualizada, por exemplo, se passarmos a utilizar novas ferramentas. A versão vigente estará sempre
+		disponível nesta página.
+	</p>
+
+	<h2>6. Contato</h2>
+	<p>
+		Dúvidas sobre cookies ou sobre o tratamento dos seus dados: <a href={`mailto:${contact.email}`}>{contact.email}</a> ou{' '}
+		{contact.phone}.
+	</p>
+</LegalLayout>
+
+<style>
+	.cookie-table {
+		width: 100%;
+		min-width: 640px;
+		border-collapse: collapse;
+		font-size: 0.9rem;
+		line-height: 1.5;
+	}
+	.cookie-table th {
+		text-align: left;
+		color: #fff;
+		font-weight: 600;
+		padding: 0.75rem 1rem;
+		border-bottom: 1px solid rgb(255 255 255 / 0.15);
+	}
+	.cookie-table td {
+		padding: 0.9rem 1rem;
+		border-bottom: 1px solid rgb(255 255 255 / 0.08);
+		vertical-align: top;
+	}
+	.cookie-table code {
+		font-size: 0.8rem;
+		color: var(--color-brand);
+	}
+</style>

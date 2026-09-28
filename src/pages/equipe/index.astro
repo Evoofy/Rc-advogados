@@ -18,7 +18,7 @@ const expertise = [...new Set(team.flatMap((t) => t.tags))];
 		crumbs={[{ label: 'Equipe' }]}
 	/>
 
-	<section class="pb-28 md:pb-36">
+	<section class="light pt-24 pb-28 md:pt-32 md:pb-36">
 		<div class="mx-auto max-w-7xl px-4 md:px-6">
 			<div class="grid gap-x-5 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
 				{team.map((p) => <TeamCard lawyer={p} />)}

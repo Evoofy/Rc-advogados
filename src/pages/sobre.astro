@@ -66,9 +66,9 @@ const pillars = [
 	/>
 
 	<!-- Story -->
-	<section class="relative py-24 md:py-32">
+	<section class="light relative py-24 md:py-32">
 		<div class="mx-auto grid max-w-7xl gap-14 px-4 md:px-6 lg:grid-cols-2 lg:gap-20">
-			<div class="relative overflow-hidden rounded-[2rem]" data-clip>
+			<div class="dark-scope relative overflow-hidden rounded-[2rem]" data-clip>
 				<img
 					src="/images/escritorio.webp"
 					alt="Advogados da RC no escritório de Limeira"
@@ -134,7 +134,7 @@ const pillars = [
 	</section>
 
 	<!-- How the hub works: stacked sticky cards -->
-	<section class="relative py-28 md:py-40">
+	<section class="light relative py-28 md:py-40">
 		<div class="mx-auto grid max-w-7xl gap-14 px-4 md:px-6 lg:grid-cols-[1fr_1.3fr]">
 			<div class="lg:sticky lg:top-32 lg:self-start">
 				<Eyebrow>Como funciona</Eyebrow>
@@ -151,7 +151,7 @@ const pillars = [
 					hub.map((h, i) => (
 						<article
 							data-stack-card
-							class="border-line bg-ink-2 sticky rounded-[2rem] border p-8 shadow-2xl shadow-black/50 md:p-10"
+							class="border-line bg-ink-2 sticky rounded-[2rem] border p-8 shadow-[0_24px_60px_-24px_rgb(0_0_0/0.35)] md:p-10"
 							style={`top: ${7 + i * 1.5}rem`}
 						>
 							<div class="flex items-start justify-between">
@@ -200,7 +200,7 @@ const pillars = [
 	</section>
 
 	<!-- Team preview -->
-	<section class="py-28 md:py-36">
+	<section class="light py-28 md:py-36">
 		<div class="mx-auto max-w-7xl px-4 md:px-6">
 			<div class="mb-14 flex flex-wrap items-end justify-between gap-6">
 				<div>
@@ -224,5 +224,5 @@ const pillars = [
 		</div>
 	</section>
 
-	<Testimonials />
+	<Testimonials light={false} />
 </Layout>

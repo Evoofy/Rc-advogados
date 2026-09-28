@@ -4,13 +4,13 @@ import { areas } from '../data/site';
 ---
 
 <section id="areas" class="relative overflow-hidden bg-ink-2">
-	<div data-hscroll class="flex min-h-svh flex-col justify-center py-24 lg:py-0">
+	<div data-hscroll class="flex min-h-svh flex-col justify-center pt-28 pb-24 lg:pt-32 lg:pb-12">
 		<div class="mx-auto mb-12 flex w-full max-w-7xl flex-wrap items-end justify-between gap-6 px-4 md:px-6">
 			<div>
 				<p data-reveal class="text-brand mb-5 flex items-center gap-3 text-sm font-medium tracking-[0.2em] uppercase">
 					<span class="bg-brand h-px w-10"></span> Serviços
 				</p>
-				<h2 class="text-[clamp(2.4rem,5.5vw,4.8rem)] leading-[0.95] font-semibold tracking-[-0.04em]">
+				<h2 class="text-[clamp(2.4rem,5.5vw,4.8rem)] leading-[0.95] font-semibold tracking-[-0.04em] lg:flex lg:flex-wrap lg:gap-x-[0.25em]">
 					<span class="line"><span data-split-line>Áreas em que</span></span>
 					<span class="line"><span data-split-line class="font-serif font-normal italic text-brand">atuamos</span></span>
 				</h2>
@@ -31,7 +31,7 @@ import { areas } from '../data/site';
 				areas.filter((a) => a.featured).map((a, i) => (
 					<a
 						href={`/areas#${a.slug}`}
-						class="group relative h-[520px] w-[80vw] max-w-[380px] shrink-0 snap-start overflow-hidden rounded-[2rem] border border-white/8"
+						class="group relative h-[580px] lg:h-[min(640px,calc(100svh-21rem))] w-[80vw] max-w-[380px] shrink-0 snap-start overflow-hidden rounded-[2rem] border border-white/8"
 					>
 						<img
 							src={a.img}

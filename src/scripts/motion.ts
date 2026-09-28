@@ -131,17 +131,6 @@ if (reduced) {
 	at('[data-float]', { y: 40, opacity: 0, scale: 0.9, duration: 1.2, stagger: 0.12 }, 0.9);
 	if ($('[data-progress]')) intro.to('[data-progress]', { width: '72%', duration: 2, ease: 'power3.inOut' }, 1.3);
 
-	if ($('[data-orb]'))
-		gsap.to('[data-orb]', {
-			x: 'random(-120, 120)',
-			y: 'random(-80, 80)',
-			duration: 8,
-			ease: 'sine.inOut',
-			repeat: -1,
-			yoyo: true,
-			repeatRefresh: true,
-		});
-
 	const heroImg = $('[data-hero-img]');
 	if (heroImg)
 		gsap.to(heroImg, {
@@ -361,22 +350,5 @@ $$('.spotlight').forEach((el) => {
 		el.style.setProperty('--my', `${e.clientY - r.top}px`);
 	});
 });
-
-/* ---------- Custom cursor ---------- */
-const cursor = $('.cursor');
-if (cursor && finePointer && !reduced) {
-	const cx = gsap.quickTo(cursor, 'x', { duration: 0.35, ease: 'power3' });
-	const cy = gsap.quickTo(cursor, 'y', { duration: 0.35, ease: 'power3' });
-	addEventListener('mousemove', (e) => {
-		cx(e.clientX);
-		cy(e.clientY);
-	});
-	$$('a, button, label.chip').forEach((el) => {
-		el.addEventListener('mouseenter', () => cursor.classList.add('is-hover'));
-		el.addEventListener('mouseleave', () => cursor.classList.remove('is-hover'));
-	});
-} else {
-	cursor?.remove();
-}
 
 addEventListener('load', () => ScrollTrigger.refresh());

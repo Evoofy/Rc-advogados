@@ -17,6 +17,27 @@ const cookies = [
 		purpose: 'Exibir o mapa interativo com a localização do escritório.',
 		duration: 'Até 6 meses',
 	},
+	{
+		category: 'Analíticos',
+		name: '_ga, _ga_*',
+		provider: 'Google Analytics',
+		purpose: 'Medir visitas e o uso das páginas de forma estatística.',
+		duration: 'Até 2 anos',
+	},
+	{
+		category: 'Publicidade',
+		name: '_gcl_au, _gcl_aw',
+		provider: 'Google Ads (via Google Tag Manager)',
+		purpose: 'Medir os contatos gerados pelos anúncios do escritório.',
+		duration: '90 dias',
+	},
+	{
+		category: 'Publicidade',
+		name: '_fbp, _fbc',
+		provider: 'Meta (Facebook/Instagram)',
+		purpose: 'Medir anúncios e exibir publicidade relevante nas redes da Meta.',
+		duration: '90 dias',
+	},
 ];
 ---
 
@@ -46,12 +67,12 @@ const cookies = [
 			com a sua permissão.
 		</li>
 		<li>
-			<strong>Analíticos:</strong> ajudam a entender como o site é usado (visitas, páginas acessadas, origem do tráfego).{' '}
-			<em>Atualmente não utilizamos ferramentas analíticas.</em>
+			<strong>Analíticos:</strong> ajudam a entender como o site é usado (visitas, páginas acessadas, origem do tráfego),
+			por meio do Google Analytics. Só são carregados com a sua permissão.
 		</li>
 		<li>
-			<strong>Publicidade:</strong> usados para exibir anúncios relevantes e medir campanhas.{' '}
-			<em>Atualmente não utilizamos cookies de publicidade.</em>
+			<strong>Publicidade:</strong> usados para medir os resultados dos anúncios do escritório e exibir publicidade
+			relevante, por meio do Google Ads e da Meta (Facebook/Instagram). Só são carregados com a sua permissão.
 		</li>
 	</ul>
 
@@ -83,8 +104,10 @@ const cookies = [
 		</table>
 	</div>
 	<p>
-		Os cookies do Google seguem a{' '}
-		<a href="https://policies.google.com/technologies/cookies?hl=pt-BR" target="_blank" rel="noopener">política de cookies do Google</a>.
+		Os cookies de terceiros seguem as políticas dos respectivos fornecedores:{' '}
+		<a href="https://policies.google.com/technologies/cookies?hl=pt-BR" target="_blank" rel="noopener">Google</a> e{' '}
+		<a href="https://www.facebook.com/privacy/policies/cookies/" target="_blank" rel="noopener">Meta</a>. Usamos o modo de
+		consentimento do Google: enquanto você não autoriza, nenhuma dessas ferramentas é carregada.
 	</p>
 
 	<h2>4. Como gerenciar as suas preferências</h2>

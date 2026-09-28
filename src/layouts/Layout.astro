@@ -5,6 +5,7 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import CtaBanner from '../components/CtaBanner.astro';
 import CookieBanner from '../components/CookieBanner.astro';
+import Tracking from '../components/Tracking.astro';
 import { asset } from '../lib/images';
 import { organization, website } from '../lib/seo';
 
@@ -67,6 +68,7 @@ const schema = [organization(site), website(site), ...jsonLd];
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<Tracking />
 		<title>{fullTitle}</title>
 		<meta name="description" content={description} />
 		<link rel="canonical" href={canonical} />
@@ -112,6 +114,7 @@ const schema = [organization(site), website(site), ...jsonLd];
 		<CookieBanner />
 		<script>
 			import '../scripts/motion';
+			import '../scripts/track';
 		</script>
 	</body>
 </html>

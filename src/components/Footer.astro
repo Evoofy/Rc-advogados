@@ -17,7 +17,9 @@ import { landings } from '../data/landings';
 						contact.social.map((s) => (
 							<a
 								href={s.href}
-								aria-label={s.label}
+								target="_blank"
+								rel="noopener"
+								aria-label={`${s.label} da RC Advogados`}
 								class="hover:border-brand hover:bg-brand grid h-10 w-10 place-items-center rounded-full border border-white/10 transition hover:text-black"
 							>
 								<Icon name={s.icon} class="h-4 w-4" />

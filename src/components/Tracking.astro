@@ -1,0 +1,82 @@
+---
+/**
+ * Google Consent Mode v2 + consent-gated loading (LGPD).
+ * - Everything is denied by default, before any tag runs.
+ * - GA4 loads only after "analiticos" consent.
+ * - GTM (Google Ads conversions + Meta Pixel) loads only after "publicidade" consent,
+ *   because its Meta Pixel tag is Custom HTML and ignores Consent Mode.
+ * - Production builds only, so local/testing traffic never reaches the reports.
+ */
+import { tracking } from '../data/site';
+
+const enabled = import.meta.env.PROD;
+---
+
+<script is:inline define:vars={{ gtmId: tracking.gtm, ga4Id: tracking.ga4, enabled }}>
+	window.dataLayer = window.dataLayer || [];
+	window.gtag = function () {
+		window.dataLayer.push(arguments);
+	};
+
+	var toGoogle = function (c) {
+		var g = function (on) { return on ? 'granted' : 'denied'; };
+		return {
+			analytics_storage: g(c && c.analiticos),
+			ad_storage: g(c && c.publicidade),
+			ad_user_data: g(c && c.publicidade),
+			ad_personalization: g(c && c.publicidade),
+			functionality_storage: g(c && c.funcionais),
+			personalization_storage: g(c && c.funcionais),
+			security_storage: 'granted',
+		};
+	};
+
+	var addScript = function (src) {
+		var s = document.createElement('script');
+		s.async = true;
+		s.src = src;
+		document.head.appendChild(s);
+	};
+
+	var loaded = {};
+	var load = {
+		ga4: function () {
+			if (!enabled || loaded.ga4) return;
+			loaded.ga4 = true;
+			window.gtag('js', new Date());
+			window.gtag('config', ga4Id);
+			addScript('https://www.googletagmanager.com/gtag/js?id=' + ga4Id);
+		},
+		gtm: function () {
+			if (!enabled || loaded.gtm) return;
+			loaded.gtm = true;
+			window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
+			addScript('https://www.googletagmanager.com/gtm.js?id=' + gtmId);
+		},
+	};
+
+	var stored = null;
+	try {
+		stored = JSON.parse(localStorage.getItem('rc-consent'));
+		if (!stored || stored.v !== 1) stored = null;
+	} catch (e) {}
+
+	window.gtag('consent', 'default', Object.assign(toGoogle(null), { wait_for_update: 500 }));
+	window.gtag('set', 'ads_data_redaction', true);
+	if (stored) window.gtag('consent', 'update', toGoogle(stored));
+
+	var apply = function (c) {
+		if (c.analiticos) load.ga4();
+		if (c.publicidade) load.gtm();
+	};
+	if (stored) apply(stored);
+
+	// Banner / preferences dialog changes (see src/scripts/consent.ts)
+	window.addEventListener('rc:consent', function (e) {
+		var c = e.detail;
+		window.gtag('consent', 'update', toGoogle(c));
+		if (window.fbq) window.fbq('consent', c.publicidade ? 'grant' : 'revoke');
+		window.dataLayer.push({ event: 'rc_consent_update', consent_analytics: !!c.analiticos, consent_ads: !!c.publicidade });
+		apply(c);
+	});
+</script>

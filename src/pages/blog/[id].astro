@@ -22,7 +22,9 @@ const { Content } = await render(post);
 const author = authorOf(post);
 const related = all.filter((p) => p.id !== post.id).slice(0, 3);
 const url = new URL(Astro.url.pathname, Astro.site).href;
-const cover = await getImage({ src: asset(post.data.cover), width: 1200, height: 630, fit: 'cover', format: 'jpg', quality: 80 });
+const coverMeta = asset(post.data.cover);
+const wideCover = coverMeta.width / coverMeta.height >= 1.45;
+const cover = await getImage({ src: asset(post.data.cover), width: 1200, height: 630, fit: 'cover', position: post.data.coverPosition, format: 'jpg', quality: 80 });
 const jsonLd = [
 	article(Astro.site!, { title: post.data.title, description: post.data.description, date: post.data.date, url: new URL(url), image: new URL(cover.src, Astro.site).href }, author),
 	breadcrumbs(Astro.site!, [{ label: 'Blog', href: '/blog' }, { label: post.data.title }], Astro.url),
@@ -34,7 +36,7 @@ const share = [
 ];
 ---
 
-<Layout title={post.data.title} description={post.data.description} image={post.data.cover} type="article" publishedTime={post.data.date} jsonLd={jsonLd}>
+<Layout title={post.data.title} description={post.data.description} image={post.data.cover} imagePosition={post.data.coverPosition} type="article" publishedTime={post.data.date} jsonLd={jsonLd}>
 	<div class="bg-brand fixed top-0 left-0 z-[55] h-0.5 w-full origin-left scale-x-0" data-read-progress aria-hidden="true"></div>
 
 	<article>
@@ -62,9 +64,19 @@ const share = [
 		</header>
 
 		<div class="mx-auto max-w-6xl px-4 md:px-6">
-			<div data-hero-visual class="relative aspect-[16/8] overflow-hidden rounded-[2rem]">
-				<Img src={post.data.cover} alt="" class="h-full w-full scale-110 object-cover" data-hero-img sizes="(min-width: 1152px) 1100px, 100vw" priority />
-			</div>
+			{
+				!wideCover ? (
+					// Portrait or square cover (lawyer photo, social-media art): show it whole, with a blurred copy filling the sides
+					<div data-hero-visual class="bg-ink-2 relative aspect-[16/9] overflow-hidden rounded-[2rem] md:aspect-[16/8]">
+						<Img src={post.data.cover} alt="" aria-hidden="true" class="absolute inset-0 h-full w-full scale-125 object-cover opacity-40 blur-2xl" sizes="320px" widths={[320]} />
+						<Img src={post.data.cover} alt="" class="relative mx-auto h-full w-auto object-contain" data-hero-img sizes="(min-width: 1152px) 400px, 50vw" priority />
+					</div>
+				) : (
+					<div data-hero-visual class="relative aspect-[16/8] overflow-hidden rounded-[2rem]">
+						<Img src={post.data.cover} alt="" class="h-full w-full scale-110 object-cover" data-hero-img sizes="(min-width: 1152px) 1100px, 100vw" priority />
+					</div>
+				)
+			}
 		</div>
 
 		<div class="mx-auto grid max-w-6xl gap-14 px-4 py-20 md:px-6 lg:grid-cols-[1fr_17rem]">

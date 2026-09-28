@@ -1,6 +1,7 @@
 export const contact = {
 	phone: '(19) 3713-5100',
-	whatsapp: 'https://wa.me/551937135100',
+	// api.whatsapp.com (not wa.me): the Google Ads conversion trigger in GTM matches "api.whatsapp"
+	whatsapp: 'https://api.whatsapp.com/send?phone=551937135100',
 	email: 'contato@reginaldocosta.com.br',
 	street: 'R. Treze de Maio, 151 - Centro',
 	city: 'Limeira – SP, 13480-170',
@@ -10,13 +11,20 @@ export const contact = {
 	maps: 'https://www.google.com/maps/place/R.+Treze+de+Maio,+151+-+Centro,+Limeira+-+SP,+13480-170',
 	mapsEmbed: 'https://www.google.com/maps?q=R.+Treze+de+Maio,+151+-+Centro,+Limeira+-+SP&output=embed',
 	social: [
-		{ icon: 'lucide:facebook', label: 'Facebook', href: '#' },
-		{ icon: 'lucide:instagram', label: 'Instagram', href: '#' },
-		{ icon: 'lucide:linkedin', label: 'LinkedIn', href: '#' },
+		{ icon: 'lucide:instagram', label: 'Instagram', href: 'https://www.instagram.com/reginaldocostaadvogados/' },
+		{ icon: 'lucide:facebook', label: 'Facebook', href: 'https://www.facebook.com/reginaldocostaadvogados' },
 	],
 };
 
-export const whatsappMsg = (text: string) => `${contact.whatsapp}?text=${encodeURIComponent(text)}`;
+export const whatsappMsg = (text: string) => `${contact.whatsapp}&text=${encodeURIComponent(text)}`;
+
+/** Tracking IDs from the previous site. Loaded only in production and only with consent. */
+export const tracking = {
+	/** Google Tag Manager: Google Ads conversions + Meta Pixel → needs "publicidade" consent */
+	gtm: 'GTM-W59PKTT',
+	/** Google Analytics 4 → needs "analiticos" consent */
+	ga4: 'G-SYD89TY068',
+};
 
 export const nav = [
 	{ label: 'Início', href: '/' },
@@ -118,6 +126,8 @@ export const areas: Area[] = [
 	},
 ];
 
+export type Social = { icon: string; label: string; href: string };
+
 export type Lawyer = {
 	slug: string;
 	name: string;
@@ -128,11 +138,14 @@ export type Lawyer = {
 	tags: string[];
 	education?: string[];
 	practice?: string[];
+	/** Personal profiles, as listed on the previous site */
+	social?: Social[];
 };
 
 export const team: Lawyer[] = [
 	{
 		slug: 'reginaldo-costa',
+		social: [{ icon: 'lucide:instagram', label: 'Instagram', href: 'https://www.instagram.com/dr_reginaldocosta/' }],
 		name: 'Dr. Reginaldo José da Costa',
 		oab: 'OAB/SP 264.367',
 		img: '/images/adv-reginaldo.webp',
@@ -168,6 +181,7 @@ export const team: Lawyer[] = [
 	},
 	{
 		slug: 'mariane-almeida',
+		social: [{ icon: 'lucide:instagram', label: 'Instagram', href: 'https://www.instagram.com/marianebalmeida.adv/' }],
 		name: 'Dra. Mariane Almeida',
 		oab: 'OAB/SP 518.830',
 		img: '/images/adv-mariane.webp',
@@ -182,15 +196,23 @@ export const team: Lawyer[] = [
 	},
 	{
 		slug: 'ricardo-marques',
+		social: [{ icon: 'lucide:instagram', label: 'Instagram', href: 'https://www.instagram.com/ricardoblack/' }],
 		name: 'Dr. Ricardo Marques',
 		oab: 'OAB/SP 537.744',
 		img: '/images/adv-ricardo.webp',
 		role: 'Advogado',
-		bio: 'Advogado inscrito na OAB/SP 537.744, integrante da equipe multidisciplinar da RC Advogados.',
-		tags: ['Consultivo', 'Contencioso'],
+		bio: 'Bacharel em Direito, advogado inscrito na OAB/SP 537.744, pós-graduado em Direito Previdenciário. Atua de forma consultiva, judicial e extrajudicial nas áreas Trabalhista e Previdenciária, oferecendo assessoria jurídica estratégica na defesa dos direitos de trabalhadores e empregadores, bem como em demandas previdenciárias.',
+		tags: ['Trabalhista', 'Previdenciário'],
+		education: ['Bacharel em Direito.', 'Pós-graduado em Direito Previdenciário.'],
+		practice: [
+			'Atuação consultiva, judicial e extrajudicial nas áreas Trabalhista e Previdenciária.',
+			'Defesa dos direitos de trabalhadores e empregadores.',
+			'Demandas previdenciárias e planejamento previdenciário.',
+		],
 	},
 	{
 		slug: 'guilherme-andrade',
+		social: [{ icon: 'lucide:instagram', label: 'Instagram', href: 'https://www.instagram.com/oguimarcato/' }, { icon: 'lucide:facebook', label: 'Facebook', href: 'https://www.facebook.com/guilherme.marcatoandrade' }, { icon: 'lucide:linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/in/guilhermemarcatodeandrade/' }],
 		name: 'Dr. Guilherme Marcato de Andrade',
 		oab: 'OAB/SP 472.937',
 		img: '/images/adv-guilherme.webp',
@@ -205,15 +227,22 @@ export const team: Lawyer[] = [
 	},
 	{
 		slug: 'gabriel-prudente',
+		social: [{ icon: 'lucide:instagram', label: 'Instagram', href: 'https://www.instagram.com/gabriel.prudent/' }],
 		name: 'Dr. Gabriel Prudente',
 		oab: 'OAB/SP 481.397',
 		img: '/images/adv-gabriel.webp',
 		role: 'Advogado',
-		bio: 'Advogado inscrito na OAB/SP 481.397, integrante da equipe multidisciplinar da RC Advogados.',
-		tags: ['Consultivo', 'Contencioso'],
+		bio: 'Bacharel em Direito, advogado inscrito na OAB/SP 481.397. Atua de forma consultiva, judicial e extrajudicial nas áreas de Direito Administrativo e Regulatório, oferecendo assessoria jurídica estratégica na relação com a Administração Pública e órgãos reguladores.',
+		tags: ['Administrativo', 'Regulatório'],
+		education: ['Bacharel em Direito.'],
+		practice: [
+			'Atuação consultiva, judicial e extrajudicial em Direito Administrativo e Regulatório.',
+			'Assessoria na relação com a Administração Pública e órgãos reguladores.',
+		],
 	},
 	{
 		slug: 'evander-oliveira',
+		social: [{ icon: 'lucide:instagram', label: 'Instagram', href: 'https://www.instagram.com/evandergarcia/' }, { icon: 'lucide:facebook', label: 'Facebook', href: 'https://www.facebook.com/evander.garcia.7' }],
 		name: 'Dr. Evander Garcia de Oliveira',
 		oab: 'OAB/SP 459.347',
 		img: '/images/adv-evander.webp',

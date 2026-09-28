@@ -4,8 +4,8 @@ import { Icon } from 'astro-icon/components';
 const categories = [
 	{ id: 'necessarios', title: 'Cookies necessários', text: 'Essenciais para o site funcionar, como lembrar as suas preferências de consentimento. Não armazenam dados pessoais.', locked: true },
 	{ id: 'funcionais', title: 'Cookies funcionais', text: 'Permitem recursos de terceiros, como o mapa do Google na página de contato e o compartilhamento em redes sociais.' },
-	{ id: 'analiticos', title: 'Cookies analíticos', text: 'Nos ajudam a entender como o site é usado: número de visitantes, páginas acessadas e origem do tráfego.' },
-	{ id: 'publicidade', title: 'Cookies de publicidade', text: 'Usados para exibir anúncios relevantes e medir a eficácia das campanhas.' },
+	{ id: 'analiticos', title: 'Cookies analíticos', text: 'Google Analytics: nos ajuda a entender como o site é usado — número de visitantes, páginas acessadas e origem do tráfego.' },
+	{ id: 'publicidade', title: 'Cookies de publicidade', text: 'Google Ads e Meta (Facebook/Instagram): medem os resultados dos nossos anúncios e permitem exibir publicidade relevante.' },
 ];
 ---
 
@@ -24,7 +24,7 @@ const categories = [
 		<div>
 			<p class="font-semibold">Sua privacidade importa</p>
 			<p class="mt-1 text-sm leading-relaxed text-[#a1a1aa]">
-				Usamos cookies necessários para o site funcionar e, com a sua permissão, cookies opcionais para recursos como o mapa.
+				Usamos cookies necessários para o site funcionar e, com a sua permissão, cookies opcionais para o mapa, a medição de audiência e os anúncios.
 				Saiba mais na <a href="/politica-de-cookies" class="text-brand underline underline-offset-2">Política de Cookies</a>.
 			</p>
 		</div>

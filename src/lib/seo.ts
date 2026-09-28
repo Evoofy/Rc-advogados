@@ -35,7 +35,7 @@ export function organization(site: URL) {
 		],
 		areaServed: [{ '@type': 'City', name: 'Limeira' }, { '@type': 'Country', name: 'Brasil' }],
 		knowsAbout: areas.map((a) => (a.title.startsWith('Defesa') ? a.title : `Direito ${a.title}`)),
-		// sameAs: add the real Instagram / Facebook / LinkedIn URLs here once available
+		sameAs: contact.social.map((s) => s.href),
 	};
 }
 
@@ -76,6 +76,7 @@ export function person(site: URL, lawyer: Lawyer, image: string) {
 		identifier: lawyer.oab,
 		knowsAbout: lawyer.tags,
 		worksFor: { '@id': `${site.href}${ORG_ID}` },
+		...(lawyer.social?.length ? { sameAs: lawyer.social.map((s) => s.href) } : {}),
 	};
 }
 

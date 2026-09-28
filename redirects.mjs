@@ -5,7 +5,7 @@
  * Single source of truth: used by Astro's `redirects` and written to
  * dist/.htaccess (Apache/LiteSpeed) and dist/_redirects (Netlify/Cloudflare).
  *
- * Old blog posts point to the closest area/article until they are migrated.
+ * Old blog posts keep their slug and now live under /blog.
  */
 export const redirects = {
 	// Institutional pages
@@ -23,21 +23,21 @@ export const redirects = {
 	'/acidente-de-trabalho-lpf': '/acidente-de-trabalho',
 	'/restricao-indevida-lp': '/areas#civil',
 
-	// Blog posts from the WordPress site
-	'/atraso-no-voo-gera-dano-moral': '/blog/voo-cancelado-direitos-do-passageiro',
-	'/situacao-vexatoria-limeirense-e-deportado-do-chile-por-falta-de-teste-para-covid-19': '/blog/voo-cancelado-direitos-do-passageiro',
-	'/auxilio-acidente': '/blog/acidente-de-trabalho-estabilidade',
-	'/planejamento-previdenciario': '/blog/revisao-de-aposentadoria',
-	'/beneficios-concedidos-pelo-inss-ao-idoso': '/blog/revisao-de-aposentadoria',
-	'/codigos-recolimento-guia-inss': '/areas#trabalhista-e-previdenciario',
-	'/rescisao-indireta': '/areas#trabalhista-e-previdenciario',
-	'/o-que-e-limbo-previdenciario': '/areas#trabalhista-e-previdenciario',
-	'/conviventes-podem-alterar-sobrenome': '/areas#civil',
-	'/meu-filho-a-tem-direito-a-heranca': '/areas#civil',
-	'/alimentos-gravidicos': '/areas#civil',
-	'/injuria-racial-e-racismo-em-partida-de-futebol': '/areas#criminal',
-	'/regulacao-do-saneamento-basico-do-poder-normativo-a-norma-de-referencia': '/areas#administrativo-e-regulatorio',
-	'/justica-concede-liminar-para-que-empresa-de-limeira-volte-a-faturar-e-exercer-atividade-empresarial': '/areas#tributario',
+	// Blog posts migrated from the WordPress site (same slug, now under /blog)
+	'/alimentos-gravidicos': '/blog/alimentos-gravidicos',
+	'/atraso-no-voo-gera-dano-moral': '/blog/atraso-no-voo-gera-dano-moral',
+	'/auxilio-acidente': '/blog/auxilio-acidente',
+	'/beneficios-concedidos-pelo-inss-ao-idoso': '/blog/beneficios-concedidos-pelo-inss-ao-idoso',
+	'/codigos-recolimento-guia-inss': '/blog/codigos-recolimento-guia-inss',
+	'/conviventes-podem-alterar-sobrenome': '/blog/conviventes-podem-alterar-sobrenome',
+	'/injuria-racial-e-racismo-em-partida-de-futebol': '/blog/injuria-racial-e-racismo-em-partida-de-futebol',
+	'/justica-concede-liminar-para-que-empresa-de-limeira-volte-a-faturar-e-exercer-atividade-empresarial': '/blog/justica-concede-liminar-para-que-empresa-de-limeira-volte-a-faturar-e-exercer-atividade-empresarial',
+	'/meu-filho-a-tem-direito-a-heranca': '/blog/meu-filho-a-tem-direito-a-heranca',
+	'/o-que-e-limbo-previdenciario': '/blog/o-que-e-limbo-previdenciario',
+	'/planejamento-previdenciario': '/blog/planejamento-previdenciario',
+	'/regulacao-do-saneamento-basico-do-poder-normativo-a-norma-de-referencia': '/blog/regulacao-do-saneamento-basico-do-poder-normativo-a-norma-de-referencia',
+	'/rescisao-indireta': '/blog/rescisao-indireta',
+	'/situacao-vexatoria-limeirense-e-deportado-do-chile-por-falta-de-teste-para-covid-19': '/blog/situacao-vexatoria-limeirense-e-deportado-do-chile-por-falta-de-teste-para-covid-19',
 
 	// Staging blog placeholders
 	'/category/trabalhista': '/blog',

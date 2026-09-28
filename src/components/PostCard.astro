@@ -15,11 +15,11 @@ const d = shortDate(post.data.date);
 		<Img
 			src={post.data.cover}
 			alt=""
-			class="h-full w-full object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(.2,.8,.2,1)] group-hover:scale-110" sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" />
-		<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+			class:list={['h-full w-full object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(.2,.8,.2,1)] group-hover:scale-110', post.data.coverPosition === 'top' && 'object-top']} sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" />
+		<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
 		<span class="glass absolute top-4 left-4 flex flex-col items-center rounded-2xl px-3 py-2 leading-none">
 			<span class="text-xl font-semibold">{d.day}</span>
-			<span class="text-mist mt-1 text-[11px] uppercase">{d.month}</span>
+			<span class="text-white mt-1 text-[11px] uppercase">{d.month}</span>
 		</span>
 		<span
 			class="group-hover:bg-brand absolute top-4 right-4 grid h-11 w-11 place-items-center rounded-full bg-white text-black transition-all duration-500 group-hover:rotate-45"

@@ -2,7 +2,7 @@
 title: 'Revisão de aposentadoria: quando vale a pena pedir'
 description: 'Erros de cálculo e períodos não reconhecidos são mais comuns do que parece. Saiba quando a revisão pode aumentar o valor do seu benefício.'
 date: 2026-08-12
-category: Aposentadoria
+category: Previdenciário
 author: reginaldo-costa
 cover: /images/area-trabalhista.webp
 ---

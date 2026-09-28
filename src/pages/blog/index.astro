@@ -28,7 +28,7 @@ const categories = [...new Set(rest.map((p) => p.data.category))];
 					<Img
 						src={featured.data.cover}
 						alt=""
-						class="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.4s] group-hover:scale-105" sizes="(min-width: 1024px) 50vw, 100vw" />
+						class:list={['absolute inset-0 h-full w-full object-cover transition-transform duration-[1.4s] group-hover:scale-105', featured.data.coverPosition === 'top' && 'object-top']} sizes="(min-width: 1024px) 50vw, 100vw" />
 					<span class="bg-brand absolute top-5 left-5 rounded-full px-3 py-1 text-xs font-semibold text-black">Em destaque</span>
 				</div>
 				<div class="flex flex-col justify-between gap-10 p-8 md:p-12">
@@ -79,15 +79,15 @@ const categories = [...new Set(rest.map((p) => p.data.category))];
 <style>
 	.filter-chip {
 		border-radius: 999px;
-		border: 1px solid rgb(255 255 255 / 0.12);
+		border: 1px solid color-mix(in oklab, var(--color-white) 14%, transparent);
 		padding: 0.55rem 1.1rem;
 		font-size: 0.875rem;
-		color: rgb(255 255 255 / 0.75);
+		color: color-mix(in oklab, var(--color-white) 75%, transparent);
 		transition: all 0.3s;
 	}
 	.filter-chip:hover {
-		border-color: rgb(255 255 255 / 0.35);
-		color: #fff;
+		border-color: color-mix(in oklab, var(--color-white) 40%, transparent);
+		color: var(--color-white);
 	}
 	.filter-chip[aria-pressed='true'] {
 		background: var(--color-brand);

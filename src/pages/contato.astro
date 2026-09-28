@@ -213,7 +213,7 @@ const channels = [
 </style>
 
 <script>
-	import { contact } from '../data/site';
+	import { whatsappMsg } from '../data/site';
 	import { whenAllowed, getConsent, saveConsent } from '../scripts/consent';
 
 	const map = document.querySelector<HTMLIFrameElement>('[data-map-src]');
@@ -250,6 +250,11 @@ const channels = [
 			'',
 			get('mensagem'),
 		].join('\n');
-		window.open(`${contact.whatsapp}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
+		window.dataLayer?.push({ event: 'generate_lead', form_name: 'contato', lead_subject: get('assunto') });
+		// A real link click (not window.open) so the GTM WhatsApp conversion trigger fires
+		const link = Object.assign(document.createElement('a'), { href: whatsappMsg(text), target: '_blank', rel: 'noopener' });
+		form.append(link);
+		link.click();
+		link.remove();
 	});
 </script>

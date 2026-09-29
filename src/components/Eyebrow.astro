@@ -1,11 +1,13 @@
 ---
 interface Props {
 	center?: boolean;
+	/** Render as a heading when the label is the only title of its section (keeps h1→h2→h3 order) */
+	as?: 'p' | 'h2';
 }
-const { center = false } = Astro.props;
+const { center = false, as: Tag = 'p' } = Astro.props;
 ---
 
-<p
+<Tag
 	data-reveal
 	class:list={[
 		'text-brand mb-5 flex items-center gap-3 text-sm font-medium tracking-[0.2em] uppercase',
@@ -14,4 +16,4 @@ const { center = false } = Astro.props;
 >
 	{!center && <span class="bg-brand h-px w-10" />}
 	<slot />
-</p>
+</Tag>

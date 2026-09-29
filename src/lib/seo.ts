@@ -72,7 +72,7 @@ export function person(site: URL, lawyer: Lawyer, image: string) {
 		jobTitle: lawyer.role,
 		description: lawyer.bio,
 		image,
-		url: new URL(`/equipe/${lawyer.slug}`, site).href,
+		url: new URL(`/equipe/${lawyer.slug}/`, site).href,
 		identifier: lawyer.oab,
 		knowsAbout: lawyer.tags,
 		worksFor: { '@id': `${site.href}${ORG_ID}` },
@@ -96,7 +96,7 @@ export function article(
 		inLanguage: 'pt-BR',
 		mainEntityOfPage: post.url.href,
 		author: author
-			? { '@type': 'Person', name: author.name, url: new URL(`/equipe/${author.slug}`, site).href }
+			? { '@type': 'Person', name: author.name, url: new URL(`/equipe/${author.slug}/`, site).href }
 			: { '@id': `${site.href}${ORG_ID}` },
 		publisher: { '@id': `${site.href}${ORG_ID}` },
 	};

@@ -8,6 +8,8 @@ const blog = defineCollection({
 	loader: glob({ pattern: '*.md', base: './src/content/blog' }),
 	schema: z.object({
 		title: z.string(),
+		/** Shorter <title> for Google (≤ 60 chars) when the headline is long */
+		seoTitle: z.string().max(60).optional(),
 		description: z.string(),
 		date: z.coerce.date(),
 		category: z.enum(categories),

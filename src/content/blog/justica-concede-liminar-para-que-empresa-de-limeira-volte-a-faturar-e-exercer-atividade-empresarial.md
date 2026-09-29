@@ -1,5 +1,6 @@
 ---
 title: "Justiça concede liminar para que empresa de Limeira volte a faturar"
+seoTitle: "Liminar permite que empresa de Limeira volte a faturar"
 description: "Em junho de 2022 o Tribunal de Justiça do Estado de São Paulo concedeu uma medida liminar, para autorizar uma empresa de Limeira a voltar a faturar. Em…"
 date: 2022-08-30
 author: eliezer-teodoro

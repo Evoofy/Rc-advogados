@@ -31,7 +31,7 @@ import { areas } from '../data/site';
 			{
 				areas.filter((a) => a.featured).map((a, i) => (
 					<a
-						href={`/areas#${a.slug}`}
+						href={`/areas/#${a.slug}`}
 						class="group relative h-[580px] lg:h-[min(640px,calc(100svh-21rem))] w-[80vw] max-w-[380px] shrink-0 snap-start overflow-hidden rounded-[2rem] border border-white/8"
 					>
 						<Img
@@ -61,7 +61,7 @@ import { areas } from '../data/site';
 				<p class="text-3xl font-semibold tracking-tight">Não encontrou sua área?</p>
 				<p class="text-mist mt-3">Atuamos também em Penal Empresarial, Penal Tributário e Defesa Criminal Eleitoral.</p>
 				<a
-					href="/areas"
+					href="/areas/"
 					class="text-brand mt-8 inline-flex items-center gap-2 font-semibold hover:underline"
 				>
 					Ver todas as áreas <Icon name="lucide:arrow-right" class="h-4 w-4" />

@@ -23,7 +23,7 @@ const categories = [...new Set(rest.map((p) => p.data.category))];
 	<section class="light pt-24 pb-28 md:pt-32">
 		<div class="mx-auto max-w-7xl px-4 md:px-6">
 			<!-- Featured -->
-			<a href={`/blog/${featured.id}`} data-reveal class="group border-line bg-ink-2 grid overflow-hidden rounded-[2rem] border lg:grid-cols-2">
+			<a href={`/blog/${featured.id}/`} data-reveal class="group border-line bg-ink-2 grid overflow-hidden rounded-[2rem] border lg:grid-cols-2">
 				<div class="relative aspect-[16/10] overflow-hidden lg:aspect-auto">
 					<Img
 						src={featured.data.cover}

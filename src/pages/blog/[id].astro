@@ -27,7 +27,7 @@ const wideCover = coverMeta.width / coverMeta.height >= 1.45;
 const cover = await getImage({ src: asset(post.data.cover), width: 1200, height: 630, fit: 'cover', position: post.data.coverPosition, format: 'jpg', quality: 80 });
 const jsonLd = [
 	article(Astro.site!, { title: post.data.title, description: post.data.description, date: post.data.date, url: new URL(url), image: new URL(cover.src, Astro.site).href }, author),
-	breadcrumbs(Astro.site!, [{ label: 'Blog', href: '/blog' }, { label: post.data.title }], Astro.url),
+	breadcrumbs(Astro.site!, [{ label: 'Blog', href: '/blog/' }, { label: post.data.title }], Astro.url),
 ];
 const share = [
 	{ icon: 'lucide:message-circle', label: 'WhatsApp', href: `https://wa.me/?text=${encodeURIComponent(`${post.data.title} ${url}`)}` },
@@ -36,7 +36,7 @@ const share = [
 ];
 ---
 
-<Layout title={post.data.title} description={post.data.description} image={post.data.cover} imagePosition={post.data.coverPosition} type="article" publishedTime={post.data.date} jsonLd={jsonLd}>
+<Layout title={post.data.seoTitle ?? post.data.title} description={post.data.description} image={post.data.cover} imagePosition={post.data.coverPosition} type="article" publishedTime={post.data.date} jsonLd={jsonLd}>
 	<div class="bg-brand fixed top-0 left-0 z-[55] h-0.5 w-full origin-left scale-x-0" data-read-progress aria-hidden="true"></div>
 
 	<article>
@@ -47,7 +47,7 @@ const share = [
 				<nav data-hero-fade aria-label="Breadcrumb" class="text-mist mb-8 flex flex-wrap items-center gap-2 text-xs">
 					<a href="/" class="hover:text-white">Início</a>
 					<span class="text-white/25">/</span>
-					<a href="/blog" class="hover:text-white">Blog</a>
+					<a href="/blog/" class="hover:text-white">Blog</a>
 					<span class="text-white/25">/</span>
 					<span class="text-white/80">{post.data.category}</span>
 				</nav>
@@ -87,7 +87,7 @@ const share = [
 			<aside class="space-y-5 lg:sticky lg:top-28 lg:self-start">
 				{
 					author && (
-						<a href={`/equipe/${author.slug}`} class="group border-line bg-ink-2 block rounded-[1.5rem] border p-5">
+						<a href={`/equipe/${author.slug}/`} class="group border-line bg-ink-2 block rounded-[1.5rem] border p-5">
 							<p class="text-mist text-xs tracking-widest uppercase">Escrito por</p>
 							<div class="mt-4 flex items-center gap-3">
 								<Img src={author.img} alt="" class="h-12 w-12 rounded-full object-cover object-top" widths={[48, 96]} sizes="48px" />
@@ -130,8 +130,8 @@ const share = [
 	<section class="light py-24">
 		<div class="mx-auto max-w-7xl px-4 md:px-6">
 			<div class="mb-10 flex items-end justify-between gap-6">
-				<Eyebrow>Continue lendo</Eyebrow>
-				<a href="/blog" class="text-mist mb-5 inline-flex items-center gap-2 text-sm hover:text-white">
+				<Eyebrow as="h2">Continue lendo</Eyebrow>
+				<a href="/blog/" class="text-mist mb-5 inline-flex items-center gap-2 text-sm hover:text-white">
 					Todos os artigos <Icon name="lucide:arrow-right" class="h-4 w-4" />
 				</a>
 			</div>

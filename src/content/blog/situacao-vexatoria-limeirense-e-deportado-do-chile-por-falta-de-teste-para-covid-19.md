@@ -1,5 +1,6 @@
 ---
 title: "Situação vexatória: limeirense é deportado do Chile por falta de teste para Covid-19"
+seoTitle: "Limeirense deportado do Chile por falta de teste PCR"
 description: "Morador de Limeira deportado do Chile por falta de teste PCR: Justiça condena companhia aérea e agência a indenizar por danos morais e materiais."
 date: 2022-12-05
 category: Consumidor
@@ -26,4 +27,4 @@ A ação foi julgada pelo juiz Marcelo Ielo Amaro e o magistrado considerou que 
 
 As duas empresas foram condenadas, de forma solidária, ao pagamento de R$ 4.653,07 a título de indenização por danos materiais e outros R$ 12 mil por danos morais, com correção e juros de mora a partir da citação. Elas podem recorrer.
 
-Advogado responsável pelo processo: [Dr. Evander Garcia de Oliveira](/equipe/evander-oliveira).
+Advogado responsável pelo processo: [Dr. Evander Garcia de Oliveira](/equipe/evander-oliveira/).

@@ -18,6 +18,15 @@ export const contact = {
 
 export const whatsappMsg = (text: string) => `${contact.whatsapp}&text=${encodeURIComponent(text)}`;
 
+/**
+ * Contact form e-mail delivery. FormSubmit forwards submissions to the address, no backend needed.
+ * The first submission sends an activation e-mail to contato@ — someone must click it once.
+ * To use another provider (Web3Forms, own PHP endpoint…), change `endpoint` and `payload` in contato.astro.
+ */
+export const contactForm = {
+	endpoint: `https://formsubmit.co/ajax/${contact.email}`,
+};
+
 /** Tracking IDs from the previous site. Loaded only in production and only with consent. */
 export const tracking = {
 	/** Google Tag Manager: Google Ads conversions + Meta Pixel → needs "publicidade" consent */
@@ -28,11 +37,11 @@ export const tracking = {
 
 export const nav = [
 	{ label: 'Início', href: '/' },
-	{ label: 'Sobre', href: '/sobre' },
-	{ label: 'Áreas', href: '/areas' },
-	{ label: 'Equipe', href: '/equipe' },
-	{ label: 'Blog', href: '/blog' },
-	{ label: 'Contato', href: '/contato' },
+	{ label: 'Sobre', href: '/sobre/' },
+	{ label: 'Áreas', href: '/areas/' },
+	{ label: 'Equipe', href: '/equipe/' },
+	{ label: 'Blog', href: '/blog/' },
+	{ label: 'Contato', href: '/contato/' },
 ];
 
 export type Area = {

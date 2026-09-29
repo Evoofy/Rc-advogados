@@ -185,7 +185,8 @@ if (reduced) {
 		el.innerHTML = words.map((w) => `<span class="inline-block">${w}&nbsp;</span>`).join('');
 		gsap.fromTo(
 			el.children,
-			{ opacity: 0.12 },
+			// Starts at ≥ 4.5:1 contrast on white, so the text is readable before (or without) scrolling
+			{ opacity: 0.6 },
 			{
 				opacity: 1,
 				stagger: 0.05,

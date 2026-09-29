@@ -9,7 +9,7 @@ interface Props {
 const { lawyer: p } = Astro.props;
 ---
 
-<a href={`/equipe/${p.slug}`} data-reveal class="group block">
+<a href={`/equipe/${p.slug}/`} data-reveal class="group block">
 	<div class="dark-scope bg-ink-3 relative aspect-[3/4] overflow-hidden rounded-[1.75rem]">
 		<Img
 			src={p.img}

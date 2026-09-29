@@ -32,7 +32,7 @@ import { landings } from '../data/landings';
 				<p class="text-sm font-semibold">Explorar</p>
 				<ul class="text-mist mt-5 space-y-3 text-sm">
 					{nav.map((n) => <li><a href={n.href} class="transition hover:text-white">{n.label}</a></li>)}
-					<li><a href="/consultar-processos" class="transition hover:text-white">Consultar processos</a></li>
+					<li><a href="/consultar-processos/" class="transition hover:text-white">Consultar processos</a></li>
 				</ul>
 			</div>
 			<div>
@@ -43,7 +43,7 @@ import { landings } from '../data/landings';
 							.filter((a) => a.featured)
 							.map((a) => (
 								<li>
-									<a href={`/areas#${a.slug}`} class="transition hover:text-white">{a.title}</a>
+									<a href={`/areas/#${a.slug}`} class="transition hover:text-white">{a.title}</a>
 								</li>
 							))
 					}
@@ -55,7 +55,7 @@ import { landings } from '../data/landings';
 					{
 						landings.map((l) => (
 							<li>
-								<a href={`/${l.slug}`} class="transition hover:text-white">
+								<a href={`/${l.slug}/`} class="transition hover:text-white">
 									{l.name}
 								</a>
 							</li>
@@ -87,9 +87,9 @@ import { landings } from '../data/landings';
 		<div class="text-mist mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-white/8 pt-8 text-xs">
 			<p>© 2026 Reginaldo Costa Adv. Assoc. · Desenvolvido por Evoo Marketing</p>
 			<div class="flex flex-wrap gap-x-6 gap-y-2">
-				<a href="/politica-de-privacidade" class="hover:text-white">Política de Privacidade</a>
-				<a href="/termos-de-uso" class="hover:text-white">Termos de Uso</a>
-				<a href="/politica-de-cookies" class="hover:text-white">Política de Cookies</a>
+				<a href="/politica-de-privacidade/" class="hover:text-white">Política de Privacidade</a>
+				<a href="/termos-de-uso/" class="hover:text-white">Termos de Uso</a>
+				<a href="/politica-de-cookies/" class="hover:text-white">Política de Cookies</a>
 				<button type="button" data-cookie-prefs class="hover:text-white">Preferências de cookies</button>
 			</div>
 		</div>

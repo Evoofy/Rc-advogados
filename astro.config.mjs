@@ -55,6 +55,7 @@ function hostingRedirects() {
 // https://astro.build/config
 export default defineConfig({
 	site,
+	trailingSlash: 'always',
 	redirects,
 
 	vite: {

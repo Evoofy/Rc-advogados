@@ -11,11 +11,11 @@ interface Props {
 const { title, lines, updated, description } = Astro.props;
 
 const docs = [
-	{ label: 'Política de Privacidade', href: '/politica-de-privacidade' },
-	{ label: 'Termos de Uso', href: '/termos-de-uso' },
-	{ label: 'Política de Cookies', href: '/politica-de-cookies' },
+	{ label: 'Política de Privacidade', href: '/politica-de-privacidade/' },
+	{ label: 'Termos de Uso', href: '/termos-de-uso/' },
+	{ label: 'Política de Cookies', href: '/politica-de-cookies/' },
 ];
-const path = Astro.url.pathname.replace(/\/$/, '');
+const path = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
 ---
 
 <Layout title={title} description={description} cta={false}>

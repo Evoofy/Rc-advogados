@@ -1,5 +1,6 @@
 ---
 title: "Regulação do saneamento básico: do poder normativo à norma de referência"
+seoTitle: "Regulação do saneamento básico e normas de referência"
 description: "A mais recente edição da Revista Digital de Direito Administrativo da USP, publicada em 21 de julho, traz artigo científico de autoria de Carlos…"
 date: 2022-08-16
 category: Administrativo

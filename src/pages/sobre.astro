@@ -162,7 +162,7 @@ const pillars = [
 								<span class="bg-brand grid h-14 w-14 place-items-center rounded-2xl text-black">
 									<Icon name={h.icon} class="h-7 w-7" />
 								</span>
-								<span class="font-mono text-5xl font-semibold text-white/10">0{i + 1}</span>
+								<span aria-hidden="true" data-num={`0${i + 1}`} class="font-mono text-5xl font-semibold text-white/10 before:content-[attr(data-num)]"></span>
 							</div>
 							<h3 class="mt-12 text-3xl font-semibold tracking-tight">{h.title}</h3>
 							<p class="text-mist mt-3 max-w-lg text-lg leading-relaxed">{h.text}</p>
@@ -216,7 +216,7 @@ const pillars = [
 				</div>
 				<a
 					data-reveal
-					href="/equipe"
+					href="/equipe/"
 					class="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-sm font-medium transition hover:border-white/40 hover:bg-white/5"
 				>
 					Toda a equipe <Icon name="lucide:arrow-right" class="h-4 w-4" />

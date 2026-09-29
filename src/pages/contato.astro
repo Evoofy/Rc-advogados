@@ -35,7 +35,7 @@ const channels = [
 						Online agora
 					</span>
 				</div>
-				<p class="text-mist mt-2 text-sm">Ao enviar, abriremos o WhatsApp com a sua mensagem pronta.</p>
+				<p class="text-mist mt-2 text-sm">Sua mensagem chega ao escritório por e-mail e abrimos o WhatsApp com ela pronta, para você falar com a gente na hora.</p>
 
 				<div class="mt-8 grid gap-4 sm:grid-cols-2">
 					<label class="field">
@@ -71,14 +71,26 @@ const channels = [
 					</label>
 				</div>
 
-				<p data-form-error hidden class="mt-4 text-sm text-red-400">Preencha nome, telefone e mensagem.</p>
+				<!-- Honeypot: hidden from people, bots fill it in -->
+				<input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" class="absolute -left-[9999px] h-px w-px opacity-0" />
+
+				<label class="mt-6 flex items-start gap-3 text-sm text-white/75">
+					<input type="checkbox" name="aceite" required class="accent-brand mt-0.5 h-4 w-4 shrink-0" />
+					<span>
+						Concordo com o uso dos meus dados para retorno do contato, conforme a{' '}
+						<a href="/politica-de-privacidade/" class="text-brand underline underline-offset-2">Política de Privacidade</a>.
+					</span>
+				</label>
+
+				<p data-form-error hidden role="alert" class="mt-4 text-sm text-red-400">Preencha nome, telefone e mensagem.</p>
+				<p data-form-status hidden role="status" aria-live="polite" class="mt-4 flex items-start gap-2 rounded-2xl p-4 text-sm"></p>
 
 				<button
 					type="submit"
 					data-magnetic
 					class="group bg-brand relative mt-8 inline-flex items-center gap-3 overflow-hidden rounded-full py-2 pr-2 pl-6 font-semibold text-black"
 				>
-					<span class="relative z-10">Enviar mensagem</span>
+					<span class="relative z-10" data-submit-label>Enviar mensagem</span>
 					<span class="relative z-10 grid h-10 w-10 place-items-center rounded-full bg-black text-white transition-transform duration-500 group-hover:rotate-45">
 						<Icon name="lucide:arrow-up-right" class="h-5 w-5" />
 					</span>
@@ -127,7 +139,7 @@ const channels = [
 				<div data-map-gate class="bg-ink-2 absolute inset-0 flex flex-col items-center justify-center gap-4 p-6 text-center">
 					<p class="max-w-sm text-sm text-white/75">
 						O mapa é fornecido pelo Google, que pode gravar cookies no seu navegador. Veja a nossa{' '}
-						<a href="/politica-de-cookies" class="text-brand underline underline-offset-2">Política de Cookies</a>.
+						<a href="/politica-de-cookies/" class="text-brand underline underline-offset-2">Política de Cookies</a>.
 					</p>
 					<div class="flex flex-wrap justify-center gap-2">
 						<button type="button" data-map-load class="bg-brand rounded-full px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-white">
@@ -213,7 +225,7 @@ const channels = [
 </style>
 
 <script>
-	import { whatsappMsg } from '../data/site';
+	import { whatsappMsg, contactForm } from '../data/site';
 	import { whenAllowed, getConsent, saveConsent } from '../scripts/consent';
 
 	const map = document.querySelector<HTMLIFrameElement>('[data-map-src]');
@@ -232,13 +244,29 @@ const channels = [
 
 	const form = document.getElementById('contact-form') as HTMLFormElement | null;
 	const error = form?.querySelector<HTMLElement>('[data-form-error]');
+	const status = form?.querySelector<HTMLElement>('[data-form-status]');
+	const label = form?.querySelector<HTMLElement>('[data-submit-label]');
+	const button = form?.querySelector<HTMLButtonElement>('button[type=submit]');
+
+	const show = (kind: 'ok' | 'warn', text: string) => {
+		if (!status) return;
+		status.hidden = false;
+		status.textContent = text;
+		status.className = `mt-4 flex items-start gap-2 rounded-2xl p-4 text-sm ${kind === 'ok' ? 'bg-emerald-500/10 text-emerald-300' : 'bg-amber-500/10 text-amber-200'}`;
+	};
 
 	form?.addEventListener('submit', (e) => {
 		e.preventDefault();
 		const data = new FormData(form);
 		const get = (k: string) => String(data.get(k) ?? '').trim();
-		if (!get('nome') || !get('telefone') || !get('mensagem')) {
-			if (error) error.hidden = false;
+		if (get('_honey')) return; // bot
+		if (!get('nome') || !get('telefone') || !get('mensagem') || !data.get('aceite')) {
+			if (error) {
+				error.textContent = !data.get('aceite') && get('nome') && get('telefone') && get('mensagem')
+					? 'Para enviar, marque que concorda com a Política de Privacidade.'
+					: 'Preencha nome, telefone e mensagem.';
+				error.hidden = false;
+			}
 			return;
 		}
 		if (error) error.hidden = true;
@@ -251,6 +279,40 @@ const channels = [
 			get('mensagem'),
 		].join('\n');
 		window.dataLayer?.push({ event: 'generate_lead', form_name: 'contato', lead_subject: get('assunto') });
+
+		// 1) E-mail to the office, in the background (keepalive survives the WhatsApp tab opening)
+		if (button) button.disabled = true;
+		if (label) label.textContent = 'Enviando…';
+		fetch(contactForm.endpoint, {
+			method: 'POST',
+			keepalive: true,
+			headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+			body: JSON.stringify({
+				_subject: `Novo contato pelo site — ${get('assunto')}`,
+				_template: 'table',
+				_replyto: get('email') || undefined,
+				Nome: get('nome'),
+				Telefone: get('telefone'),
+				'E-mail': get('email') || '—',
+				Assunto: get('assunto'),
+				Mensagem: get('mensagem'),
+				Origem: window.location.href,
+			}),
+		})
+			.then((r) => r.json().catch(() => ({})).then((j) => ({ ok: r.ok && j.success !== 'false' && j.success !== false })))
+			.catch(() => ({ ok: false }))
+			.then(({ ok }) => {
+				if (ok) {
+					show('ok', 'Mensagem enviada! Recebemos seu contato por e-mail e o WhatsApp foi aberto para você falar com a gente agora.');
+					form.reset();
+				} else {
+					show('warn', 'Não conseguimos enviar por e-mail agora, mas o WhatsApp foi aberto com a sua mensagem — é só enviar por lá.');
+				}
+				if (button) button.disabled = false;
+				if (label) label.textContent = 'Enviar mensagem';
+			});
+
+		// 2) WhatsApp, synchronously inside the click so pop-up blockers allow it
 		// A real link click (not window.open) so the GTM WhatsApp conversion trigger fires
 		const link = Object.assign(document.createElement('a'), { href: whatsappMsg(text), target: '_blank', rel: 'noopener' });
 		form.append(link);

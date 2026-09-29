@@ -2,7 +2,7 @@
 import { Icon } from 'astro-icon/components';
 import { nav, contact } from '../data/site';
 
-const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const path = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
 const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
 ---
 
@@ -42,7 +42,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
 
 		<div class="relative z-10 flex items-center gap-2">
 			<a
-				href="/consultar-processos"
+				href="/consultar-processos/"
 				class="hidden items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm text-white/80 transition hover:border-white/40 hover:text-white xl:flex"
 			>
 				<Icon name="lucide:search" class="h-4 w-4" /> Consultar processos
@@ -94,7 +94,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
 			))
 		}
 		<a
-			href="/consultar-processos"
+			href="/consultar-processos/"
 			class="menu-link text-mist mt-6 flex items-center gap-2 text-base"
 			style="--d:500ms"
 		>

@@ -72,7 +72,7 @@ const schema = [organization(site), website(site), ...jsonLd];
 		<title>{fullTitle}</title>
 		<meta name="description" content={description} />
 		<link rel="canonical" href={canonical} />
-		{noindex && <meta name="robots" content="noindex, follow" />}
+		<meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1'} />
 		<meta name="theme-color" content="#07070a" />
 
 		<meta property="og:site_name" content="RC Advogados" />

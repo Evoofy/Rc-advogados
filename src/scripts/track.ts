@@ -19,6 +19,7 @@ const location = (el: Element) => {
 	if (el.closest('#nav, #mobile-menu')) return 'menu';
 	if (el.closest('footer')) return 'rodape';
 	if (el.closest('#cookie-banner')) return 'cookies';
+	if (el.closest('#whatsapp-float')) return 'botao-flutuante';
 	const section = el.closest('section[id], article[id], section');
 	return section?.id || section?.querySelector('h1, h2')?.textContent?.trim().slice(0, 40) || 'pagina';
 };

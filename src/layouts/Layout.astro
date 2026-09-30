@@ -6,6 +6,7 @@ import Footer from '../components/Footer.astro';
 import CtaBanner from '../components/CtaBanner.astro';
 import CookieBanner from '../components/CookieBanner.astro';
 import Tracking from '../components/Tracking.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
 import { asset } from '../lib/images';
 import { organization, website } from '../lib/seo';
 
@@ -111,6 +112,7 @@ const schema = [organization(site), website(site), ...jsonLd];
 		</main>
 		{cta && <CtaBanner />}
 		<Footer />
+		<WhatsAppFloat />
 		<CookieBanner />
 		<script>
 			import '../scripts/motion';

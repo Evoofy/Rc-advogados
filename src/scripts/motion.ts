@@ -125,7 +125,10 @@ if (reduced) {
 		if (document.querySelector(sel)) intro.from(sel, vars, pos);
 	};
 	at('[data-hero-line]', { yPercent: 115, rotate: 3, duration: 1.4, stagger: 0.1 }, 0.1);
-	at('[data-hero-fade]', { y: 30, opacity: 0, duration: 1.2, stagger: 0.08 }, 0.4);
+	// Hero paragraphs are usually the LCP element: slide them in but keep them visible from the first paint,
+	// otherwise Google only counts the page as loaded once the fade-in finishes (~2 s later on mobile)
+	at('[data-hero-fade]:not(p)', { y: 30, opacity: 0, duration: 1.2, stagger: 0.08 }, 0.4);
+	at('p[data-hero-fade]', { y: 24, duration: 1.2, stagger: 0.08 }, 0.4);
 	at('[data-hero-visual]', { clipPath: 'inset(12% 12% 12% 12% round 2rem)', opacity: 0, duration: 1.6 }, 0.3);
 	at('[data-hero-img]', { scale: 1.5, duration: 2.2 }, 0.3);
 	at('[data-float]', { y: 40, opacity: 0, scale: 0.9, duration: 1.2, stagger: 0.12 }, 0.9);

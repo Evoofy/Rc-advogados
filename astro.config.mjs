@@ -34,19 +34,48 @@ function hostingRedirects() {
 					...entries.map(([from, to]) => `RewriteRule ^${from.slice(1).replace(/[.]/g, '\\.')}/?$ ${to} [R=301,L,NE]`),
 					'</IfModule>',
 					'',
+					'# Compressão (LiteSpeed já comprime sozinho; isto cobre Apache)',
+					'<IfModule mod_brotli.c>',
+					'  AddOutputFilterByType BROTLI_COMPRESS text/html text/css text/plain text/xml application/xml application/javascript text/javascript application/json application/manifest+json image/svg+xml',
+					'</IfModule>',
+					'<IfModule mod_deflate.c>',
+					'  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/xml application/javascript text/javascript application/json application/manifest+json image/svg+xml',
+					'</IfModule>',
+					'AddType application/manifest+json .webmanifest',
+					'AddType font/woff2 .woff2',
+					'',
 					'<IfModule mod_headers.c>',
-					'  <FilesMatch "\\.(js|css|woff2|webp|jpg|png|svg)$">',
-					'    Header set Cache-Control "public, max-age=31536000, immutable"',
+					'  # Segurança',
+					'  Header always set X-Content-Type-Options "nosniff"',
+					'  Header always set X-Frame-Options "SAMEORIGIN"',
+					'  Header always set Referrer-Policy "strict-origin-when-cross-origin"',
+					'  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"',
+					'  Header always set Strict-Transport-Security "max-age=31536000" env=HTTPS',
+					'  # Cache: imagens/fontes fora de /_astro mudam sem trocar de nome → 1 semana',
+					'  <FilesMatch "\\.(webp|jpg|jpeg|png|svg|ico|woff2|webmanifest)$">',
+					'    Header set Cache-Control "public, max-age=604800"',
 					'  </FilesMatch>',
-					'  <FilesMatch "\\.html$">',
+					'  <FilesMatch "\\.(html|xml|txt)$">',
 					'    Header set Cache-Control "public, max-age=0, must-revalidate"',
 					'  </FilesMatch>',
 					'</IfModule>',
 					'',
 				].join('\n');
+				// /_astro/ files have a content hash in the name: safe to cache forever
+				const immutable = ['<IfModule mod_headers.c>', '  Header set Cache-Control "public, max-age=31536000, immutable"', '</IfModule>', ''].join('\n');
+				const security = [
+					'  X-Content-Type-Options: nosniff',
+					'  X-Frame-Options: SAMEORIGIN',
+					'  Referrer-Policy: strict-origin-when-cross-origin',
+					'  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()',
+					'  Strict-Transport-Security: max-age=31536000',
+				];
+				const headers = ['/*', ...security, '', '/_astro/*', '  Cache-Control: public, max-age=31536000, immutable', ''].join('\n');
 				const netlify = entries.flatMap(([from, to]) => [`${from} ${to} 301`, `${from}/ ${to} 301`]).join('\n') + '\n';
 				await writeFile(new URL('.htaccess', dir), htaccess);
 				await writeFile(new URL('_redirects', dir), netlify);
+				await writeFile(new URL('_astro/.htaccess', dir), immutable);
+				await writeFile(new URL('_headers', dir), headers);
 			},
 		},
 	};

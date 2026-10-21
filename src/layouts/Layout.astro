@@ -9,6 +9,7 @@ import Tracking from '../components/Tracking.astro';
 import WhatsAppFloat from '../components/WhatsAppFloat.astro';
 import { asset } from '../lib/images';
 import { organization, website } from '../lib/seo';
+import { tracking } from '../data/site';
 
 interface Props {
 	title?: string;
@@ -75,6 +76,7 @@ const schema = [organization(site), website(site), ...jsonLd];
 		<link rel="canonical" href={canonical} />
 		<meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1'} />
 		<meta name="theme-color" content="#07070a" />
+		<meta name="google-site-verification" content={tracking.searchConsole} />
 
 		<meta property="og:site_name" content="RC Advogados" />
 		<meta property="og:locale" content="pt_BR" />

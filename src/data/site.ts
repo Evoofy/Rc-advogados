@@ -33,6 +33,8 @@ export const tracking = {
 	gtm: 'GTM-W59PKTT',
 	/** Google Analytics 4 → needs "analiticos" consent */
 	ga4: 'G-SYD89TY068',
+	/** Google Search Console ownership (meta tag copied from the previous site — keep it, or the property loses verification) */
+	searchConsole: 'sIyxuj_SgANS9unYtEqGaAlrq5U16rtFxAgqbXrWIk4',
 };
 
 export const nav = [

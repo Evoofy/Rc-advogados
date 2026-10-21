@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 import icon from 'astro-icon';
 import sitemap from '@astrojs/sitemap';
 
-import { redirects } from './redirects.mjs';
+import { redirects, serverRedirects } from './redirects.mjs';
 
 const site = 'https://reginaldocosta.com.br';
 const redirectSources = new Set(Object.keys(redirects).map((p) => `${site}${p}/`));
@@ -17,7 +17,7 @@ function hostingRedirects() {
 		name: 'hosting-redirects',
 		hooks: {
 			'astro:build:done': async ({ dir }) => {
-				const entries = Object.entries(redirects);
+				const entries = [...Object.entries(redirects), ...Object.entries(serverRedirects)];
 				const htaccess = [
 					'# Gerado no build a partir de redirects.mjs — não editar à mão',
 					'Options -Indexes',

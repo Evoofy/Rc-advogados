@@ -146,4 +146,9 @@ export const serverRedirects = {
 	'/sitemap.xml': '/sitemap-index.xml',
 	'/sitemap_index.xml': '/sitemap-index.xml',
 	'/wp-sitemap.xml': '/sitemap-index.xml',
+
+	// cPanel shortcuts from the old host: e-mail still lives there (the domain now points to Vercel)
+	'/webmail': 'https://webmail.reginaldocosta.com.br/',
+	'/cpanel': 'https://mail.reginaldocosta.com.br:2083/',
+	'/whm': 'https://mail.reginaldocosta.com.br:2083/',
 };

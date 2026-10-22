@@ -1136,6 +1136,36 @@
 			"source": "/wp-sitemap.xml",
 			"destination": "/sitemap-index.xml",
 			"statusCode": 301
+		},
+		{
+			"source": "/webmail",
+			"destination": "https://webmail.reginaldocosta.com.br/",
+			"statusCode": 301
+		},
+		{
+			"source": "/webmail/",
+			"destination": "https://webmail.reginaldocosta.com.br/",
+			"statusCode": 301
+		},
+		{
+			"source": "/cpanel",
+			"destination": "https://mail.reginaldocosta.com.br:2083/",
+			"statusCode": 301
+		},
+		{
+			"source": "/cpanel/",
+			"destination": "https://mail.reginaldocosta.com.br:2083/",
+			"statusCode": 301
+		},
+		{
+			"source": "/whm",
+			"destination": "https://mail.reginaldocosta.com.br:2083/",
+			"statusCode": 301
+		},
+		{
+			"source": "/whm/",
+			"destination": "https://mail.reginaldocosta.com.br:2083/",
+			"statusCode": 301
 		}
 	],
 	"headers": [

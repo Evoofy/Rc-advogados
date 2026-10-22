@@ -1,5 +1,5 @@
 // @ts-check
-import { writeFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 import { defineConfig, fontProviders } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
@@ -8,8 +8,52 @@ import sitemap from '@astrojs/sitemap';
 
 import { redirects, serverRedirects } from './redirects.mjs';
 
-const site = 'https://reginaldocosta.com.br';
+// Primary domain on Vercel (reginaldocosta.com.br → www via 308)
+const site = 'https://www.reginaldocosta.com.br';
 const redirectSources = new Set(Object.keys(redirects).map((p) => `${site}${p}/`));
+
+/**
+ * vercel.json (the site is hosted on Vercel, which ignores .htaccess).
+ * Regenerated from redirects.mjs on every `astro dev` / `astro build` — commit it with the redirects.
+ * Vercel reads it before building, so it must live in the repo root.
+ */
+function vercelConfig() {
+	return {
+		name: 'vercel-config',
+		hooks: {
+			'astro:config:done': async () => {
+				const entries = [...Object.entries(redirects), ...Object.entries(serverRedirects)];
+				const config = {
+					$schema: 'https://openapi.vercel.sh/vercel.json',
+					trailingSlash: true,
+					// Both spellings, so an old URL is always a single 301 hop
+					redirects: entries.flatMap(([from, to]) =>
+						(from.endsWith('.xml') ? [from] : [from, `${from}/`]).map((source) => ({ source, destination: to, statusCode: 301 })),
+					),
+					headers: [
+						{
+							source: '/(.*)',
+							headers: [
+								{ key: 'X-Content-Type-Options', value: 'nosniff' },
+								{ key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+								{ key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+								{ key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(), payment=()' },
+							],
+						},
+						// Hashed file names: safe to cache forever
+						{ source: '/_astro/(.*)', headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }] },
+						// Same name across versions: one week
+						{ source: '/(images|og)/(.*)', headers: [{ key: 'Cache-Control', value: 'public, max-age=604800' }] },
+					],
+				};
+				const json = JSON.stringify(config, null, '\t') + '\n';
+				const file = new URL('./vercel.json', import.meta.url);
+				const current = await readFile(file, 'utf8').catch(() => '');
+				if (current !== json) await writeFile(file, json);
+			},
+		},
+	};
+}
 
 /** Writes the redirect map as real 301s for Apache/LiteSpeed and Netlify/Cloudflare. */
 function hostingRedirects() {
@@ -25,9 +69,9 @@ function hostingRedirects() {
 					'',
 					'<IfModule mod_rewrite.c>',
 					'RewriteEngine On',
-					'# HTTPS e domínio sem www',
+					'# HTTPS e domínio com www',
 					'RewriteCond %{HTTPS} off [OR]',
-					'RewriteCond %{HTTP_HOST} ^www\\. [NC]',
+					'RewriteCond %{HTTP_HOST} !^www\\. [NC]',
 					`RewriteRule ^ ${site}%{REQUEST_URI} [R=301,L,NE]`,
 					'',
 					'# URLs antigas → novas',
@@ -118,5 +162,6 @@ export default defineConfig({
 			filter: (page) => !redirectSources.has(page) && !page.endsWith('/404/'),
 		}),
 		hostingRedirects(),
+		vercelConfig(),
 	],
 });

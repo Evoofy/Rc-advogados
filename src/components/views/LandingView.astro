@@ -35,6 +35,7 @@ const light = (id: string) => sections.indexOf(id) % 2 === 0;
 	image={l.img}
 	canonical={l.canonical}
 	whatsappText={l.waText}
+	autoTracking
 	jsonLd={[service(Astro.site!, l.name, l.seoDescription, Astro.url), breadcrumbs(Astro.site!, [{ label: l.name }], Astro.url)]}
 >
 	<!-- Hero -->

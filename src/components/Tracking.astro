@@ -6,13 +6,20 @@
  * - GTM (Google Ads conversions + Meta Pixel) loads only after "publicidade" consent,
  *   because its Meta Pixel tag is Custom HTML and ignores Consent Mode.
  * - Production builds only, so local/testing traffic never reaches the reports.
+ * - `auto` (ad landing pages, at the client's request): tags load right away for visitors who
+ *   haven't chosen yet. The banner still shows and "Rejeitar" turns everything off; an earlier
+ *   rejection is respected.
  */
 import { tracking } from '../data/site';
 
+interface Props {
+	auto?: boolean;
+}
+const { auto = false } = Astro.props;
 const enabled = import.meta.env.PROD;
 ---
 
-<script is:inline define:vars={{ gtmId: tracking.gtm, ga4Id: tracking.ga4, enabled }}>
+<script is:inline define:vars={{ gtmId: tracking.gtm, ga4Id: tracking.ga4, enabled, auto }}>
 	window.dataLayer = window.dataLayer || [];
 	window.gtag = function () {
 		window.dataLayer.push(arguments);
@@ -63,13 +70,15 @@ const enabled = import.meta.env.PROD;
 
 	window.gtag('consent', 'default', Object.assign(toGoogle(null), { wait_for_update: 500 }));
 	window.gtag('set', 'ads_data_redaction', true);
-	if (stored) window.gtag('consent', 'update', toGoogle(stored));
+	// Landing pages: no choice yet → measure right away (not saved, so other pages still ask)
+	var effective = stored || (auto ? { analiticos: true, publicidade: true, funcionais: false } : null);
+	if (effective) window.gtag('consent', 'update', toGoogle(effective));
 
 	var apply = function (c) {
 		if (c.analiticos) load.ga4();
 		if (c.publicidade) load.gtm();
 	};
-	if (stored) apply(stored);
+	if (effective) apply(effective);
 
 	// Banner / preferences dialog changes (see src/scripts/consent.ts)
 	window.addEventListener('rc:consent', function (e) {

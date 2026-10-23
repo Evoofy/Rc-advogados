@@ -30,6 +30,8 @@ interface Props {
 	canonical?: string;
 	/** Message for the floating WhatsApp button */
 	whatsappText?: string;
+	/** Load GTM/GA4 right away (ad landing pages); the visitor can still refuse in the banner */
+	autoTracking?: boolean;
 }
 
 const siteName = 'RC Advogados';
@@ -45,6 +47,7 @@ const {
 	cta = true,
 	canonical: canonicalPath,
 	whatsappText,
+	autoTracking = false,
 } = Astro.props;
 
 const site = Astro.site!;
@@ -76,7 +79,7 @@ const schema = [organization(site), website(site), ...jsonLd];
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<Tracking />
+		<Tracking auto={autoTracking} />
 		<title>{fullTitle}</title>
 		<meta name="description" content={description} />
 		<link rel="canonical" href={canonical} />
@@ -121,7 +124,7 @@ const schema = [organization(site), website(site), ...jsonLd];
 		{cta && <CtaBanner />}
 		<Footer />
 		<WhatsAppFloat text={whatsappText} />
-		<CookieBanner />
+		<CookieBanner auto={autoTracking} />
 		<script>
 			import '../scripts/motion';
 			import '../scripts/track';

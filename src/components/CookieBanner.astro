@@ -1,6 +1,12 @@
 ---
 import { Icon } from 'astro-icon/components';
 
+interface Props {
+	/** Landing pages: measurement is already on, the banner offers to refuse */
+	auto?: boolean;
+}
+const { auto = false } = Astro.props;
+
 const categories = [
 	{ id: 'necessarios', title: 'Cookies necessários', text: 'Essenciais para o site funcionar, como lembrar as suas preferências de consentimento. Não armazenam dados pessoais.', locked: true },
 	{ id: 'funcionais', title: 'Cookies funcionais', text: 'Permitem recursos de terceiros, como o mapa do Google na página de contato e o compartilhamento em redes sociais.' },
@@ -24,7 +30,9 @@ const categories = [
 		<div>
 			<p class="font-semibold">Sua privacidade importa</p>
 			<p class="mt-1 text-sm leading-relaxed text-[#a1a1aa]">
-				Usamos cookies necessários para o site funcionar e, com a sua permissão, cookies opcionais para o mapa, a medição de audiência e os anúncios.
+				{auto
+					? 'Usamos cookies para medir a audiência e o resultado dos nossos anúncios (Google e Meta). Você pode recusar ou personalizar quando quiser.'
+					: 'Usamos cookies necessários para o site funcionar e, com a sua permissão, cookies opcionais para o mapa, a medição de audiência e os anúncios.'}
 				Saiba mais na <a href="/politica-de-cookies/" class="text-brand underline underline-offset-2">Política de Cookies</a>.
 			</p>
 		</div>
@@ -45,6 +53,7 @@ const categories = [
 <!-- Preferences dialog -->
 <dialog
 	id="cookie-dialog"
+	data-auto={auto ? "" : undefined}
 	aria-labelledby="cookie-dialog-title"
 	class="m-auto w-[calc(100%-2rem)] max-w-lg rounded-3xl border border-white/10 bg-[#0e0e13] p-0 text-white shadow-2xl backdrop:bg-black/70"
 >
@@ -163,7 +172,9 @@ const categories = [
 	document.addEventListener('click', (e) => {
 		if (!(e.target as Element).closest('[data-cookie-prefs]')) return;
 		const current = getConsent();
-		cats.forEach((c) => (box(c).checked = current?.[c] ?? false));
+		// On landing pages measurement is already on until the visitor decides
+		const autoOn = dialog.hasAttribute('data-auto') && !current;
+		cats.forEach((c) => (box(c).checked = current?.[c] ?? (autoOn && c !== 'funcionais')));
 		dialog.showModal();
 	});
 

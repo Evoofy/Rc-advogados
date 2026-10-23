@@ -30,8 +30,8 @@ export function organization(site: URL) {
 		geo: { '@type': 'GeoCoordinates', latitude: -22.5653729, longitude: -47.4033639 },
 		hasMap: contact.maps,
 		openingHoursSpecification: [
-			{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '08:00', closes: '12:00' },
-			{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '13:00', closes: '17:30' },
+			{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '08:30', closes: '12:00' },
+			{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '13:00', closes: '17:00' },
 		],
 		areaServed: [{ '@type': 'City', name: 'Limeira' }, { '@type': 'Country', name: 'Brasil' }],
 		knowsAbout: areas.map((a) => (a.title.startsWith('Defesa') ? a.title : `Direito ${a.title}`)),

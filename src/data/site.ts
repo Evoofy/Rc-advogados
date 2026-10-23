@@ -6,7 +6,7 @@ export const contact = {
 	street: 'R. Treze de Maio, 151 - Centro',
 	city: 'Limeira – SP, 13480-170',
 	address: 'R. Treze de Maio, 151 - Centro, Limeira – SP',
-	hours: 'Seg. a Sex. das 08:00–12:00 e 13:00–17:30',
+	hours: 'Seg. a Sex. das 08:30–12:00 e 13:00–17:00',
 	oab: 'OAB-13.584',
 	maps: 'https://www.google.com/maps/place/R.+Treze+de+Maio,+151+-+Centro,+Limeira+-+SP,+13480-170',
 	mapsEmbed: 'https://www.google.com/maps?q=R.+Treze+de+Maio,+151+-+Centro,+Limeira+-+SP&output=embed',

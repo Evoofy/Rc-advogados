@@ -1,0 +1,18 @@
+---
+import type { GetStaticPaths } from 'astro';
+import ArchiveView from '../../components/views/ArchiveView.astro';
+import { authorArchives } from '../../data/wp-archives';
+import { getPosts } from '../../lib/blog';
+
+export const getStaticPaths = (async () => {
+	const posts = await getPosts();
+	return authorArchives.map((a) => ({
+		params: { slug: a.path.split('/')[2] },
+		props: { name: a.name, slug: a.path.split('/')[2], posts: posts.filter((p) => a.posts.includes(p.id)) },
+	}));
+}) satisfies GetStaticPaths;
+
+const { name, slug, posts } = Astro.props;
+---
+
+<ArchiveView kind="Autor" {name} {posts} title={`Artigos de ${name}${slug.endsWith('adm') ? ' (administração)' : ''}`} description={`Artigos publicados por ${name} no blog da RC Advogados (${posts.length} ${posts.length === 1 ? 'artigo' : 'artigos'}).`} />

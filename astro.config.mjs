@@ -6,11 +6,15 @@ import tailwindcss from '@tailwindcss/vite';
 import icon from 'astro-icon';
 import sitemap from '@astrojs/sitemap';
 
-import { redirects, serverRedirects } from './redirects.mjs';
+import { redirects, serverRedirects, rewrites } from './redirects.mjs';
 
 // Primary domain on Vercel (reginaldocosta.com.br → www via 308)
 const site = 'https://www.reginaldocosta.com.br';
 const redirectSources = new Set(Object.keys(redirects).map((p) => `${site}${p}/`));
+// Same content served at a second URL (canonical points elsewhere): keep them out of the sitemap
+const nonCanonical = new Set(['/login/', '/acidente-de-trabalho-lpf/', '/page/2/'].map((p) => `${site}${p}`));
+// Archive pages (tags, categories, authors, pagination) exist but were never in the old sitemap either
+const isArchive = (page) => /\/(tag|category|author)\/|\/page\/2\/$/.test(page);
 
 /**
  * vercel.json (the site is hosted on Vercel, which ignores .htaccess).
@@ -27,9 +31,9 @@ function vercelConfig() {
 					$schema: 'https://openapi.vercel.sh/vercel.json',
 					trailingSlash: true,
 					// Both spellings, so an old URL is always a single 301 hop
-					redirects: entries.flatMap(([from, to]) =>
-						(from.endsWith('.xml') ? [from] : [from, `${from}/`]).map((source) => ({ source, destination: to, statusCode: 301 })),
-					),
+					redirects: entries.flatMap(([from, to]) => [from, `${from}/`].map((source) => ({ source, destination: to, statusCode: 301 }))),
+					// Old URL keeps answering with the new file's content (feeds → RSS, old sitemaps → sitemap)
+					rewrites: Object.entries(rewrites).map(([source, destination]) => ({ source, destination })),
 					headers: [
 						{
 							source: '/(.*)',
@@ -74,7 +78,10 @@ function hostingRedirects() {
 					'RewriteCond %{HTTP_HOST} !^www\\. [NC]',
 					`RewriteRule ^ ${site}%{REQUEST_URI} [R=301,L,NE]`,
 					'',
-					'# URLs antigas → novas',
+					'# Mesmo endereço antigo, conteúdo novo (feeds e sitemaps do WordPress)',
+					...Object.entries(rewrites).map(([from, to]) => `RewriteRule ^${from.slice(1).replace(/\/$/, '').replace(/[.]/g, '\\.')}/?$ ${to} [L]`),
+					'',
+					'# Endereços criados pelo site novo → endereços antigos',
 					...entries.map(([from, to]) => `RewriteRule ^${from.slice(1).replace(/[.]/g, '\\.')}/?$ ${to} [R=301,L,NE]`),
 					'</IfModule>',
 					'',
@@ -115,7 +122,7 @@ function hostingRedirects() {
 					'  Strict-Transport-Security: max-age=31536000',
 				];
 				const headers = ['/*', ...security, '', '/_astro/*', '  Cache-Control: public, max-age=31536000, immutable', ''].join('\n');
-				const netlify = entries.flatMap(([from, to]) => [`${from} ${to} 301`, `${from}/ ${to} 301`]).join('\n') + '\n';
+				const netlify = [...entries.flatMap(([from, to]) => [`${from} ${to} 301`, `${from}/ ${to} 301`]), ...Object.entries(rewrites).map(([from, to]) => `${from} ${to} 200`)].join('\n') + '\n';
 				await writeFile(new URL('.htaccess', dir), htaccess);
 				await writeFile(new URL('_redirects', dir), netlify);
 				await writeFile(new URL('_astro/.htaccess', dir), immutable);
@@ -159,7 +166,7 @@ export default defineConfig({
 	integrations: [
 		icon(),
 		sitemap({
-			filter: (page) => !redirectSources.has(page) && !page.endsWith('/404/'),
+			filter: (page) => !redirectSources.has(page) && !nonCanonical.has(page) && !isArchive(page) && !page.endsWith('/404/'),
 		}),
 		hostingRedirects(),
 		vercelConfig(),

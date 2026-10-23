@@ -1,9 +1,17 @@
 ---
+import { getPosts } from '../lib/blog';
+import { postUrl } from '../lib/urls';
 import { Icon } from 'astro-icon/components';
 import { nav, contact } from '../data/site';
 
 const path = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
-const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+const postPaths = new Set((await getPosts()).map((p) => postUrl(p.id)));
+const isActive = (href: string) => {
+	if (href === '/') return path === '/';
+	if (href === '/equipe-reginaldo-costa/') return path.startsWith('/equipe');
+	if (href === '/blog/') return path.startsWith('/blog/') || postPaths.has(path);
+	return path.startsWith(href);
+};
 ---
 
 <header id="nav" class="fixed inset-x-0 top-0 z-50 px-4 pt-4 transition-transform duration-500">
@@ -42,7 +50,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
 
 		<div class="relative z-10 flex items-center gap-2">
 			<a
-				href="/consultar-processos/"
+				href="/area-do-cliente/"
 				class="hidden items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm text-white/80 transition hover:border-white/40 hover:text-white xl:flex"
 			>
 				<Icon name="lucide:search" class="h-4 w-4" /> Consultar processos
@@ -94,7 +102,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
 			))
 		}
 		<a
-			href="/consultar-processos/"
+			href="/area-do-cliente/"
 			class="menu-link text-mist mt-6 flex items-center gap-2 text-base"
 			style="--d:500ms"
 		>

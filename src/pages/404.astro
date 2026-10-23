@@ -1,35 +1,132 @@
 ---
 import { Icon } from 'astro-icon/components';
 import Layout from '../layouts/Layout.astro';
-import { nav } from '../data/site';
+import { areas, whatsappMsg } from '../data/site';
+import { landings } from '../data/landings';
+import { getPosts } from '../lib/blog';
+import { postUrl } from '../lib/urls';
+
+// Every page a visitor might have been looking for: used for the "Você quis dizer…?" suggestion
+const posts = await getPosts();
+const pages = [
+	{ t: 'Início', u: '/' },
+	{ t: 'Sobre o escritório', u: '/sobre/' },
+	{ t: 'Áreas de atuação', u: '/areas/' },
+	{ t: 'Equipe', u: '/equipe-reginaldo-costa/' },
+	{ t: 'Empresas atendidas', u: '/empresa/' },
+	{ t: 'Blog', u: '/blog/' },
+	{ t: 'Contato', u: '/contato/' },
+	{ t: 'Área do cliente — consultar processos', u: '/area-do-cliente/' },
+	{ t: 'Política de Privacidade', u: '/politica-de-privacidade/' },
+	{ t: 'Política de Cookies', u: '/politica-de-cookies/' },
+	{ t: 'Termos de Uso', u: '/termos-de-uso/' },
+	...landings.filter((l) => !l.canonical).map((l) => ({ t: l.pageTitle ?? l.name, u: `/${l.slug}/` })),
+	...posts.map((p) => ({ t: p.data.title, u: postUrl(p.id) })),
+	...areas.map((a) => ({ t: `Direito ${a.title}`, u: `/areas/#${a.slug}` })),
+];
+
+const shortcuts = [
+	{ icon: 'lucide:scale', label: 'Áreas de atuação', href: '/areas/' },
+	{ icon: 'lucide:smartphone', label: 'Golpe do PIX', href: '/golpe-do-pix/' },
+	{ icon: 'lucide:hard-hat', label: 'Acidente de trabalho', href: '/acidente-de-trabalho/' },
+	{ icon: 'lucide:users', label: 'Equipe', href: '/equipe-reginaldo-costa/' },
+	{ icon: 'lucide:newspaper', label: 'Blog', href: '/blog/' },
+	{ icon: 'lucide:mail', label: 'Contato', href: '/contato/' },
+];
 ---
 
-<Layout title="Página não encontrada" cta={false} noindex>
-	<section class="relative flex min-h-svh items-center overflow-hidden pt-28 pb-16">
+<Layout title="Página não encontrada" description="A página que você procura não existe ou mudou de endereço. Veja sugestões ou fale com a RC Advogados." cta={false} noindex>
+	<section class="relative flex min-h-svh items-center overflow-hidden pt-28 pb-20">
 		<div class="bg-grid absolute inset-0" aria-hidden="true"></div>
 		<div class="orb bg-brand top-1/4 left-1/2 h-[30rem] w-[30rem] -translate-x-1/2" data-orb aria-hidden="true"></div>
-		<div class="relative mx-auto max-w-4xl px-4 text-center md:px-6">
-			<p class="text-[clamp(7rem,26vw,18rem)] leading-none font-semibold tracking-[-0.08em] text-transparent [-webkit-text-stroke:1.5px_rgb(255_255_255/0.4)]">
+
+		<div class="relative mx-auto w-full max-w-4xl px-4 text-center md:px-6">
+			<p class="text-[clamp(7rem,26vw,16rem)] leading-none font-semibold tracking-[-0.08em] text-transparent [-webkit-text-stroke:1.5px_rgb(255_255_255/0.4)]" aria-hidden="true">
 				<span class="line"><span data-hero-line>404</span></span>
 			</p>
-			<h1 data-hero-fade class="mt-4 text-3xl font-semibold tracking-tight md:text-5xl">
+			<h1 data-hero-fade class="mt-2 text-3xl font-semibold tracking-tight md:text-5xl">
 				Esta página <span class="font-serif font-normal italic text-brand">não existe</span>
 			</h1>
 			<p data-hero-fade class="text-mist mx-auto mt-4 max-w-md">
-				O endereço pode ter mudado ou sido digitado incorretamente. Que tal começar por aqui?
+				O endereço pode ter mudado ou sido digitado incorretamente.
 			</p>
-			<div data-hero-fade class="mt-10 flex flex-wrap justify-center gap-2">
+
+			<!-- Filled in by the script below when a similar page exists -->
+			<div data-suggestion hidden class="glass mx-auto mt-10 max-w-xl rounded-3xl p-6 text-left">
+				<p class="text-mist text-xs tracking-[0.2em] uppercase">Você quis dizer…</p>
+				<a data-suggestion-link href="/" class="group mt-3 flex items-center justify-between gap-4">
+					<span>
+						<span data-suggestion-title class="group-hover:text-brand block text-lg font-semibold transition-colors"></span>
+						<span data-suggestion-url class="text-mist mt-1 block font-mono text-xs"></span>
+					</span>
+					<span class="bg-brand grid h-11 w-11 shrink-0 place-items-center rounded-full text-black transition-transform group-hover:rotate-45">
+						<Icon name="lucide:arrow-up-right" class="h-5 w-5" />
+					</span>
+				</a>
+			</div>
+
+			<div data-hero-fade class="mx-auto mt-10 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-3">
 				{
-					nav.map((n) => (
-						<a href={n.href} class="hover:border-brand hover:text-brand rounded-full border border-white/15 px-5 py-2.5 text-sm transition">
-							{n.label}
+					shortcuts.map((s) => (
+						<a href={s.href} class="hover:border-brand group flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-left text-sm transition">
+							<Icon name={s.icon} class="text-brand h-5 w-5 shrink-0" />
+							<span class="group-hover:text-brand font-medium transition-colors">{s.label}</span>
 						</a>
 					))
 				}
 			</div>
-			<a href="/" data-hero-fade class="bg-brand mt-8 inline-flex items-center gap-2 rounded-full px-6 py-3.5 font-semibold text-black transition hover:bg-white">
-				<Icon name="lucide:arrow-left" class="h-4 w-4" /> Voltar ao início
-			</a>
+
+			<div data-hero-fade class="mt-10 flex flex-wrap items-center justify-center gap-3">
+				<a href="/" class="bg-brand inline-flex items-center gap-2 rounded-full px-6 py-3.5 font-semibold text-black transition hover:bg-white">
+					<Icon name="lucide:arrow-left" class="h-4 w-4" /> Voltar ao início
+				</a>
+				<a
+					href={whatsappMsg('Olá! Não encontrei uma página no site e gostaria de falar com um advogado.')}
+					target="_blank"
+					rel="noopener"
+					class="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3.5 text-sm font-medium transition hover:border-white/40"
+				>
+					<Icon name="lucide:message-circle" class="h-4 w-4" /> Falar no WhatsApp
+				</a>
+			</div>
 		</div>
 	</section>
+
+	<script is:inline type="application/json" id="site-pages" set:html={JSON.stringify(pages)} />
 </Layout>
+
+<script>
+	type Page = { t: string; u: string };
+	const pages: Page[] = JSON.parse(document.getElementById('site-pages')?.textContent || '[]');
+	const path = decodeURIComponent(location.pathname);
+
+	// Let GTM / GA4 report broken links (old URLs, typos, ads pointing to the wrong place)
+	window.dataLayer?.push({ event: 'page_not_found', page_path: path, page_referrer: document.referrer || '(direto)' });
+
+	// "Você quis dizer…?": Dice similarity on character pairs of the URL slug vs. page URL and title
+	const norm = (s: string) =>
+		s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
+	const pairs = (s: string) => {
+		const out = new Set<string>();
+		for (const w of norm(s).split(' ')) for (let i = 0; i < w.length - 1; i++) out.add(w.slice(i, i + 2));
+		return out;
+	};
+	const dice = (a: Set<string>, b: Set<string>) => {
+		if (!a.size || !b.size) return 0;
+		let hit = 0;
+		a.forEach((x) => b.has(x) && hit++);
+		return (2 * hit) / (a.size + b.size);
+	};
+	const typed = pairs(path.replace(/^\/(blog|tag|category)\//, '/'));
+	const best = pages
+		.map((p) => ({ ...p, score: Math.max(dice(typed, pairs(p.u)), dice(typed, pairs(p.t))) }))
+		.sort((a, b) => b.score - a.score)[0];
+
+	if (best && best.score >= 0.4) {
+		const box = document.querySelector<HTMLElement>('[data-suggestion]')!;
+		box.querySelector<HTMLAnchorElement>('[data-suggestion-link]')!.href = best.u;
+		box.querySelector('[data-suggestion-title]')!.textContent = best.t;
+		box.querySelector('[data-suggestion-url]')!.textContent = `reginaldocosta.com.br${best.u}`;
+		box.hidden = false;
+	}
+</script>

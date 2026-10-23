@@ -5,7 +5,12 @@
  */
 import { whatsappMsg } from '../data/site';
 
-const href = whatsappMsg('Olá! Vim pelo site e gostaria de falar com um advogado.');
+interface Props {
+	/** Pre-filled message (ad landing pages pass theirs so the campaign tag (G)/(F) is kept) */
+	text?: string;
+}
+const { text = 'Olá! Vim pelo site e gostaria de falar com um advogado.' } = Astro.props;
+const href = whatsappMsg(text);
 ---
 
 <a

@@ -1,0 +1,53 @@
+---
+// Same URL as the previous WordPress site: "Empresas atendidas"
+import { Icon } from 'astro-icon/components';
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Img from '../components/Img.astro';
+import { empresas } from '../data/empresas';
+---
+
+<Layout
+	title="Empresas atendidas"
+	description="A RC Advogados presta serviços jurídicos para empresas, associações e órgãos de todo o Brasil. Conheça algumas das empresas atendidas."
+>
+	<PageHero
+		eyebrow="Clientes"
+		lines={['Empresas', '*atendidas*']}
+		lead="A RC Advogados tem orgulho em prestar serviços jurídicos para empresas de todo o Brasil. Conheça algumas abaixo."
+		crumbs={[{ label: 'Empresas atendidas' }]}
+	/>
+
+	<section class="light py-24 md:py-32">
+		<div class="mx-auto max-w-7xl px-4 md:px-6">
+			<ul class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+				{
+					empresas.map((e) => (
+						<li data-reveal class="border-line bg-ink-2 flex flex-col overflow-hidden rounded-3xl border">
+							<div class:list={['flex h-36 items-center justify-center p-6', e.dark ? 'bg-[#0e0e13]' : 'bg-[#ffffff]']}>
+								{e.logo ? (
+									<Img src={e.logo} alt={`Logo ${e.name}`} class="max-h-20 w-auto max-w-full object-contain" widths={[160, 320]} sizes="160px" />
+								) : (
+									<span class="text-center text-lg leading-tight font-semibold tracking-tight text-[#0b0b10]">{e.name}</span>
+								)}
+							</div>
+							<div class="flex flex-1 flex-col justify-between gap-2 p-4">
+								<p class="text-sm leading-snug font-semibold">{e.name}</p>
+								{e.instagram && (
+									<a
+										href={`https://www.instagram.com/${e.instagram}/`}
+										target="_blank"
+										rel="noopener"
+										class="text-mist hover:text-brand inline-flex items-center gap-1.5 text-xs transition"
+									>
+										<Icon name="lucide:instagram" class="h-3.5 w-3.5" /> @{e.instagram}
+									</a>
+								)}
+							</div>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+</Layout>

@@ -1,10 +1,10 @@
 ---
 import { Icon } from 'astro-icon/components';
-import Layout from '../../layouts/Layout.astro';
-import PageHero from '../../components/PageHero.astro';
-import TeamCard from '../../components/TeamCard.astro';
-import Eyebrow from '../../components/Eyebrow.astro';
-import { team } from '../../data/site';
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import TeamCard from '../components/TeamCard.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import { team } from '../data/site';
 
 const expertise = [...new Set(team.flatMap((t) => t.tags))];
 ---

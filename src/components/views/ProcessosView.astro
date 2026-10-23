@@ -1,8 +1,14 @@
 ---
 import { Icon } from 'astro-icon/components';
-import Layout from '../layouts/Layout.astro';
-import PageHero from '../components/PageHero.astro';
-import { whatsappMsg } from '../data/site';
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import { whatsappMsg } from '../../data/site';
+
+interface Props {
+	/** Canonical path (both /area-do-cliente/ and /login/ show this page) */
+	canonical: string;
+}
+const { canonical } = Astro.props;
 
 const courts = [
 	{ name: 'TJSP · e-SAJ', desc: 'Processos cíveis, criminais e de família na Justiça Estadual de São Paulo.', href: 'https://esaj.tjsp.jus.br/cpopg/open.do' },
@@ -14,12 +20,12 @@ const courts = [
 ];
 ---
 
-<Layout title="Consultar processos" description="Acompanhe o andamento do seu processo nos principais tribunais ou fale diretamente com a equipe da RC Advogados.">
+<Layout title="Área do cliente — Consultar processos" canonical={canonical} description="Acompanhe o andamento do seu processo nos principais tribunais ou fale diretamente com a equipe da RC Advogados.">
 	<PageHero
 		eyebrow="Área do cliente"
 		lines={['Consultar', '*processos*']}
 		lead="Acompanhe o andamento nos portais oficiais dos tribunais — ou peça a atualização diretamente para a nossa equipe."
-		crumbs={[{ label: 'Consultar processos' }]}
+		crumbs={[{ label: 'Área do cliente' }]}
 	/>
 
 	<section class="pb-24">

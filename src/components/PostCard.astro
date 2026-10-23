@@ -1,4 +1,5 @@
 ---
+import { postUrl } from '../lib/urls';
 import Img from './Img.astro';
 import { Icon } from 'astro-icon/components';
 import { shortDate, readingTime, type Post } from '../lib/blog';
@@ -10,7 +11,7 @@ const { post } = Astro.props;
 const d = shortDate(post.data.date);
 ---
 
-<a href={`/blog/${post.id}/`} data-reveal data-cat={post.data.category} class="group flex flex-col">
+<a href={postUrl(post.id)} data-reveal data-cat={post.data.category} class="group flex flex-col">
 	<div class="dark-scope bg-ink-3 relative aspect-[4/3] overflow-hidden rounded-[1.75rem]">
 		<Img
 			src={post.data.cover}

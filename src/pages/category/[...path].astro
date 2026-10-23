@@ -1,0 +1,20 @@
+---
+import type { GetStaticPaths } from 'astro';
+import ArchiveView from '../../components/views/ArchiveView.astro';
+import { categoryArchives } from '../../data/wp-archives';
+import { getPosts } from '../../lib/blog';
+
+export const getStaticPaths = (async () => {
+	const posts = await getPosts();
+	// Nested categories keep their full path, e.g. /category/previdencia-social/aposentadoria/
+	return categoryArchives.map((a) => ({
+		params: { path: a.path.replace(/^\/category\/|\/$/g, '') },
+		props: { name: a.name, posts: posts.filter((p) => a.posts.includes(p.id)), path: a.path },
+	}));
+}) satisfies GetStaticPaths;
+
+const { name, posts, path } = Astro.props;
+const parent = path.split('/').length > 4 ? ` (${path.split('/')[2].replace(/-/g, ' ')})` : '';
+---
+
+<ArchiveView kind="Categoria" {name} {posts} title={`Categoria: ${name}${parent}`} description={`Artigos da categoria ${name}${parent} no blog da RC Advogados, escritório de advocacia em Limeira – SP.`} />

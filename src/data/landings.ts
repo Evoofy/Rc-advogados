@@ -1,27 +1,208 @@
+type Card = { icon: string; title: string; text?: string };
+
 export type Landing = {
 	slug: string;
 	name: string;
 	/** Meta description (≤ 155 chars) */
 	seoDescription: string;
+	/** <title> override (defaults to name) */
+	pageTitle?: string;
+	/** Canonical path when two landing pages share the same content (e.g. Google/Facebook versions) */
+	canonical?: string;
+	/** Show in footer / listings (ad-campaign duplicates set this to false) */
+	listed?: boolean;
 	tag: string;
+	/** Hero pill text */
+	badgeText?: string;
 	title: string;
 	accent: string;
 	lead: string;
 	img: string;
+	/** WhatsApp message for every CTA on the page (old ad pages tag the source: "(G)" Google, "(F)" Facebook) */
+	waText?: string;
+	ctaLabel?: string;
 	threshold?: string;
 	typesEyebrow: string;
 	typesTitle: string;
-	types: { icon: string; title: string; text: string }[];
+	typesLead?: string;
+	/** "E mais outras dezenas de situações" box (default true) */
+	typesMore?: boolean;
+	types: Card[];
+	/** Second card grid, e.g. "O que pode levar a um acidente de trabalho?" */
+	extraCards?: { eyebrow: string; title: string; items: Card[] };
 	eligibilityTitle: string;
 	eligibilityLead: string;
-	eligibility: string[];
-	steps: { title: string; text: string }[];
+	eligibility: (string | { title: string; text: string })[];
+	eligibilityNote?: string;
+	/** Checklist section, e.g. "Veja quais os direitos que o trabalhador tem" */
+	rights?: { eyebrow: string; title: string; lead?: string; items: string[]; note?: string };
+	/** "Nós somos especialistas…" paragraphs + numbers + reasons (old ad pages) */
+	about?: { title: string; paragraphs: string[] };
+	stats?: { value: string; label: string }[];
+	reasons?: Card[];
+	steps?: { title: string; text: string }[];
+	closingTitle?: string;
 	closing: string;
 	/** Fake "app" widget shown in the hero */
-	widget: { label: string; value: string; status: string; ok: string };
+	widget?: { label: string; value: string; status: string; ok: string };
 };
 
+/* ---------------------------------------------------------------------------
+ * Ad-campaign landing pages from the previous site — SAME URLs and original copy.
+ * LPG = Google Ads, LPF = Facebook/Instagram Ads. The WhatsApp message ends with
+ * "(G)" or "(F)" so the office can tell which campaign each contact came from.
+ * ------------------------------------------------------------------------- */
+const officeAbout: NonNullable<Landing['about']> = {
+	title: 'Nós somos especialistas e estamos prontos para te atender',
+	paragraphs: [
+		'Estamos há mais de 10 anos exercendo o atendimento jurídico em Limeira (SP), acompanhados de profissionais altamente capacitados e experientes, que trabalham pautados em ética, transparência e compromisso com a satisfação dos clientes.',
+		'Nosso atendimento é 100% personalizado para atender nossos clientes de acordo com suas reais necessidades.',
+		'Trabalhamos com as mais modernas ferramentas de atendimento, de forma que conseguimos atender a você ou sua empresa em qualquer lugar do país ou mundo, resultando em uma economia de tempo e dinheiro para nossos clientes.',
+		'Além disso, também atuamos com contratos mensais de prestação de serviços, oferecidos tanto para empresas quanto pessoas físicas, de forma que sempre estejam protegidos por profissionais qualificados. Ao final do mês, oferecemos um relatório atualizado e detalhado de todos os serviços prestados.',
+	],
+};
+const officeStats = [
+	{ value: '1.7k+', label: 'Idas ao Tribunal' },
+	{ value: '890+', label: 'Clientes Satisfeitos' },
+	{ value: '97%', label: 'Causas Ganhas' },
+];
+const officeReasons = [
+	{ icon: 'lucide:award', title: 'Experiência', text: 'São mais de 10 anos de atuação em atendimento jurídico com ética e transparência' },
+	{ icon: 'lucide:user-check', title: 'Atendimento', text: 'Atendemos cada cliente de forma 100% customizada, para atender suas necessidades reais' },
+	{ icon: 'lucide:star', title: 'Reconhecimento', text: 'O mercado reconhece nossa atuação e valoriza, sendo mais de 890 clientes satisfeitos' },
+	{ icon: 'lucide:scale', title: 'Expertise', text: 'Temos 97% das causas ganhas devido a expertise de nossos advogados atuantes' },
+];
+
+const acidenteAd = {
+	name: 'Acidente de trabalho',
+	seoDescription: 'Sofreu um acidente de trabalho? Descubra quais são os seus direitos: estabilidade, auxílio-acidente, auxílio-doença acidentário e indenizações.',
+	listed: false,
+	tag: 'Acidente de trabalho',
+	badgeText: 'Mais de 10 anos de atendimento jurídico',
+	title: 'Sofreu um acidente de',
+	accent: 'trabalho?',
+	lead: 'Descubra quais são os seus direitos! Cada caso tem as suas particularidades e por isso deve ser avaliado individualmente.',
+	img: '/images/acidente.webp',
+	ctaLabel: 'Falar com advogado',
+	typesEyebrow: 'Tipos de acidente',
+	typesTitle: 'Quais os tipos de acidente?',
+	typesMore: false,
+	types: [
+		{ icon: 'lucide:hard-hat', title: 'Típico', text: 'É o tipo de acidente que machuca fisicamente um trabalhador durante o expediente, no local de trabalho ou ao redor dele.' },
+		{ icon: 'lucide:activity', title: 'Atípico', text: 'Já esse acidente de trabalho é causado por esforço repetitivo ou excesso de trabalho, como LER e burnout.' },
+		{ icon: 'lucide:route', title: 'De trajeto', text: 'O acidente de trajeto é aquele que acontece enquanto o trabalhador vai para o local de trabalho ou vice-versa.' },
+	],
+	extraCards: {
+		eyebrow: 'Causas',
+		title: 'O que pode levar a um acidente de trabalho?',
+		items: [
+			{ icon: 'lucide:shield-alert', title: 'Falta de segurança', text: 'Os equipamentos que protegem os profissionais enquanto trabalham são fundamentais para manter sua integridade, prevenir acidentes e garantir a segurança.' },
+			{ icon: 'lucide:triangle-alert', title: 'Exposição do trabalhador', text: 'Em vários casos, o trabalhador é exposto a materiais perigosos para a sua saúde e também a atividades que demandam muito esforço físico, que podem causar lesões.' },
+			{ icon: 'lucide:clock-alert', title: 'Jornadas longas', text: 'Todo trabalhador deve seguir a jornada adequada ao seu trabalho. Quando ela é excedida, acidentes podem acontecer, sejam quedas ou até mesmo um acidente vascular cerebral.' },
+		],
+	},
+	eligibilityTitle: 'Quando é possível entrar com processo por acidente de trabalho?',
+	eligibilityLead: '',
+	eligibility: [
+		{ title: 'Empresa não emitir o Comunicado de Acidente de Trabalho (CAT)', text: 'É uma obrigação da empresa, pois o CAT (Comunicado de Acidente de Trabalho) atesta que houve o acidente ou doença.' },
+		{ title: 'O trabalhador teve o auxílio-doença acidentário negado', text: 'Infelizmente o INSS muitas vezes nega o auxílio-doença acidentário, mas receber esse valor é um direito garantido.' },
+		{ title: 'Em caso de demissão após o acidente', text: 'O trabalhador precisa permanecer na empresa por pelo menos um ano após o acidente, e não pode ser demitido sem justa causa.' },
+		{ title: 'INSS negou o auxílio-acidente', text: 'Se o trabalhador cumpre todos os requisitos, mas o INSS nega o auxílio-acidente, é possível entrar com recursos judiciais.' },
+		{ title: 'Desenvolver incapacidade parcial ou total para o trabalho', text: 'Caso o trabalhador tenha sequelas, devido ao acidente, que atrapalhem ou não permitam que ele trabalhe, o auxílio-acidente deve ser solicitado.' },
+		{ title: 'Solicitar o auxílio-acidente retroativo', text: 'Esse auxílio é direito do trabalhador acidentado, por isso deve ser pago após o fim do auxílio-doença acidentário, mas às vezes é negado pelo INSS.' },
+	],
+	rights: {
+		eyebrow: 'Seus direitos',
+		title: 'Veja quais os direitos que o trabalhador tem em caso de acidente de trabalho',
+		lead: 'Existem diversos direitos que o trabalhador tem acesso, de acordo com o seu acidente de trabalho. Confira alguns deles abaixo!',
+		items: [
+			'Garantia de estabilidade de emprego',
+			'Direito de aposentadoria por invalidez',
+			'Direito ao auxílio-acidente',
+			'Direito ao auxílio doença acidentário',
+			'Direito à pensão por morte',
+			'Afastamento remunerado',
+			'Recolhimento do FGTS',
+			'Indenização por danos morais e estéticos',
+			'Indenização por danos materiais',
+		],
+	},
+	about: officeAbout,
+	stats: officeStats,
+	reasons: officeReasons,
+	closingTitle: 'Avalie o seu caso com um especialista',
+	closing: 'Cada caso tem as suas particularidades e por isso deve ser avaliado individualmente.',
+} satisfies Omit<Landing, 'slug'>;
+
+const adLandings: Landing[] = [
+	{
+		...acidenteAd,
+		slug: 'acidente-de-trabalho-lpg',
+		pageTitle: 'Acidente de trabalho: descubra seus direitos',
+		waText: 'Olá, sofri um acidente de trabalho e gostaria de falar com um advogado... (G)',
+	},
+	{
+		...acidenteAd,
+		slug: 'acidente-de-trabalho-lpf',
+		pageTitle: 'Acidente de trabalho: descubra seus direitos',
+		// Same content as the Google version: consolidate it for search, keep the URL for the ads
+		canonical: '/acidente-de-trabalho-lpg/',
+		waText: 'Olá, sofri um acidente de trabalho e gostaria de falar com um advogado... (F)',
+	},
+	{
+		slug: 'restricao-indevida-lp',
+		name: 'Restrição indevida',
+		pageTitle: 'Nome negativado indevidamente? Descubra seus direitos',
+		seoDescription: 'Seu nome foi negativado indevidamente? Você pode ter direito à retirada do nome dos cadastros e a indenização por danos morais e materiais.',
+		listed: false,
+		tag: 'Negativação indevida',
+		badgeText: 'Mais de 10 anos de atendimento jurídico',
+		title: 'Seu nome foi negativado',
+		accent: 'indevidamente?',
+		lead: 'Descubra seus direitos! Você pode entrar com um processo por danos morais e materiais em casos de negativação indevida, desde que consiga comprovar a falha da empresa responsável pela negativação.',
+		img: '/images/lp-restricao.jpg',
+		ctaLabel: 'Falar com advogado',
+		waText: 'Olá, meu nome foi negativado indevidamente e gostaria de falar com um advogado...',
+		typesEyebrow: 'Causas comuns',
+		typesTitle: 'Principais causas de nome negativado de forma indevida por empresas',
+		typesMore: false,
+		types: [
+			{ icon: 'lucide:receipt', title: 'Cobranças indevidas' },
+			{ icon: 'lucide:server-crash', title: 'Falhas no sistema da empresa responsável pela negativação' },
+			{ icon: 'lucide:id-card', title: 'Erros de identificação' },
+			{ icon: 'lucide:shield-alert', title: 'Fraude ou golpe' },
+			{ icon: 'lucide:badge-check', title: 'Conta já paga' },
+			{ icon: 'lucide:file-x', title: 'Serviço não contratado ou já cancelado' },
+			{ icon: 'lucide:credit-card', title: 'Cartão de crédito não solicitado' },
+			{ icon: 'lucide:landmark', title: 'Conta bancária desconhecida' },
+			{ icon: 'lucide:zap', title: 'Instalação de energia desconhecida' },
+			{ icon: 'lucide:graduation-cap', title: 'Matrícula em faculdade sem consentimento' },
+		],
+		eligibilityTitle: 'Quando é possível entrar com processo?',
+		eligibilityLead: 'Você pode entrar com um processo por danos morais e materiais em casos de negativação indevida, desde que consiga comprovar a falha da empresa responsável pela negativação.',
+		eligibility: [],
+		rights: {
+			eyebrow: 'Seus direitos',
+			title: 'Quais são meus direitos?',
+			lead: 'Se você foi negativado indevidamente, tem direito a:',
+			items: [
+				'Retirada do nome dos cadastros de negativação',
+				'Indenização por danos morais e materiais, se for o caso',
+				'Correção dos dados cadastrais',
+				'Comprovação de quitação da dívida, caso já tenha sido paga',
+			],
+			note: 'Lembre-se: é importante buscar ajuda de um profissional especializado para lidar com casos de negativação indevida e garantir que seus direitos sejam respeitados.',
+		},
+		about: officeAbout,
+		stats: officeStats,
+		reasons: officeReasons,
+		closingTitle: 'Avalie o seu caso com um especialista',
+		closing: 'Cada caso tem as suas particularidades e por isso deve ser avaliado individualmente.',
+	},
+];
+
 export const landings: Landing[] = [
+	...adLandings,
 	{
 		slug: 'golpe-do-pix',
 		name: 'Golpe do PIX',

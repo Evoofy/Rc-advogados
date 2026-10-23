@@ -1,0 +1,9 @@
+---
+// Old WordPress pagination URL: older articles
+import ArchiveView from '../../../components/views/ArchiveView.astro';
+import { getPosts } from '../../../lib/blog';
+
+const posts = (await getPosts()).slice(9);
+---
+
+<ArchiveView kind="Blog" name="Página 2" {posts} title="Blog — Página 2" description="Artigos anteriores do blog da RC Advogados: direito previdenciário, trabalhista, família, consumidor e mais." />

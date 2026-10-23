@@ -6,7 +6,9 @@ interface Props {
 	light?: boolean;
 }
 const { light = true } = Astro.props;
-const rows = [testimonials, [...testimonials].reverse()];
+// Two rows of different reviews; each row is doubled once so the marquee loops seamlessly
+const half = Math.ceil(testimonials.length / 2);
+const rows = [testimonials.slice(0, half), testimonials.slice(half)];
 ---
 
 <section class:list={[light && 'light', 'relative overflow-hidden py-28 md:py-40']}>
@@ -26,7 +28,7 @@ const rows = [testimonials, [...testimonials].reverse()];
 			rows.map((row, r) => (
 				<div class="marquee-wrap">
 					<div class:list={['marquee', r === 1 && 'reverse']} style={`--dur:${r ? 50 : 40}s`}>
-						{[...row, ...row, ...row, ...row].map((t) => (
+						{[...row, ...row].map((t) => (
 							<figure class="glass mx-2.5 w-[340px] shrink-0 rounded-3xl p-7">
 								<div class="text-brand flex gap-0.5">
 									<span class="text-sm tracking-[0.15em]">★★★★★</span>

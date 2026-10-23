@@ -1,0 +1,45 @@
+---
+/**
+ * WordPress-style archive (tag, category, author, paginated blog) at the same URL as the old site.
+ */
+import { Icon } from 'astro-icon/components';
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../PageHero.astro';
+import PostCard from '../PostCard.astro';
+import type { Post } from '../../lib/blog';
+
+interface Props {
+	/** e.g. "Tag", "Categoria", "Autor" */
+	kind: string;
+	name: string;
+	posts: Post[];
+	title: string;
+	description: string;
+	canonical?: string;
+}
+const { kind, name, posts, title, description, canonical } = Astro.props;
+---
+
+<Layout title={title} description={description} canonical={canonical}>
+	<PageHero
+		eyebrow={kind}
+		lines={[`*${name}*`]}
+		lead={`${posts.length} ${posts.length === 1 ? 'artigo' : 'artigos'} no blog da RC Advogados.`}
+		crumbs={[{ label: 'Blog', href: '/blog/' }, { label: name }]}
+	/>
+
+	<section class="light py-20 md:py-28">
+		<div class="mx-auto max-w-7xl px-4 md:px-6">
+			<h2 class="sr-only">Artigos</h2>
+			<div class="grid gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
+				{posts.map((post) => <PostCard post={post} />)}
+			</div>
+			<a
+				href="/blog/"
+				class="mt-16 inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-3 text-sm font-medium transition hover:border-white/40"
+			>
+				<Icon name="lucide:arrow-left" class="h-4 w-4" /> Ver todos os artigos
+			</a>
+		</div>
+	</section>
+</Layout>

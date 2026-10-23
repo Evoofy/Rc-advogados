@@ -1,6 +1,5 @@
 ---
 import Img from '../../components/Img.astro';
-import type { GetStaticPaths } from 'astro';
 import { render } from 'astro:content';
 import { Icon } from 'astro-icon/components';
 import Layout from '../../layouts/Layout.astro';
@@ -11,11 +10,6 @@ import { whatsappMsg } from '../../data/site';
 import { article, breadcrumbs } from '../../lib/seo';
 import { asset } from '../../lib/images';
 import { getImage } from 'astro:assets';
-
-export const getStaticPaths = (async () => {
-	const posts = await getPosts();
-	return posts.map((post) => ({ params: { id: post.id }, props: { post, all: posts } }));
-}) satisfies GetStaticPaths;
 
 const { post, all } = Astro.props as { post: Post; all: Post[] };
 const { Content } = await render(post);

@@ -20,7 +20,7 @@ const posts = (await getPosts()).filter((p) => p.data.author === lawyer.slug);
 const photo = await getImage({ src: asset(lawyer.img), width: 800, format: 'jpg', quality: 80 });
 const jsonLd = [
 	person(Astro.site!, lawyer, new URL(photo.src, Astro.site).href),
-	breadcrumbs(Astro.site!, [{ label: 'Equipe', href: '/equipe/' }, { label: lawyer.name }], Astro.url),
+	breadcrumbs(Astro.site!, [{ label: 'Equipe', href: '/equipe-reginaldo-costa/' }, { label: lawyer.name }], Astro.url),
 ];
 const firstName = lawyer.name.replace(/^Dra?\.\s*/, '').split(' ')[0];
 const words = lawyer.name.split(" ");
@@ -44,7 +44,7 @@ const nameLines = [words.slice(0, half).join(" "), words.slice(half).join(" ")];
 			<nav data-hero-fade aria-label="Breadcrumb" class="text-mist mb-10 flex flex-wrap items-center gap-2 text-xs">
 				<a href="/" class="hover:text-white">Início</a>
 				<span class="text-white/25">/</span>
-				<a href="/equipe/" class="hover:text-white">Equipe</a>
+				<a href="/equipe-reginaldo-costa/" class="hover:text-white">Equipe</a>
 				<span class="text-white/25">/</span>
 				<span class="text-white/80">{lawyer.name}</span>
 			</nav>
@@ -160,7 +160,7 @@ const nameLines = [words.slice(0, half).join(" "), words.slice(half).join(" ")];
 						}
 					</div>
 
-					<a href="/equipe/" class="text-mist mt-10 inline-flex items-center gap-2 text-sm hover:text-white">
+					<a href="/equipe-reginaldo-costa/" class="text-mist mt-10 inline-flex items-center gap-2 text-sm hover:text-white">
 						<Icon name="lucide:arrow-left" class="h-4 w-4" /> Voltar para a equipe
 					</a>
 				</div>

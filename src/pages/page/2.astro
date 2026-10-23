@@ -1,0 +1,9 @@
+---
+// Old WordPress home pagination URL: same listing as /blog/page/2/
+import ArchiveView from '../../components/views/ArchiveView.astro';
+import { getPosts } from '../../lib/blog';
+
+const posts = (await getPosts()).slice(9);
+---
+
+<ArchiveView kind="Blog" name="Página 2" {posts} title="Blog — Página 2" description="Artigos anteriores do blog da RC Advogados." canonical="/blog/page/2/" />

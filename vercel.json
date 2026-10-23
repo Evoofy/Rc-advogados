@@ -3,16 +3,6 @@
 	"trailingSlash": true,
 	"redirects": [
 		{
-			"source": "/empresa",
-			"destination": "/sobre/",
-			"statusCode": 301
-		},
-		{
-			"source": "/empresa/",
-			"destination": "/sobre/",
-			"statusCode": 301
-		},
-		{
 			"source": "/sobre-nos",
 			"destination": "/sobre/",
 			"statusCode": 301
@@ -33,16 +23,6 @@
 			"statusCode": 301
 		},
 		{
-			"source": "/equipe-reginaldo-costa",
-			"destination": "/equipe/",
-			"statusCode": 301
-		},
-		{
-			"source": "/equipe-reginaldo-costa/",
-			"destination": "/equipe/",
-			"statusCode": 301
-		},
-		{
 			"source": "/reginaldo-costa",
 			"destination": "/equipe/reginaldo-costa/",
 			"statusCode": 301
@@ -50,26 +30,6 @@
 		{
 			"source": "/reginaldo-costa/",
 			"destination": "/equipe/reginaldo-costa/",
-			"statusCode": 301
-		},
-		{
-			"source": "/area-do-cliente",
-			"destination": "/consultar-processos/",
-			"statusCode": 301
-		},
-		{
-			"source": "/area-do-cliente/",
-			"destination": "/consultar-processos/",
-			"statusCode": 301
-		},
-		{
-			"source": "/login",
-			"destination": "/consultar-processos/",
-			"statusCode": 301
-		},
-		{
-			"source": "/login/",
-			"destination": "/consultar-processos/",
 			"statusCode": 301
 		},
 		{
@@ -83,993 +43,213 @@
 			"statusCode": 301
 		},
 		{
-			"source": "/acidente-de-trabalho-lpg",
-			"destination": "/acidente-de-trabalho/",
+			"source": "/blog/acidente-de-trabalho-estabilidade",
+			"destination": "/acidente-de-trabalho-estabilidade/",
 			"statusCode": 301
 		},
 		{
-			"source": "/acidente-de-trabalho-lpg/",
-			"destination": "/acidente-de-trabalho/",
+			"source": "/blog/acidente-de-trabalho-estabilidade/",
+			"destination": "/acidente-de-trabalho-estabilidade/",
 			"statusCode": 301
 		},
 		{
-			"source": "/acidente-de-trabalho-lpf",
-			"destination": "/acidente-de-trabalho/",
+			"source": "/blog/alimentos-gravidicos",
+			"destination": "/alimentos-gravidicos/",
 			"statusCode": 301
 		},
 		{
-			"source": "/acidente-de-trabalho-lpf/",
-			"destination": "/acidente-de-trabalho/",
+			"source": "/blog/alimentos-gravidicos/",
+			"destination": "/alimentos-gravidicos/",
 			"statusCode": 301
 		},
 		{
-			"source": "/restricao-indevida-lp",
-			"destination": "/areas/#civil",
+			"source": "/blog/atraso-no-voo-gera-dano-moral",
+			"destination": "/atraso-no-voo-gera-dano-moral/",
 			"statusCode": 301
 		},
 		{
-			"source": "/restricao-indevida-lp/",
-			"destination": "/areas/#civil",
+			"source": "/blog/atraso-no-voo-gera-dano-moral/",
+			"destination": "/atraso-no-voo-gera-dano-moral/",
 			"statusCode": 301
 		},
 		{
-			"source": "/alimentos-gravidicos",
-			"destination": "/blog/alimentos-gravidicos/",
+			"source": "/blog/auxilio-acidente",
+			"destination": "/auxilio-acidente/",
 			"statusCode": 301
 		},
 		{
-			"source": "/alimentos-gravidicos/",
-			"destination": "/blog/alimentos-gravidicos/",
+			"source": "/blog/auxilio-acidente/",
+			"destination": "/auxilio-acidente/",
 			"statusCode": 301
 		},
 		{
-			"source": "/atraso-no-voo-gera-dano-moral",
-			"destination": "/blog/atraso-no-voo-gera-dano-moral/",
+			"source": "/blog/beneficios-concedidos-pelo-inss-ao-idoso",
+			"destination": "/beneficios-concedidos-pelo-inss-ao-idoso/",
 			"statusCode": 301
 		},
 		{
-			"source": "/atraso-no-voo-gera-dano-moral/",
-			"destination": "/blog/atraso-no-voo-gera-dano-moral/",
+			"source": "/blog/beneficios-concedidos-pelo-inss-ao-idoso/",
+			"destination": "/beneficios-concedidos-pelo-inss-ao-idoso/",
 			"statusCode": 301
 		},
 		{
-			"source": "/auxilio-acidente",
-			"destination": "/blog/auxilio-acidente/",
+			"source": "/blog/codigos-recolimento-guia-inss",
+			"destination": "/codigos-recolimento-guia-inss/",
 			"statusCode": 301
 		},
 		{
-			"source": "/auxilio-acidente/",
-			"destination": "/blog/auxilio-acidente/",
+			"source": "/blog/codigos-recolimento-guia-inss/",
+			"destination": "/codigos-recolimento-guia-inss/",
 			"statusCode": 301
 		},
 		{
-			"source": "/beneficios-concedidos-pelo-inss-ao-idoso",
-			"destination": "/blog/beneficios-concedidos-pelo-inss-ao-idoso/",
+			"source": "/blog/conviventes-podem-alterar-sobrenome",
+			"destination": "/conviventes-podem-alterar-sobrenome/",
 			"statusCode": 301
 		},
 		{
-			"source": "/beneficios-concedidos-pelo-inss-ao-idoso/",
-			"destination": "/blog/beneficios-concedidos-pelo-inss-ao-idoso/",
+			"source": "/blog/conviventes-podem-alterar-sobrenome/",
+			"destination": "/conviventes-podem-alterar-sobrenome/",
 			"statusCode": 301
 		},
 		{
-			"source": "/codigos-recolimento-guia-inss",
-			"destination": "/blog/codigos-recolimento-guia-inss/",
+			"source": "/blog/golpe-do-pix-primeiras-24-horas",
+			"destination": "/golpe-do-pix-primeiras-24-horas/",
 			"statusCode": 301
 		},
 		{
-			"source": "/codigos-recolimento-guia-inss/",
-			"destination": "/blog/codigos-recolimento-guia-inss/",
+			"source": "/blog/golpe-do-pix-primeiras-24-horas/",
+			"destination": "/golpe-do-pix-primeiras-24-horas/",
 			"statusCode": 301
 		},
 		{
-			"source": "/conviventes-podem-alterar-sobrenome",
-			"destination": "/blog/conviventes-podem-alterar-sobrenome/",
+			"source": "/blog/injuria-racial-e-racismo-em-partida-de-futebol",
+			"destination": "/injuria-racial-e-racismo-em-partida-de-futebol/",
 			"statusCode": 301
 		},
 		{
-			"source": "/conviventes-podem-alterar-sobrenome/",
-			"destination": "/blog/conviventes-podem-alterar-sobrenome/",
+			"source": "/blog/injuria-racial-e-racismo-em-partida-de-futebol/",
+			"destination": "/injuria-racial-e-racismo-em-partida-de-futebol/",
 			"statusCode": 301
 		},
 		{
-			"source": "/injuria-racial-e-racismo-em-partida-de-futebol",
-			"destination": "/blog/injuria-racial-e-racismo-em-partida-de-futebol/",
+			"source": "/blog/justica-concede-liminar-para-que-empresa-de-limeira-volte-a-faturar-e-exercer-atividade-empresarial",
+			"destination": "/justica-concede-liminar-para-que-empresa-de-limeira-volte-a-faturar-e-exercer-atividade-empresarial/",
 			"statusCode": 301
 		},
 		{
-			"source": "/injuria-racial-e-racismo-em-partida-de-futebol/",
-			"destination": "/blog/injuria-racial-e-racismo-em-partida-de-futebol/",
+			"source": "/blog/justica-concede-liminar-para-que-empresa-de-limeira-volte-a-faturar-e-exercer-atividade-empresarial/",
+			"destination": "/justica-concede-liminar-para-que-empresa-de-limeira-volte-a-faturar-e-exercer-atividade-empresarial/",
 			"statusCode": 301
 		},
 		{
-			"source": "/justica-concede-liminar-para-que-empresa-de-limeira-volte-a-faturar-e-exercer-atividade-empresarial",
-			"destination": "/blog/justica-concede-liminar-para-que-empresa-de-limeira-volte-a-faturar-e-exercer-atividade-empresarial/",
+			"source": "/blog/meu-filho-a-tem-direito-a-heranca",
+			"destination": "/meu-filho-a-tem-direito-a-heranca/",
 			"statusCode": 301
 		},
 		{
-			"source": "/justica-concede-liminar-para-que-empresa-de-limeira-volte-a-faturar-e-exercer-atividade-empresarial/",
-			"destination": "/blog/justica-concede-liminar-para-que-empresa-de-limeira-volte-a-faturar-e-exercer-atividade-empresarial/",
+			"source": "/blog/meu-filho-a-tem-direito-a-heranca/",
+			"destination": "/meu-filho-a-tem-direito-a-heranca/",
 			"statusCode": 301
 		},
 		{
-			"source": "/meu-filho-a-tem-direito-a-heranca",
-			"destination": "/blog/meu-filho-a-tem-direito-a-heranca/",
+			"source": "/blog/o-que-e-limbo-previdenciario",
+			"destination": "/o-que-e-limbo-previdenciario/",
 			"statusCode": 301
 		},
 		{
-			"source": "/meu-filho-a-tem-direito-a-heranca/",
-			"destination": "/blog/meu-filho-a-tem-direito-a-heranca/",
+			"source": "/blog/o-que-e-limbo-previdenciario/",
+			"destination": "/o-que-e-limbo-previdenciario/",
 			"statusCode": 301
 		},
 		{
-			"source": "/o-que-e-limbo-previdenciario",
-			"destination": "/blog/o-que-e-limbo-previdenciario/",
+			"source": "/blog/planejamento-previdenciario",
+			"destination": "/planejamento-previdenciario/",
 			"statusCode": 301
 		},
 		{
-			"source": "/o-que-e-limbo-previdenciario/",
-			"destination": "/blog/o-que-e-limbo-previdenciario/",
+			"source": "/blog/planejamento-previdenciario/",
+			"destination": "/planejamento-previdenciario/",
 			"statusCode": 301
 		},
 		{
-			"source": "/planejamento-previdenciario",
-			"destination": "/blog/planejamento-previdenciario/",
+			"source": "/blog/regulacao-do-saneamento-basico-do-poder-normativo-a-norma-de-referencia",
+			"destination": "/regulacao-do-saneamento-basico-do-poder-normativo-a-norma-de-referencia/",
 			"statusCode": 301
 		},
 		{
-			"source": "/planejamento-previdenciario/",
-			"destination": "/blog/planejamento-previdenciario/",
+			"source": "/blog/regulacao-do-saneamento-basico-do-poder-normativo-a-norma-de-referencia/",
+			"destination": "/regulacao-do-saneamento-basico-do-poder-normativo-a-norma-de-referencia/",
 			"statusCode": 301
 		},
 		{
-			"source": "/regulacao-do-saneamento-basico-do-poder-normativo-a-norma-de-referencia",
-			"destination": "/blog/regulacao-do-saneamento-basico-do-poder-normativo-a-norma-de-referencia/",
+			"source": "/blog/rescisao-indireta",
+			"destination": "/rescisao-indireta/",
 			"statusCode": 301
 		},
 		{
-			"source": "/regulacao-do-saneamento-basico-do-poder-normativo-a-norma-de-referencia/",
-			"destination": "/blog/regulacao-do-saneamento-basico-do-poder-normativo-a-norma-de-referencia/",
+			"source": "/blog/rescisao-indireta/",
+			"destination": "/rescisao-indireta/",
 			"statusCode": 301
 		},
 		{
-			"source": "/rescisao-indireta",
-			"destination": "/blog/rescisao-indireta/",
+			"source": "/blog/revisao-de-aposentadoria",
+			"destination": "/revisao-de-aposentadoria/",
 			"statusCode": 301
 		},
 		{
-			"source": "/rescisao-indireta/",
-			"destination": "/blog/rescisao-indireta/",
+			"source": "/blog/revisao-de-aposentadoria/",
+			"destination": "/revisao-de-aposentadoria/",
 			"statusCode": 301
 		},
 		{
-			"source": "/situacao-vexatoria-limeirense-e-deportado-do-chile-por-falta-de-teste-para-covid-19",
-			"destination": "/blog/situacao-vexatoria-limeirense-e-deportado-do-chile-por-falta-de-teste-para-covid-19/",
+			"source": "/blog/situacao-vexatoria-limeirense-e-deportado-do-chile-por-falta-de-teste-para-covid-19",
+			"destination": "/situacao-vexatoria-limeirense-e-deportado-do-chile-por-falta-de-teste-para-covid-19/",
 			"statusCode": 301
 		},
 		{
-			"source": "/situacao-vexatoria-limeirense-e-deportado-do-chile-por-falta-de-teste-para-covid-19/",
-			"destination": "/blog/situacao-vexatoria-limeirense-e-deportado-do-chile-por-falta-de-teste-para-covid-19/",
+			"source": "/blog/situacao-vexatoria-limeirense-e-deportado-do-chile-por-falta-de-teste-para-covid-19/",
+			"destination": "/situacao-vexatoria-limeirense-e-deportado-do-chile-por-falta-de-teste-para-covid-19/",
 			"statusCode": 301
 		},
 		{
-			"source": "/author/reginaldocosta-adm",
-			"destination": "/equipe/",
+			"source": "/blog/voo-cancelado-direitos-do-passageiro",
+			"destination": "/voo-cancelado-direitos-do-passageiro/",
 			"statusCode": 301
 		},
 		{
-			"source": "/author/reginaldocosta-adm/",
-			"destination": "/equipe/",
+			"source": "/blog/voo-cancelado-direitos-do-passageiro/",
+			"destination": "/voo-cancelado-direitos-do-passageiro/",
 			"statusCode": 301
 		},
 		{
-			"source": "/author/reginaldocosta-advs",
-			"destination": "/equipe/",
+			"source": "/equipe",
+			"destination": "/equipe-reginaldo-costa/",
 			"statusCode": 301
 		},
 		{
-			"source": "/author/reginaldocosta-advs/",
-			"destination": "/equipe/",
+			"source": "/equipe/",
+			"destination": "/equipe-reginaldo-costa/",
 			"statusCode": 301
 		},
 		{
-			"source": "/author/studiopontozero",
-			"destination": "/equipe/",
+			"source": "/consultar-processos",
+			"destination": "/area-do-cliente/",
 			"statusCode": 301
 		},
 		{
-			"source": "/author/studiopontozero/",
-			"destination": "/equipe/",
+			"source": "/consultar-processos/",
+			"destination": "/area-do-cliente/",
 			"statusCode": 301
 		},
 		{
-			"source": "/feed",
-			"destination": "/blog/",
+			"source": "/home",
+			"destination": "/",
 			"statusCode": 301
 		},
 		{
-			"source": "/feed/",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/comments/feed",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/comments/feed/",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/blog/feed",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/blog/feed/",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/blog/page/2",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/blog/page/2/",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/page/2",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/page/2/",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/category/advogados",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/category/advogados/",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/category/advogados/direito-empresarial-advogados",
-			"destination": "/blog/justica-concede-liminar-para-que-empresa-de-limeira-volte-a-faturar-e-exercer-atividade-empresarial/",
-			"statusCode": 301
-		},
-		{
-			"source": "/category/advogados/direito-empresarial-advogados/",
-			"destination": "/blog/justica-concede-liminar-para-que-empresa-de-limeira-volte-a-faturar-e-exercer-atividade-empresarial/",
-			"statusCode": 301
-		},
-		{
-			"source": "/category/aposentadoria-2",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/category/aposentadoria-2/",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/category/dano-moral",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/category/dano-moral/",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/category/danos-morais",
-			"destination": "/blog/atraso-no-voo-gera-dano-moral/",
-			"statusCode": 301
-		},
-		{
-			"source": "/category/danos-morais/",
-			"destination": "/blog/atraso-no-voo-gera-dano-moral/",
-			"statusCode": 301
-		},
-		{
-			"source": "/category/danos-morais/trabalhista",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/category/danos-morais/trabalhista/",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/category/direito-administrativo",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/category/direito-administrativo/",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/category/direito-da-familia",
-			"destination": "/blog/conviventes-podem-alterar-sobrenome/",
-			"statusCode": 301
-		},
-		{
-			"source": "/category/direito-da-familia/",
-			"destination": "/blog/conviventes-podem-alterar-sobrenome/",
-			"statusCode": 301
-		},
-		{
-			"source": "/category/direito-empresarial",
-			"destination": "/blog/justica-concede-liminar-para-que-empresa-de-limeira-volte-a-faturar-e-exercer-atividade-empresarial/",
-			"statusCode": 301
-		},
-		{
-			"source": "/category/direito-empresarial/",
-			"destination": "/blog/justica-concede-liminar-para-que-empresa-de-limeira-volte-a-faturar-e-exercer-atividade-empresarial/",
-			"statusCode": 301
-		},
-		{
-			"source": "/category/inventario",
-			"destination": "/blog/meu-filho-a-tem-direito-a-heranca/",
-			"statusCode": 301
-		},
-		{
-			"source": "/category/inventario/",
-			"destination": "/blog/meu-filho-a-tem-direito-a-heranca/",
-			"statusCode": 301
-		},
-		{
-			"source": "/category/pensao-alimenticia",
-			"destination": "/blog/alimentos-gravidicos/",
-			"statusCode": 301
-		},
-		{
-			"source": "/category/pensao-alimenticia/",
-			"destination": "/blog/alimentos-gravidicos/",
-			"statusCode": 301
-		},
-		{
-			"source": "/category/previdencia-social",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/category/previdencia-social/",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/category/previdencia-social/aposentadoria",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/category/previdencia-social/aposentadoria/",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/category/previdenciario",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/category/previdenciario/",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/13o-salario",
-			"destination": "/blog/rescisao-indireta/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/13o-salario/",
-			"destination": "/blog/rescisao-indireta/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/advogados",
-			"destination": "/blog/planejamento-previdenciario/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/advogados/",
-			"destination": "/blog/planejamento-previdenciario/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/alimentos-gravidicos",
-			"destination": "/blog/alimentos-gravidicos/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/alimentos-gravidicos/",
-			"destination": "/blog/alimentos-gravidicos/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/aposentadoria",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/aposentadoria/",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/aposentadoria-por-idade",
-			"destination": "/blog/beneficios-concedidos-pelo-inss-ao-idoso/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/aposentadoria-por-idade/",
-			"destination": "/blog/beneficios-concedidos-pelo-inss-ao-idoso/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/auxilio-doenca",
-			"destination": "/blog/codigos-recolimento-guia-inss/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/auxilio-doenca/",
-			"destination": "/blog/codigos-recolimento-guia-inss/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/auxilio-maternidade",
-			"destination": "/blog/codigos-recolimento-guia-inss/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/auxilio-maternidade/",
-			"destination": "/blog/codigos-recolimento-guia-inss/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/auxilio-reclusao",
-			"destination": "/blog/codigos-recolimento-guia-inss/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/auxilio-reclusao/",
-			"destination": "/blog/codigos-recolimento-guia-inss/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/baixa-renda",
-			"destination": "/blog/codigos-recolimento-guia-inss/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/baixa-renda/",
-			"destination": "/blog/codigos-recolimento-guia-inss/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/beneficio",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/beneficio/",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/beneficio-inss",
-			"destination": "/blog/o-que-e-limbo-previdenciario/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/beneficio-inss/",
-			"destination": "/blog/o-que-e-limbo-previdenciario/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/bpc",
-			"destination": "/blog/planejamento-previdenciario/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/bpc/",
-			"destination": "/blog/planejamento-previdenciario/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/chile",
-			"destination": "/blog/situacao-vexatoria-limeirense-e-deportado-do-chile-por-falta-de-teste-para-covid-19/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/chile/",
-			"destination": "/blog/situacao-vexatoria-limeirense-e-deportado-do-chile-por-falta-de-teste-para-covid-19/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/clt",
-			"destination": "/blog/rescisao-indireta/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/clt/",
-			"destination": "/blog/rescisao-indireta/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/cnis",
-			"destination": "/blog/planejamento-previdenciario/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/cnis/",
-			"destination": "/blog/planejamento-previdenciario/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/contrato-de-trabalho",
-			"destination": "/blog/rescisao-indireta/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/contrato-de-trabalho/",
-			"destination": "/blog/rescisao-indireta/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/contribuicao",
-			"destination": "/blog/planejamento-previdenciario/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/contribuicao/",
-			"destination": "/blog/planejamento-previdenciario/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/covid",
-			"destination": "/blog/situacao-vexatoria-limeirense-e-deportado-do-chile-por-falta-de-teste-para-covid-19/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/covid/",
-			"destination": "/blog/situacao-vexatoria-limeirense-e-deportado-do-chile-por-falta-de-teste-para-covid-19/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/crime",
-			"destination": "/blog/injuria-racial-e-racismo-em-partida-de-futebol/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/crime/",
-			"destination": "/blog/injuria-racial-e-racismo-em-partida-de-futebol/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/danos-morais",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/danos-morais/",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/demissao",
-			"destination": "/blog/rescisao-indireta/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/demissao/",
-			"destination": "/blog/rescisao-indireta/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/deportado",
-			"destination": "/blog/situacao-vexatoria-limeirense-e-deportado-do-chile-por-falta-de-teste-para-covid-19/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/deportado/",
-			"destination": "/blog/situacao-vexatoria-limeirense-e-deportado-do-chile-por-falta-de-teste-para-covid-19/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/direito-administrativo",
-			"destination": "/blog/regulacao-do-saneamento-basico-do-poder-normativo-a-norma-de-referencia/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/direito-administrativo/",
-			"destination": "/blog/regulacao-do-saneamento-basico-do-poder-normativo-a-norma-de-referencia/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/direito-de-familia",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/direito-de-familia/",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/direito-empresarial",
-			"destination": "/blog/justica-concede-liminar-para-que-empresa-de-limeira-volte-a-faturar-e-exercer-atividade-empresarial/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/direito-empresarial/",
-			"destination": "/blog/justica-concede-liminar-para-que-empresa-de-limeira-volte-a-faturar-e-exercer-atividade-empresarial/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/direito-penal",
-			"destination": "/blog/injuria-racial-e-racismo-em-partida-de-futebol/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/direito-penal/",
-			"destination": "/blog/injuria-racial-e-racismo-em-partida-de-futebol/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/direito-previdenciario",
-			"destination": "/blog/planejamento-previdenciario/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/direito-previdenciario/",
-			"destination": "/blog/planejamento-previdenciario/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/dispensa-com-justa-causa",
-			"destination": "/blog/rescisao-indireta/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/dispensa-com-justa-causa/",
-			"destination": "/blog/rescisao-indireta/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/dispensa-sem-justa-causa",
-			"destination": "/blog/rescisao-indireta/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/dispensa-sem-justa-causa/",
-			"destination": "/blog/rescisao-indireta/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/dona-de-casa",
-			"destination": "/blog/codigos-recolimento-guia-inss/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/dona-de-casa/",
-			"destination": "/blog/codigos-recolimento-guia-inss/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/empresa",
-			"destination": "/blog/justica-concede-liminar-para-que-empresa-de-limeira-volte-a-faturar-e-exercer-atividade-empresarial/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/empresa/",
-			"destination": "/blog/justica-concede-liminar-para-que-empresa-de-limeira-volte-a-faturar-e-exercer-atividade-empresarial/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/facultativo",
-			"destination": "/blog/codigos-recolimento-guia-inss/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/facultativo/",
-			"destination": "/blog/codigos-recolimento-guia-inss/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/fgts",
-			"destination": "/blog/rescisao-indireta/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/fgts/",
-			"destination": "/blog/rescisao-indireta/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/guia-do-inss",
-			"destination": "/blog/codigos-recolimento-guia-inss/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/guia-do-inss/",
-			"destination": "/blog/codigos-recolimento-guia-inss/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/heranca",
-			"destination": "/blog/meu-filho-a-tem-direito-a-heranca/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/heranca/",
-			"destination": "/blog/meu-filho-a-tem-direito-a-heranca/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/herdeiro",
-			"destination": "/blog/meu-filho-a-tem-direito-a-heranca/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/herdeiro/",
-			"destination": "/blog/meu-filho-a-tem-direito-a-heranca/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/indenizacao",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/indenizacao/",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/inss",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/inss/",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/julgado",
-			"destination": "/blog/situacao-vexatoria-limeirense-e-deportado-do-chile-por-falta-de-teste-para-covid-19/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/julgado/",
-			"destination": "/blog/situacao-vexatoria-limeirense-e-deportado-do-chile-por-falta-de-teste-para-covid-19/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/justica",
-			"destination": "/blog/justica-concede-liminar-para-que-empresa-de-limeira-volte-a-faturar-e-exercer-atividade-empresarial/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/justica/",
-			"destination": "/blog/justica-concede-liminar-para-que-empresa-de-limeira-volte-a-faturar-e-exercer-atividade-empresarial/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/latam",
-			"destination": "/blog/situacao-vexatoria-limeirense-e-deportado-do-chile-por-falta-de-teste-para-covid-19/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/latam/",
-			"destination": "/blog/situacao-vexatoria-limeirense-e-deportado-do-chile-por-falta-de-teste-para-covid-19/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/leis-trabalhistas",
-			"destination": "/blog/rescisao-indireta/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/leis-trabalhistas/",
-			"destination": "/blog/rescisao-indireta/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/limeira",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/limeira/",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/liminar",
-			"destination": "/blog/justica-concede-liminar-para-que-empresa-de-limeira-volte-a-faturar-e-exercer-atividade-empresarial/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/liminar/",
-			"destination": "/blog/justica-concede-liminar-para-que-empresa-de-limeira-volte-a-faturar-e-exercer-atividade-empresarial/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/loas",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/loas/",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/paternidade",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/paternidade/",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/pensao",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/pensao/",
-			"destination": "/blog/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/pensao-por-morte",
-			"destination": "/blog/beneficios-concedidos-pelo-inss-ao-idoso/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/pensao-por-morte/",
-			"destination": "/blog/beneficios-concedidos-pelo-inss-ao-idoso/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/planejamento-previdenciario",
-			"destination": "/blog/planejamento-previdenciario/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/planejamento-previdenciario/",
-			"destination": "/blog/planejamento-previdenciario/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/profissional-liberal",
-			"destination": "/blog/codigos-recolimento-guia-inss/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/profissional-liberal/",
-			"destination": "/blog/codigos-recolimento-guia-inss/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/racismo",
-			"destination": "/blog/injuria-racial-e-racismo-em-partida-de-futebol/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/racismo/",
-			"destination": "/blog/injuria-racial-e-racismo-em-partida-de-futebol/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/regulacao",
-			"destination": "/blog/regulacao-do-saneamento-basico-do-poder-normativo-a-norma-de-referencia/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/regulacao/",
-			"destination": "/blog/regulacao-do-saneamento-basico-do-poder-normativo-a-norma-de-referencia/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/renda",
-			"destination": "/blog/planejamento-previdenciario/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/renda/",
-			"destination": "/blog/planejamento-previdenciario/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/rescisao-indireta",
-			"destination": "/blog/rescisao-indireta/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/rescisao-indireta/",
-			"destination": "/blog/rescisao-indireta/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/saneamento-basico",
-			"destination": "/blog/regulacao-do-saneamento-basico-do-poder-normativo-a-norma-de-referencia/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/saneamento-basico/",
-			"destination": "/blog/regulacao-do-saneamento-basico-do-poder-normativo-a-norma-de-referencia/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/servicos-publico",
-			"destination": "/blog/regulacao-do-saneamento-basico-do-poder-normativo-a-norma-de-referencia/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/servicos-publico/",
-			"destination": "/blog/regulacao-do-saneamento-basico-do-poder-normativo-a-norma-de-referencia/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/sucessao",
-			"destination": "/blog/meu-filho-a-tem-direito-a-heranca/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/sucessao/",
-			"destination": "/blog/meu-filho-a-tem-direito-a-heranca/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/tempo",
-			"destination": "/blog/planejamento-previdenciario/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/tempo/",
-			"destination": "/blog/planejamento-previdenciario/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/viagem",
-			"destination": "/blog/situacao-vexatoria-limeirense-e-deportado-do-chile-por-falta-de-teste-para-covid-19/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/viagem/",
-			"destination": "/blog/situacao-vexatoria-limeirense-e-deportado-do-chile-por-falta-de-teste-para-covid-19/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/voo-atrasado",
-			"destination": "/blog/atraso-no-voo-gera-dano-moral/",
-			"statusCode": 301
-		},
-		{
-			"source": "/tag/voo-atrasado/",
-			"destination": "/blog/atraso-no-voo-gera-dano-moral/",
+			"source": "/home/",
+			"destination": "/",
 			"statusCode": 301
 		},
 		{
@@ -1123,21 +303,6 @@
 			"statusCode": 301
 		},
 		{
-			"source": "/sitemap.xml",
-			"destination": "/sitemap-index.xml",
-			"statusCode": 301
-		},
-		{
-			"source": "/sitemap_index.xml",
-			"destination": "/sitemap-index.xml",
-			"statusCode": 301
-		},
-		{
-			"source": "/wp-sitemap.xml",
-			"destination": "/sitemap-index.xml",
-			"statusCode": 301
-		},
-		{
 			"source": "/webmail",
 			"destination": "https://webmail.reginaldocosta.com.br/",
 			"statusCode": 301
@@ -1166,6 +331,32 @@
 			"source": "/whm/",
 			"destination": "https://mail.reginaldocosta.com.br:2083/",
 			"statusCode": 301
+		}
+	],
+	"rewrites": [
+		{
+			"source": "/feed/",
+			"destination": "/rss.xml"
+		},
+		{
+			"source": "/blog/feed/",
+			"destination": "/rss.xml"
+		},
+		{
+			"source": "/comments/feed/",
+			"destination": "/rss.xml"
+		},
+		{
+			"source": "/sitemap.xml",
+			"destination": "/sitemap-index.xml"
+		},
+		{
+			"source": "/sitemap_index.xml",
+			"destination": "/sitemap-index.xml"
+		},
+		{
+			"source": "/wp-sitemap.xml",
+			"destination": "/sitemap-index.xml"
 		}
 	],
 	"headers": [

@@ -26,6 +26,10 @@ interface Props {
 	publishedTime?: Date;
 	/** Show the orange "Vamos falar sobre o seu caso?" banner above the footer */
 	cta?: boolean;
+	/** Canonical path when the same content is served at more than one URL */
+	canonical?: string;
+	/** Message for the floating WhatsApp button */
+	whatsappText?: string;
 }
 
 const siteName = 'RC Advogados';
@@ -39,6 +43,8 @@ const {
 	jsonLd = [],
 	publishedTime,
 	cta = true,
+	canonical: canonicalPath,
+	whatsappText,
 } = Astro.props;
 
 const site = Astro.site!;
@@ -48,7 +54,7 @@ const fullTitle = !title
 	: `${title} — ${siteName}`.length <= 60
 		? `${title} — ${siteName}`
 		: title;
-const canonical = new URL(Astro.url.pathname, site).href;
+const canonical = new URL(canonicalPath ?? Astro.url.pathname, site).href;
 
 let ogImage = new URL('/og/og-default.jpg', site).href;
 let ogSize = { width: 1200, height: 630 };
@@ -114,7 +120,7 @@ const schema = [organization(site), website(site), ...jsonLd];
 		</main>
 		{cta && <CtaBanner />}
 		<Footer />
-		<WhatsAppFloat />
+		<WhatsAppFloat text={whatsappText} />
 		<CookieBanner />
 		<script>
 			import '../scripts/motion';

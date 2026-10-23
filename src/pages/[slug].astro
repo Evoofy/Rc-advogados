@@ -1,0 +1,26 @@
+---
+/**
+ * Root-level pages that keep the exact URLs of the previous WordPress site:
+ * blog posts (/rescisao-indireta/) and landing pages (/acidente-de-trabalho-lpg/).
+ */
+import type { GetStaticPaths } from 'astro';
+import PostView from '../components/views/PostView.astro';
+import LandingView from '../components/views/LandingView.astro';
+import { getPosts } from '../lib/blog';
+import { landings } from '../data/landings';
+
+export const getStaticPaths = (async () => {
+	const posts = await getPosts();
+	const landingSlugs = new Set(landings.map((l) => l.slug));
+	const clash = posts.find((p) => landingSlugs.has(p.id));
+	if (clash) throw new Error(`Slug usado por um artigo e uma landing page ao mesmo tempo: ${clash.id}`);
+	return [
+		...posts.map((post) => ({ params: { slug: post.id }, props: { kind: 'post' as const, post, all: posts } })),
+		...landings.map((l) => ({ params: { slug: l.slug }, props: { kind: 'landing' as const, l } })),
+	];
+}) satisfies GetStaticPaths;
+
+const props = Astro.props;
+---
+
+{props.kind === 'post' ? <PostView post={props.post} all={props.all} /> : <LandingView l={props.l} />}

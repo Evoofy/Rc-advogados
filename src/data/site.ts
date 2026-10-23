@@ -41,7 +41,7 @@ export const nav = [
 	{ label: 'Início', href: '/' },
 	{ label: 'Sobre', href: '/sobre/' },
 	{ label: 'Áreas', href: '/areas/' },
-	{ label: 'Equipe', href: '/equipe/' },
+	{ label: 'Equipe', href: '/equipe-reginaldo-costa/' },
 	{ label: 'Blog', href: '/blog/' },
 	{ label: 'Contato', href: '/contato/' },
 ];
@@ -273,7 +273,16 @@ export const testimonials = [
 	{ name: 'Israel Carlos Souza', text: 'Excelente atendimento. Profissionais competentes e dedicados. Indico aos amigos.' },
 	{ name: 'Edmilson Viana', text: 'Escritório bem estruturado, e excelentes profissionais.' },
 	{ name: 'Panoraamic Eye', text: 'Advogados de confiança e responsabilidade!!' },
-	{ name: 'Silvana Tolentino', text: 'Excelente profissional, com uma equipe que resolve.' },
+	{ name: 'Silvana Tolentino', text: 'Excelente profissional, com uma equipe que resolve.' },	{ name: 'Antonio Carlos Mendes Oliveira', text: 'Excelente! Tenho um contrato para cuidar de meus interesses. Dr. Reginaldo e sua Equipe está, a meu ver, no topo da prestação de serviços advocatícios em Limeira (SP) e no seu entorno.' },
+	{ name: 'Shirlei Costa Parra', text: 'Fui muito bem atendida e orientada, gostei muito.' },
+	{ name: 'Geo Solution', text: 'Profissional é outro nível, excelente advogado.' },
+	{ name: 'Mauro Rafael Miguel', text: 'Excelente atendimento.' },
+	{ name: 'Adriano Massane', text: 'Atendimento nota 10. Profissionais altamente capacitados e atenciosos.' },
+	{ name: 'Silvani Maciel', text: 'Cuida de casos importantes com competência.' },
+	{ name: 'Reinaldo Costa', text: 'Advogados qualificados para defender seus direitos!' },
+	{ name: 'Jose Carlos Eleuterio', text: 'Espaço agradável e ótimo atendimento.' },
+	{ name: 'Lucio de Oliveira Batista', text: 'Excelentes advogados.' },
+	{ name: 'Guilherme Costa', text: 'Atendimento fantástico.' },
 ];
 
 export const faq = [

@@ -1,0 +1,18 @@
+---
+import type { GetStaticPaths } from 'astro';
+import ArchiveView from '../../components/views/ArchiveView.astro';
+import { tagArchives } from '../../data/wp-archives';
+import { getPosts } from '../../lib/blog';
+
+export const getStaticPaths = (async () => {
+	const posts = await getPosts();
+	return tagArchives.map((a) => ({
+		params: { slug: a.path.split('/')[2] },
+		props: { name: a.name, posts: posts.filter((p) => a.posts.includes(p.id)) },
+	}));
+}) satisfies GetStaticPaths;
+
+const { name, posts } = Astro.props;
+---
+
+<ArchiveView kind="Tag" {name} {posts} title={`Tag: ${name}`} description={`Artigos sobre ${name} no blog da RC Advogados: conteúdo jurídico claro para entender seus direitos.`} />

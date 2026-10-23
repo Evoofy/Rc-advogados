@@ -32,7 +32,8 @@ import { landings } from '../data/landings';
 				<p class="text-sm font-semibold">Explorar</p>
 				<ul class="text-mist mt-5 space-y-3 text-sm">
 					{nav.map((n) => <li><a href={n.href} class="transition hover:text-white">{n.label}</a></li>)}
-					<li><a href="/consultar-processos/" class="transition hover:text-white">Consultar processos</a></li>
+					<li><a href="/empresa/" class="transition hover:text-white">Empresas atendidas</a></li>
+					<li><a href="/area-do-cliente/" class="transition hover:text-white">Área do cliente</a></li>
 				</ul>
 			</div>
 			<div>
@@ -53,7 +54,7 @@ import { landings } from '../data/landings';
 				<p class="text-sm font-semibold">Seus direitos</p>
 				<ul class="text-mist mt-5 space-y-3 text-sm">
 					{
-						landings.map((l) => (
+						landings.filter((l) => l.listed !== false).map((l) => (
 							<li>
 								<a href={`/${l.slug}/`} class="transition hover:text-white">
 									{l.name}
